@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>금호타이어 광주공장 화재 사건 분석 인포그래픽</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <!-- 
+    Narrative Plan:
+    1.  Header: Title and key summary of the event.
+    2.  Timeline Section: Visualize the event timeline from start to finish.
+    3.  Damage Overview Section: Show key numbers related to human, financial, and environmental impact using cards and charts.
+    4.  Response Section: Detail the response from authorities and the company using a structured list.
+    5.  Economic Impact Section: Visualize the effect on workers and suppliers.
+    6.  Compensation & Future Section: Conclude with information on compensation efforts.
+
+    Visualization Choices (NO SVG, NO MERMAID):
+    -   Event Timeline: Goal=Organize. Chosen Visualization=HTML/CSS Timeline. Justification=Clearly shows sequential events. Method=Tailwind CSS. NO SVG.
+    -   Financial Damage vs. Insurance: Goal=Compare. Chosen Visualization=Bar Chart. Justification=Direct comparison of two large numbers. Library=Chart.js (Canvas). NO SVG.
+    -   Affected Population Breakdown: Goal=Compare/Inform. Chosen Visualization=Donut Chart. Justification=Shows the composition of affected people (injured vs. evacuated). Library=Chart.js (Canvas). NO SVG.
+    -   Economic Impact (Workforce): Goal=Compare/Inform. Chosen Visualization=Donut Chart. Justification=Shows the proportion of the workforce on standby. Library=Chart.js (Canvas). NO SVG.
+    -   Single Big Numbers: Goal=Inform. Chosen Visualization=Large Text. Justification=Highlights key stats effectively. Method=Tailwind CSS. NO SVG.
+
+    Color Palette Choice:
+    -   Palette Name: "Brilliant Blues" (Adapted)
+    -   HEX Codes Used: #05445E (Dark Blue), #189AB4 (Medium Blue), #75E6DA (Light Cyan/Mint), #D4F1F4 (Very Light Blue/Background), with #FF6384 (Red accent for contrast).
+    
+    Confirmation:
+    -   NEITHER Mermaid JS NOR SVG were used in this output. All charts are rendered on Canvas by Chart.js. All diagrams are built with structured HTML and styled with Tailwind CSS.
+    -->
+
+    <div class="container mx-auto p-4 md:p-8">
+
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-6xl font-black text-[#05445E] mb-2">금호타이어 광주공장 화재</h1>
+            <p class="text-lg md:text-xl text-[#189AB4]">2025년 5월, 76시간의 기록과 그 영향</p>
+        </header>
+
+        <main class="space-y-12">
+            
+            <section id="timeline">
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h2 class="text-2xl font-bold text-[#05445E] mb-6 text-center">주요 사건 타임라인</h2>
+                    <div class="relative border-l-4 border-[#75E6DA] ml-4 md:ml-0 md:pl-4">
+                        <div class="mb-8 pl-8 relative">
+                            <div class="absolute -left-[18px] top-1 w-8 h-8 bg-[#189AB4] rounded-full border-4 border-white"></div>
+                            <p class="font-bold text-lg text-[#05445E]">5월 17일 07:11</p>
+                            <p class="text-gray-600">광주공장 2공장 내 고무정련 공장동에서 최초 화재 발생. 소방 대응 1단계 발령.</p>
+                        </div>
+                        <div class="mb-8 pl-8 relative">
+                             <div class="absolute -left-[18px] top-1 w-8 h-8 bg-[#189AB4] rounded-full border-4 border-white"></div>
+                            <p class="font-bold text-lg text-[#05445E]">5월 17일 08:00</p>
+                            <p class="text-gray-600">불길이 급격히 확산됨에 따라 소방 대응 2단계로 격상, 국가 소방 동원령 발령.</p>
+                        </div>
+                        <div class="mb-8 pl-8 relative">
+                             <div class="absolute -left-[18px] top-1 w-8 h-8 bg-[#189AB4] rounded-full border-4 border-white"></div>
+                            <p class="font-bold text-lg text-[#05445E]">5월 18일 14:50</p>
+                            <p class="text-gray-600">발생 약 32시간 만에 주불 진화 성공. 하지만 잔불 정리에 난항 시작.</p>
+                        </div>
+                        <div class="pl-8 relative">
+                             <div class="absolute -left-[18px] top-1 w-8 h-8 bg-[#189AB4] rounded-full border-4 border-white"></div>
+                            <p class="font-bold text-lg text-[#05445E]">5월 20일 11:50</p>
+                            <p class="text-gray-600">신고 접수 76시간 만에 완전 진화 선언.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="damage_overview">
+                 <h2 class="text-3xl font-bold text-[#05445E] mb-6 text-center">한눈에 보는 피해 규모</h2>
+                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+
+                    <div class="bg-white rounded-lg shadow-md p-6 flex flex-col items-center justify-center text-center">
+                        <h3 class="text-xl font-bold text-[#189AB4] mb-2">인명 피해 현황</h3>
+                        <p class="text-gray-700 mb-4">화재 진압 및 대피 과정에서 부상자와 이재민이 발생했습니다. 특히 연기로 인한 건강 피해를 호소하는 주민들이 많았습니다.</p>
+                        <div class="chart-container h-64 md:h-72">
+                            <canvas id="humanImpactChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-md p-6 flex flex-col items-center justify-center text-center">
+                        <h3 class="text-xl font-bold text-[#189AB4] mb-2">재산 피해 및 보험 보상</h3>
+                        <p class="text-gray-700 mb-4">공장 소실로 인한 직접적인 매출 손실은 막대했으며, 이는 화재보험으로 일부 충당될 예정입니다.</p>
+                        <div class="chart-container h-64 md:h-72">
+                            <canvas id="financialLossChart"></canvas>
+                        </div>
+                    </div>
+                 </div>
+            </section>
+            
+            <section id="economic_impact">
+                <h2 class="text-3xl font-bold text-[#05445E] mb-6 text-center">경제적 파장</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <p class="text-5xl font-black text-[#05445E]">12%</p>
+                        <p class="text-lg font-bold text-gray-700 mt-2">국내 타이어 수요 생산량</p>
+                        <p class="text-sm text-gray-500 mt-1">광주공장이 담당하던 비율</p>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <p class="text-5xl font-black text-[#05445E]">872곳</p>
+                        <p class="text-lg font-bold text-gray-700 mt-2">피해 예상 납품업체</p>
+                         <p class="text-sm text-gray-500 mt-1">광주 소재 222곳 포함</p>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <p class="text-5xl font-black text-[#05445E]">2,500명</p>
+                        <p class="text-lg font-bold text-gray-700 mt-2">소속 노동자 생계 우려</p>
+                        <p class="text-sm text-gray-500 mt-1">1,800여 명 자택 대기</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-6 mt-6 flex flex-col items-center justify-center text-center">
+                    <h3 class="text-xl font-bold text-[#189AB4] mb-2">전체 노동자 대비 자택 대기 인원 비율</h3>
+                    <p class="text-gray-700 mb-4">공장 가동 중단으로 인해 대다수의 직원이 자택 대기 상태에 들어갔습니다.</p>
+                    <div class="chart-container h-64 md:h-72">
+                         <canvas id="workforceImpactChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <section id="response">
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h2 class="text-2xl font-bold text-[#05445E] mb-6 text-center">기관별 주요 조치</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div>
+                            <h3 class="font-bold text-xl text-[#189AB4] border-b-2 border-[#75E6DA] pb-2 mb-3">소방 당국</h3>
+                            <ul class="list-disc list-inside space-y-2 text-gray-700">
+                                <li>대응 2단계 및 국가 동원령 발령</li>
+                                <li>주민 대상 수도 사용 자제 요청</li>
+                                <li>살수차 운영으로 분진 피해 최소화</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-xl text-[#189AB4] border-b-2 border-[#75E6DA] pb-2 mb-3">금호타이어</h3>
+                            <ul class="list-disc list-inside space-y-2 text-gray-700">
+                                <li>비상 대응 체제 가동</li>
+                                <li>타 공장으로 생산 전환 검토</li>
+                                <li>주민 피해 보상 약속 및 접수처 운영</li>
+                                <li>안전관리 체계 전면 재정비 선언</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-xl text-[#189AB4] border-b-2 border-[#75E6DA] pb-2 mb-3">광주시/광산구</h3>
+                            <ul class="list-disc list-inside space-y-2 text-gray-700">
+                                <li>의료상담 창구 3곳 운영</li>
+                                <li>방진 마스크 3만개 이상 배부</li>
+                                <li>피해 보상 절차 협의 및 지원</li>
+                                <li>주민 건강/재산 보호 종합대책 추진</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+        </main>
+
+        <footer class="text-center mt-12 py-6 border-t border-gray-300">
+            <p class="text-sm text-gray-500">본 인포그래픽은 2025년 5월 금호타이어 화재 사건 관련 공개 데이터를 기반으로 제작되었습니다.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        const wrapLabel = (label) => {
+            const maxLength = 16;
+            if (label.length <= maxLength) return label;
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = '';
+            words.forEach(word => {
+                if ((currentLine + word).length > maxLength) {
+                    lines.push(currentLine.trim());
+                    currentLine = '';
+                }
+                currentLine += word + ' ';
+            });
+            lines.push(currentLine.trim());
+            return lines;
+        };
+        
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+              return label.join(' ');
+            } else {
+              return label;
+            }
+        };
+
+        const commonChartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        color: '#05445E',
+                        font: {
+                            size: 12,
+                            family: "'Noto Sans KR', sans-serif"
+                        }
+                    }
+                },
+                tooltip: {
+                    backgroundColor: 'rgba(5, 68, 94, 0.9)',
+                    titleFont: {
+                        size: 14,
+                        family: "'Noto Sans KR', sans-serif"
+                    },
+                    bodyFont: {
+                        size: 12,
+                        family: "'Noto Sans KR', sans-serif"
+                    },
+                    callbacks: {
+                        title: tooltipTitleCallback
+                    }
+                }
+            }
+        };
+
+        const humanImpactCtx = document.getElementById('humanImpactChart').getContext('2d');
+        new Chart(humanImpactCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['임시 대피소 대피 주민', '건강 이상 호소 주민', '부상자 (직원/소방관)'],
+                datasets: [{
+                    label: '인원 수',
+                    data: [183, 53, 3],
+                    backgroundColor: ['#189AB4', '#FF6384', '#05445E'],
+                    borderColor: '#FFFFFF',
+                    borderWidth: 2,
+                    hoverOffset: 4
+                }]
+            },
+            options: { ...commonChartOptions }
+        });
+
+        const financialLossCtx = document.getElementById('financialLossChart').getContext('2d');
+        new Chart(financialLossCtx, {
+            type: 'bar',
+            data: {
+                labels: ['예상 매출 손실액', '예상 보험 보상액'],
+                datasets: [{
+                    label: '금액 (단위: 억 원)',
+                    data: [8916, 5000],
+                    backgroundColor: ['#FF6384', '#189AB4'],
+                    borderColor: ['#FF6384', '#189AB4'],
+                    borderWidth: 1,
+                    barPercentage: 0.6
+                }]
+            },
+            options: {
+                ...commonChartOptions,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: { color: '#05445E' },
+                        grid: { color: '#D4F1F4' }
+                    },
+                    x: {
+                        ticks: { color: '#05445E' },
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+
+        const workforceImpactCtx = document.getElementById('workforceImpactChart').getContext('2d');
+        new Chart(workforceImpactCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['자택 대기 인원', '정상 근무 인원 (추정)'],
+                datasets: [{
+                    label: '인원 수',
+                    data: [1800, 2500 - 1800],
+                    backgroundColor: ['#FF6384', '#189AB4'],
+                    borderColor: '#FFFFFF',
+                    borderWidth: 2,
+                    hoverOffset: 4
+                }]
+            },
+            options: { ...commonChartOptions }
+        });
+    </script>
+</body>
+</html>
