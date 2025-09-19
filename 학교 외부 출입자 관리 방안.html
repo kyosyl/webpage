@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마재초등학교 외부 출입자 안전 관리 시스템</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Calm Harmony -->
+    <!-- Application Structure Plan: A four-tab single-page application (SPA) structure was designed to transform the linear report into a user-centric tool. The tabs are: 1) Core Guidelines, 2) Procedures by Visitor Type, 3) Situational Responses, and 4) Roles & Status. This thematic structure allows users (school staff) to quickly access specific, actionable information relevant to their immediate needs (e.g., 'How to handle a visitor now?' or 'What to do if the safety officer is absent?') rather than reading through the entire report. This task-oriented design enhances usability and supports rapid decision-making in real-world scenarios. -->
+    <!-- Visualization & Content Choices: Report Info -> Goal -> Viz/Presentation -> Interaction -> Justification. 1. Visitor procedures -> Organize -> HTML/CSS flowchart -> Clickable buttons -> Visually separates complex procedures for clarity. 2. 10-step contingency plan -> Organize/Inform -> Interactive accordion & Bar Chart (Chart.js) -> Click to expand, chart shows cost data -> Accordion reduces cognitive load; chart provides quick financial insights. 3. RACI matrix -> Inform -> Styled HTML table -> Hover effects (optional) -> Clear, standard presentation for responsibility mapping. 4. Gate/Playground hours -> Inform -> Visual schedule cards -> None -> More engaging and easier to read than plain text. This multi-faceted approach presents information in its most digestible format. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #F8F7F4; /* Warm Neutral Background */
+        }
+        .nav-button {
+            transition: all 0.3s ease;
+            border-bottom: 4px solid transparent;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .nav-button.active {
+            border-bottom-color: #3B82F6; /* Subtle Accent */
+            color: #1E3A8A;
+        }
+        .nav-button:hover {
+            background-color: #E0E7FF;
+        }
+        .content-section {
+            display: none;
+        }
+        .content-section.active {
+            display: block;
+        }
+        .card {
+            background-color: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -2px rgb(0 0 0 / 0.1);
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out, padding 0.5s ease-out;
+            padding: 0 1rem;
+        }
+        @media (min-width: 640px) {
+            .accordion-content {
+                padding: 0 1.5rem;
+            }
+        }
+        .procedure-btn.active {
+            background-color: #3B82F6;
+            color: white;
+            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 288px; /* h-72 */
+            max-height: 50vh;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 384px; /* h-96 */
+            }
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <div class="container mx-auto p-4 md:p-6 max-w-7xl">
+        <header class="text-center mb-6 md:mb-8">
+            <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900">마재초등학교 외부 출입자 안전 관리 시스템</h1>
+            <p class="mt-2 text-base md:text-lg text-blue-800 font-semibold bg-blue-100 rounded-full inline-block px-4 py-1">'선 허가, 후 방문' 원칙 확립</p>
+        </header>
+
+        <nav class="bg-white rounded-lg shadow-md mb-6 md:mb-8 sticky top-2 z-10">
+            <div class="flex flex-col sm:flex-row sm:justify-around border-b border-gray-200">
+                <button class="nav-button flex-1 py-3 sm:py-4 px-2 text-sm md:text-base font-medium text-gray-600 active" data-target="guidelines">
+                    <span class="md:hidden">Ⅰ. 지침</span>
+                    <span class="hidden md:inline">Ⅰ. 핵심 관리 지침</span>
+                </button>
+                <button class="nav-button flex-1 py-3 sm:py-4 px-2 text-sm md:text-base font-medium text-gray-600" data-target="procedures">
+                    <span class="md:hidden">Ⅱ. 절차</span>
+                    <span class="hidden md:inline">Ⅱ. 출입자 유형별 절차</span>
+                </button>
+                <button class="nav-button flex-1 py-3 sm:py-4 px-2 text-sm md:text-base font-medium text-gray-600" data-target="responses">
+                    <span class="md:hidden">Ⅲ. 대응</span>
+                    <span class="hidden md:inline">Ⅲ. 상황별 대응 방안</span>
+                </button>
+                <button class="nav-button flex-1 py-3 sm:py-4 px-2 text-sm md:text-base font-medium text-gray-600" data-target="status">
+                    <span class="md:hidden">Ⅳ. 현황</span>
+                    <span class="hidden md:inline">Ⅳ. 역할 및 추진 현황</span>
+                </button>
+            </div>
+        </nav>
+
+        <main>
+            <!-- Section 1: Core Guidelines -->
+            <section id="guidelines" class="content-section active">
+                <div class="p-4 bg-white rounded-lg shadow-inner border border-gray-200 mb-6">
+                    <h2 class="text-xl md:text-2xl font-bold mb-3 text-gray-900">핵심 관리 지침 소개</h2>
+                    <p class="text-gray-600 text-sm md:text-base">이 섹션은 우리 학교의 외부인 출입 통제에 관한 가장 기본적인 원칙과 규정을 담고 있습니다. 모든 교직원은 아래의 운영 방안을 숙지하여 학생들의 안전을 확보하는 데 동참해야 합니다. 각 지침은 교육청 공문과 관련 법규에 근거한 필수 이행 사항입니다.</p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+                    <div class="card p-4 md:p-6 col-span-1 lg:col-span-1">
+                        <h3 class="text-lg md:text-xl font-bold mb-3 flex items-center"><span class="text-2xl md:text-3xl mr-3">🚪</span>출입문 관리 원칙</h3>
+                        <p class="text-gray-700 text-sm md:text-base">학생 안전 확보를 위해, 지정된 시간 외에는 모든 교문과 건물 출입문을 <span class="font-bold text-red-600">완전 폐쇄</span>하는 것을 원칙으로 합니다.</p>
+                        <p class="mt-2 text-xs md:text-sm text-gray-500">근거: 교육부 가이드라인 제13조</p>
+                    </div>
+
+                    <div class="card p-4 md:p-6 col-span-1 md:col-span-2 lg:col-span-2">
+                        <h3 class="text-lg md:text-xl font-bold mb-3 flex items-center"><span class="text-2xl md:text-3xl mr-3">🕒</span>교문 및 운동장 운영 시간</h3>
+                        <div class="grid sm:grid-cols-2 gap-4 mt-4">
+                            <div>
+                                <h4 class="font-semibold text-blue-700">후문 (방문객 주 출입구)</h4>
+                                <ul class="list-disc list-inside text-gray-600 mt-1 text-sm">
+                                    <li>등교: 08:00 ~ 09:00</li>
+                                    <li>하교/방과후 (월,수): 13:10 ~ 16:30</li>
+                                    <li>하교/방과후 (화,목,금): 13:50 ~ 16:30</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-green-700">운동장 (지역주민 개방)</h4>
+                                <ul class="list-disc list-inside text-gray-600 mt-1 text-sm">
+                                    <li>평일: 07:00-08:00, 17:30-21:30</li>
+                                    <li>주말/공휴일: 07:00-21:30</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-xs text-orange-600 bg-orange-100 p-2 rounded-md">※ 정문은 등·하교 시간 외 폐쇄 원칙. 운동장 이용 시 건물 내 출입은 엄격히 통제됩니다.</p>
+                    </div>
+
+                    <div class="card p-4 md:p-6 col-span-1 md:col-span-2 lg:col-span-3">
+                        <h3 class="text-lg md:text-xl font-bold mb-3 flex items-center"><span class="text-2xl md:text-3xl mr-3">📝</span>모든 외부인 출입 기록 의무</h3>
+                        <p class="text-gray-700 text-sm md:text-base">교직원(공무원증/교직원증)과 학생(이름표)을 제외한 모든 학교 출입자는 <span class="font-bold text-blue-600">반드시 신분증을 제시</span>하고, <span class="font-bold text-blue-600">방문일지를 작성</span>한 뒤 <span class="font-bold text-blue-600">방문증을 패용</span>해야 합니다. 이는 학생 보호를 위한 필수 절차입니다.</p>
+                        <p class="mt-2 text-xs md:text-sm text-gray-500">근거: [안내] 공문 '나항'</p>
+                    </div>
+                     <div class="card p-4 md:p-6 col-span-1">
+                        <h3 class="text-lg md:text-xl font-bold mb-3 flex items-center"><span class="text-2xl md:text-3xl mr-3">🧑‍🏫</span>전 구성원 안전 교육</h3>
+                        <p class="text-gray-700 text-sm md:text-base">전 교직원과 학생을 대상으로, 출입증 미패용자 발견 시 <span class="font-bold">즉시 학생보호인력에게 신고</span>하도록 <span class="font-bold text-green-600">연 1회 이상 교육</span>을 실시해야 합니다.</p>
+                        <p class="mt-2 text-xs md:text-sm text-gray-500">근거: 교육부 가이드라인 제20조</p>
+                    </div>
+                    <div class="card p-4 md:p-6 col-span-1 md:col-span-2">
+                        <h3 class="text-lg md:text-xl font-bold mb-3 flex items-center"><span class="text-2xl md:text-3xl mr-3">🚓</span>무단 출입자 조치</h3>
+                        <p class="text-gray-700 text-sm md:text-base">교직원은 출입증 없는 외부인 발견 시 <span class="font-bold">후문 배움터지킴이실로 안내</span>해야 합니다. 만약 방문객이 퇴교 요청에 불응할 경우, 학교장은 <span class="font-bold text-red-600">즉시 관할 경찰서에 신고</span>할 의무가 있습니다.</p>
+                         <p class="mt-2 text-xs md:text-sm text-gray-500">근거: 교육부 가이드라인 제19조</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2: Procedures by Visitor Type -->
+            <section id="procedures" class="content-section">
+                 <div class="p-4 bg-white rounded-lg shadow-inner border border-gray-200 mb-6">
+                    <h2 class="text-xl md:text-2xl font-bold mb-3 text-gray-900">출입자 유형별 절차 안내</h2>
+                    <p class="text-gray-600 text-sm md:text-base">외부 방문자는 유형에 따라 다른 출입 절차를 따릅니다. 아래에서 해당하는 방문자 유형을 선택하면, 단계별로 명확한 처리 절차를 확인할 수 있습니다. 신속하고 정확한 응대를 위해 각 절차를 숙지해주시기 바랍니다.</p>
+                </div>
+                <div class="flex flex-col sm:flex-row flex-wrap gap-2 mb-6">
+                    <button class="procedure-btn w-full sm:flex-1 px-4 py-3 text-sm md:text-base font-medium rounded-md bg-gray-200 hover:bg-gray-300 active" data-procedure="general">일반 방문객</button>
+                    <button class="procedure-btn w-full sm:flex-1 px-4 py-3 text-sm md:text-base font-medium rounded-md bg-gray-200 hover:bg-gray-300" data-procedure="instructor">협력수업 외부강사</button>
+                    <button class="procedure-btn w-full sm:flex-1 px-4 py-3 text-sm md:text-base font-medium rounded-md bg-gray-200 hover:bg-gray-300" data-procedure="others">기타 강사 (늘봄/유치원)</button>
+                    <button class="procedure-btn w-full sm:flex-1 px-4 py-3 text-sm md:text-base font-medium rounded-md bg-gray-200 hover:bg-gray-300" data-procedure="resident">지역주민 (운동장)</button>
+                </div>
+                <div id="procedure-display" class="card p-4 md:p-6">
+                    <!-- JS will populate this -->
+                </div>
+            </section>
+            
+            <!-- Section 3: Situational Responses -->
+            <section id="responses" class="content-section">
+                <div class="p-4 bg-white rounded-lg shadow-inner border border-gray-200 mb-6">
+                    <h2 class="text-xl md:text-2xl font-bold mb-3 text-gray-900">상황별 대응 방안</h2>
+                    <p class="text-gray-600 text-sm md:text-base">학교 안전 관리에서 가장 취약한 순간은 담당자가 부재중일 때입니다. 이 섹션은 '배움터지킴이 부재'라는 핵심 리스크 상황에 대비한 10단계 대응 방안을 구체적으로 제시합니다. 각 방안을 클릭하여 세부 내용, 필요 시설 및 예상 비용을 확인하고, 실제 상황 발생 시 신속하게 대응할 수 있도록 준비해주십시오.</p>
+                </div>
+
+                <div class="bg-white p-4 md:p-6 rounded-lg shadow-lg">
+                    <h3 class="text-lg md:text-xl font-bold mb-4 text-center text-red-700">[특별 제안] 배움터지킴이 부재 시 10단계 대응 방안</h3>
+                    <div id="accordion-container" class="space-y-2">
+                        <!-- JS will populate this -->
+                    </div>
+                </div>
+
+                <div class="card mt-6">
+                    <h3 class="text-lg md:text-xl font-bold mb-4 text-center p-4 md:p-6">대응 방안 비용 분석</h3>
+                    <div class="p-2 sm:p-4">
+                        <div class="chart-container">
+                             <canvas id="costChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 4: Roles & Status -->
+            <section id="status" class="content-section">
+                <div class="p-4 bg-white rounded-lg shadow-inner border border-gray-200 mb-6">
+                    <h2 class="text-xl md:text-2xl font-bold mb-3 text-gray-900">역할 및 추진 현황</h2>
+                    <p class="text-gray-600 text-sm md:text-base">성공적인 안전 시스템 정착을 위해서는 명확한 역할 분담과 지속적인 추진 현황 점검이 필수적입니다. 여기서는 각 과업별 담당자와 현재 교감 선생님 주도로 추진 중인 사항들을 확인할 수 있습니다. 자신의 역할을 확인하고 협조가 필요한 부분을 파악하여 주시기 바랍니다.</p>
+                </div>
+                <div class="grid lg:grid-cols-2 gap-6 md:gap-8">
+                    <div class="card p-4 md:p-6">
+                        <h3 class="text-lg md:text-xl font-bold mb-4 text-center">역할 및 책임 (RACI)</h3>
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full text-sm text-left text-gray-500">
+                                <thead class="text-xs text-gray-700 uppercase bg-gray-100">
+                                    <tr>
+                                        <th scope="col" class="px-4 py-3">과업</th>
+                                        <th scope="col" class="px-4 py-3">실행(R)</th>
+                                        <th scope="col" class="px-4 py-3">총괄(A)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="bg-white border-b"><td class="px-4 py-3 font-medium">출입 통제 총괄</td><td class="px-4 py-3">교감/행정실장</td><td class="px-4 py-3">교장</td></tr>
+                                    <tr class="bg-gray-50 border-b"><td class="px-4 py-3 font-medium">외부 출입자 시스템 구축/운영</td><td class="px-4 py-3">생활기획</td><td class="px-4 py-3">교감</td></tr>
+                                    <tr class="bg-white border-b"><td class="px-4 py-3 font-medium">방문객 응대/방문증 배부</td><td class="px-4 py-3">배움터지킴이</td><td class="px-4 py-3">생활기획</td></tr>
+                                    <tr class="bg-gray-50 border-b"><td class="px-4 py-3 font-medium">서류 비치 및 작성</td><td class="px-4 py-3">배움터지킴이</td><td class="px-4 py-3">생활기획</td></tr>
+                                    <tr class="bg-white border-b"><td class="px-4 py-3 font-medium">외부강사증 관리(협력수업, 늘봄학교, 병설유치원)</td><td class="px-4 py-3">교무실무사,늘봄실무사,병설유치원</td><td class="px-4 py-3">업무담당자</td></tr>
+                                    <tr class="bg-gray-50 border-b"><td class="px-4 py-3 font-medium">안전교육</td><td class="px-4 py-3">생활기획</td><td class="px-4 py-3">교감</td></tr>
+                                    <tr class="bg-white border-b"><td class="px-4 py-3 font-medium">필요물품 예산 편성 및 집행</td><td class="px-4 py-3">업무담당자/행정실</td><td class="px-4 py-3">행정실장</td></tr>
+                                    <tr class="bg-white"><td class="px-4 py-3 font-medium">비상 대응 (신고)</td><td class="px-4 py-3">배움터지킴이</td><td class="px-4 py-3">교감, 교장</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                     <div class="card p-4 md:p-6">
+                        <h3 class="text-lg md:text-xl font-bold mb-4 text-center">교감이 현재 추진중인 사항</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start"><span class="bg-blue-500 rounded-full w-5 h-5 text-white text-xs flex items-center justify-center mr-3 mt-1 flex-shrink-0">1</span><span><span class="font-semibold">정문 폐쇄 여부 의견 수렴</span><br><span class="text-sm text-gray-500">→ 결정 시 학부모 홍보 및 유예기간 실시</span></span></li>
+                            <li class="flex items-start"><span class="bg-blue-500 rounded-full w-5 h-5 text-white text-xs flex items-center justify-center mr-3 mt-1 flex-shrink-0">2</span><span><span class="font-semibold">협력수업 외부강사 관리 방안 수립</span><br><span class="text-sm text-gray-500">→ 교무실 '외부강사증' 배부 및 수불대장 기재</span></span></li>
+                            <li class="flex items-start"><span class="bg-blue-500 rounded-full w-5 h-5 text-white text-xs flex items-center justify-center mr-3 mt-1 flex-shrink-0">3</span><span><span class="font-semibold">교직원 공무원증 패용 여부 검토</span><br><span class="text-sm text-gray-500">→ 별도 교직원증 제작 여부 판단 필요</span></span></li>
+                            <li class="flex items-start"><span class="bg-blue-500 rounded-full w-5 h-5 text-white text-xs flex items-center justify-center mr-3 mt-1 flex-shrink-0">4</span><span><span class="font-semibold">배움터지킴이 운영 시스템 점검</span></span></li>
+                            <li class="flex items-start"><span class="bg-blue-500 rounded-full w-5 h-5 text-white text-xs flex items-center justify-center mr-3 mt-1 flex-shrink-0">5</span><span><span class="font-semibold">기타 외부강사(늘봄/유치원) 관리 방안 확인</span></span></li>
+                            <li class="flex items-start"><span class="bg-blue-500 rounded-full w-5 h-5 text-white text-xs flex items-center justify-center mr-3 mt-1 flex-shrink-0">6</span><span><span class="font-semibold">배움터지킴이 부재 시 안내판 제작 및 비치</span></span></li>
+                            <li class="flex items-start"><span class="bg-blue-500 rounded-full w-5 h-5 text-white text-xs flex items-center justify-center mr-3 mt-1 flex-shrink-0">7</span><span><span class="font-semibold">교직원 대상 안전 연수 계획 수립</span></span></li>
+                            <li class="flex items-start"><span class="bg-blue-500 rounded-full w-5 h-5 text-white text-xs flex items-center justify-center mr-3 mt-1 flex-shrink-0">8</span><span><span class="font-semibold">외부인 출입통제 가정통신문 발송</span></span></li>
+                            <li class="flex items-start"><span class="bg-blue-500 rounded-full w-5 h-5 text-white text-xs flex items-center justify-center mr-3 mt-1 flex-shrink-0">9</span><span><span class="font-semibold">출입수칙 게시판 현황 파악</span><br><span class="text-sm text-gray-500">→ 현재 돌봄출입구 및 급식실 출입구 맞은편 2곳 부착</span></span></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // Data Store
+        const procedureData = {
+            general: {
+                title: '일반 방문객 출입 절차',
+                steps: [
+                    { icon: '①', text: '방문객은 후문 배움터지킴이실로 방문합니다.' },
+                    { icon: '②', text: '담당자(배움터지킴이)에게 신분증을 제시합니다.' },
+                    { icon: '③', text: '비치된 \'일일방문증 관리대장\'을 작성합니다.' },
+                    { icon: '④', text: '담당자는 신원 확인 후 \'일일방문증\'을 교부합니다.' },
+                    { icon: '⑤', text: '방문객은 교내에서 방문증을 상시 패용합니다.' },
+                    { icon: '⑥', text: '용무를 마친 후, 배움터지킴이실에 방문증을 반납하고 퇴교합니다.' },
+                ]
+            },
+            instructor: {
+                title: '협력수업 외부강사 출입 절차',
+                steps: [
+                    { icon: '①', text: '최초 방문 시, 교무실에서 신분 확인 절차를 거칩니다.' },
+                    { icon: '②', text: '\'외부강사증 수불대장\'에 서명 후 \'외부강사증\'을 수령합니다.' },
+                    { icon: '③', text: '활동 기간 동안 교내에서 상시 패용합니다.' },
+                    { icon: '④', text: '외부강사는 별도 방문일지 작성 없이 후문으로 출입 가능합니다.' },
+                    { icon: '⑤', text: '활동 종료(계약 만료) 후, 교무실에 \'외부강사증\'을 반납합니다.' },
+                ]
+            },
+            others: {
+                title: '기타 강사 (늘봄/유치원) 출입 절차',
+                steps: [
+                    { icon: '●', text: '<span class="font-bold">늘봄학교 위탁강사:</span> 현재와 같이 발급된 강사증을 패용하고 출입합니다.' },
+                    { icon: '●', text: '<span class="font-bold">유치원 외부강사:</span> 출입 관리 방안이 수립될 때까지 일반 방문객 절차를 따릅니다. (추후 별도 안내 예정)' },
+                ]
+            },
+            resident: {
+                title: '지역주민 (운동장 이용자) 안내',
+                steps: [
+                    { icon: '①', text: '정해진 개방 시간에만 운동장 이용이 가능합니다.' },
+                    { icon: '②', text: '운동장 이용 시에는 별도의 출입 절차가 없습니다.' },
+                    { icon: '③', text: '<span class="font-bold text-red-600">절대로 학교 건물 내로 출입할 수 없습니다.</span>' },
+                    { icon: '④', text: '무단으로 건물에 들어올 경우 즉시 퇴교 조치되며, 불응 시 경찰에 신고됩니다.' },
+                ]
+            }
+        };
+
+        const accordionData = [
+            { title: "1단계: 행정실 연동 인터폰 설치", content: "<strong>(세부 방안)</strong> Wi-Fi 기반 무선 비디오폰 도입: 배움터지킴이실-행정실 거리(약 70m) 고려 시, 배선 공사비가 높은 유선보다 기존 Wi-Fi 활용 무선 방식이 효율적. 방문객 호출 시 행정실 PC/모니터에서 영상으로 신원 확인 및 통화.<br><strong>(예상 비용)</strong> 총 약 45만원 ~ 90만원" },
+            { title: "2단계: 스마트 출입 관리 시스템 도입 검토", content: "<strong>(세부 방안)</strong> QR코드 기반 사전 방문 예약 시스템 또는 행정실 원격 개문 가능한 전자 도어락 시스템을 장기적으로 검토.<br><strong>(예상 비용)</strong> 약 100만원 ~ 300만원 이상" },
+            { title: "3단계: 행정실 교대 근무조 편성", content: "<strong>(세부 방안)</strong> 행정실 직원이 교대로 외부 출입자 안내 역할을 수행하는 내부 근무 지침 마련.<br><strong>(예상 비용)</strong> 비용 없음" },
+            { title: "4단계: 교직원 '안전 지킴이' 자원봉사 운영", content: "<strong>(세부 방안)</strong> 비담임 교사 중심으로 특정 시간대(점심시간 등)에 후문 안내 데스크를 지원하는 자원봉사제 운영.<br><strong>(예상 비용)</strong> 비용 없음" },
+            { title: "5단계: 학부모 폴리스와 연계 강화", content: "<strong>(세부 방안)</strong> 학부모 폴리스 활동 시간을 배움터지킴이 순찰 시간과 연계하여 후문 주변 집중 순찰 협조 요청.<br><strong>(예상 비용)</strong> 비용 없음" },
+            { title: "6단계: '실시간 모니터링' 안내문 부착", content: "<strong>(세부 방안)</strong> 후문과 현관에 'CCTV 실시간 녹화 및 행정실 모니터링 중' 안내문 부착으로 심리적 침입 장벽 강화.<br><strong>(예상 비용)</strong> 약 1만원 ~ 5만원" },
+            { title: "7단계: '사전 예약 방문' 원칙 홍보", content: "<strong>(세부 방안)</strong> 긴급 용무 외 모든 방문은 '사전 전화 예약'을 원칙으로 함을 e-알리미, 홈페이지 등으로 지속 홍보.<br><strong>(예상 비용)</strong> 비용 없음" },
+            { title: "8단계: 건물 중앙 현관 자동 잠금", content: "<strong>(세부 방안)</strong> 배움터지킴이 부재 시, 중앙 현관 자동 잠금 상태로 전환하여 모든 출입이 행정실을 경유하도록 유도.<br><strong>(예상 비용)</strong> 기존 기능 활용 시 비용 없음. 신규 설치 시 약 50만원 ~ 150만원" },
+            { title: "9단계: 자율방범대 순찰 경로 포함 요청", content: "<strong>(세부 방안)</strong> 지역 자율방범대에 협조하여, 배움터지킴이 부재 시간대 학교 후문 주변 순찰 경로 포함 요청.<br><strong>(예상 비용)</strong> 비용 없음" },
+            { title: "10단계: '외부인 침입 상황 가정' 모의훈련", content: "<strong>(세부 방안)</strong> 배움터지킴이 부재 상황을 가정한 최초 발견, 보고, 교내 전파, 경찰 신고까지의 모의훈련 정기 실시.<br><strong>(예상 비용)</strong> 비용 없음" }
+        ];
+
+        // App Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const navButtons = document.querySelectorAll('.nav-button');
+            const contentSections = document.querySelectorAll('.content-section');
+            const procedureButtons = document.querySelectorAll('.procedure-btn');
+            const procedureDisplay = document.getElementById('procedure-display');
+            const accordionContainer = document.getElementById('accordion-container');
+
+            // Navigation
+            navButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    navButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+
+                    contentSections.forEach(section => {
+                        section.style.display = 'none';
+                        section.classList.remove('active');
+                    });
+                    
+                    const targetSection = document.getElementById(button.dataset.target);
+                    targetSection.style.display = 'block';
+                    targetSection.classList.add('active');
+                });
+            });
+
+            // Procedure Display
+            function updateProcedureDisplay(procedureKey) {
+                const data = procedureData[procedureKey];
+                let content = `<h3 class="text-xl font-bold mb-4">${data.title}</h3><div class="space-y-3">`;
+                data.steps.forEach(step => {
+                    content += `<div class="flex items-start"><span class="flex-shrink-0 bg-blue-100 text-blue-800 font-bold rounded-full w-8 h-8 flex items-center justify-center mr-3">${step.icon}</span><p class="text-gray-700 pt-1 text-sm md:text-base">${step.text}</p></div>`;
+                });
+                content += `</div>`;
+                procedureDisplay.innerHTML = content;
+            }
+
+            procedureButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    procedureButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    updateProcedureDisplay(button.dataset.procedure);
+                });
+            });
+            updateProcedureDisplay('general');
+
+            // Accordion
+            accordionData.forEach((item, index) => {
+                const accordionItem = document.createElement('div');
+                accordionItem.className = 'border rounded-lg';
+                
+                const button = document.createElement('button');
+                button.className = 'accordion-button w-full p-3 sm:p-4 text-left font-semibold hover:bg-gray-50 flex justify-between items-center';
+                button.innerHTML = `<span class="text-sm md:text-base">${item.title}</span><span class="transform transition-transform duration-300 text-xl font-light">+</span>`;
+                
+                const content = document.createElement('div');
+                content.className = 'accordion-content bg-gray-50 text-sm md:text-base';
+                content.innerHTML = `<div class="p-4 sm:p-6 pt-0">${item.content}</div>`;
+                
+                accordionItem.appendChild(button);
+                accordionItem.appendChild(content);
+                accordionContainer.appendChild(accordionItem);
+
+                button.addEventListener('click', () => {
+                    const isExpanded = content.style.maxHeight && content.style.maxHeight !== '0px';
+                    
+                    document.querySelectorAll('.accordion-content').forEach(el => el.style.maxHeight = '0px');
+                    document.querySelectorAll('.accordion-button span:last-child').forEach(el => {
+                        el.textContent = '+';
+                        el.classList.remove('rotate-45');
+                    });
+                    
+                    if (!isExpanded) {
+                        content.style.maxHeight = content.scrollHeight + "px";
+                        button.querySelector('span:last-child').textContent = '+';
+                        button.querySelector('span:last-child').classList.add('rotate-45');
+                    }
+                });
+            });
+
+            // Chart.js
+            const costData = {
+                labels: ['인터폰', '스마트시스템', '안내문', '자동잠금'],
+                datasets: [{
+                    label: '최소 예상 비용 (만원)',
+                    data: [45, 100, 1, 50],
+                    backgroundColor: 'rgba(59, 130, 246, 0.6)',
+                    borderColor: 'rgba(59, 130, 246, 1)',
+                    borderWidth: 1
+                }, {
+                    label: '최대 예상 비용 (만원)',
+                    data: [90, 300, 5, 150],
+                    backgroundColor: 'rgba(239, 68, 68, 0.6)',
+                    borderColor: 'rgba(239, 68, 68, 1)',
+                    borderWidth: 1
+                }]
+            };
+
+            const ctx = document.getElementById('costChart').getContext('2d');
+            const myChart = new Chart(ctx, {
+                type: 'bar',
+                data: costData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: '시설 투자 필요 대응 방안 예상 비용',
+                            font: { size: 16 }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.dataset.label}: ${context.raw}만원`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: '비용 (만원)'
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
