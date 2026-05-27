@@ -1,0 +1,723 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="교직원을 위한 법규의 위계 질서 이해 안내 자료" />
+  <title>법규의 위계 질서 이해</title>
+  <style>
+    :root{
+      --bg:#f6f7fb;
+      --card:#ffffff;
+      --text:#0f172a;
+      --muted:#475569;
+      --soft:#f1f5f9;
+      --line:#dbe3ef;
+      --blue:#1d4ed8;
+      --blue-soft:#eff6ff;
+      --green:#047857;
+      --green-soft:#ecfdf5;
+      --amber:#b45309;
+      --amber-soft:#fffbeb;
+      --violet:#6d28d9;
+      --violet-soft:#f5f3ff;
+      --sky:#0369a1;
+      --sky-soft:#f0f9ff;
+      --shadow: 0 10px 25px rgba(15,23,42,.07);
+      --radius: 26px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", Arial, sans-serif;
+      color:var(--text);
+      background:var(--bg);
+      line-height:1.6;
+      word-break:keep-all;
+      overflow-wrap:break-word;
+    }
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:1180px;margin:0 auto;padding:0 18px}
+    .topbar{
+      position:sticky;top:0;z-index:50;
+      background:rgba(255,255,255,.96);
+      border-bottom:1px solid var(--line);
+      box-shadow:0 4px 14px rgba(15,23,42,.05);
+      backdrop-filter: blur(12px);
+    }
+    .topbar-inner{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0}
+    .brand{display:flex;align-items:center;gap:12px;min-width:0}
+    .brand-icon{
+      width:42px;height:42px;border-radius:16px;background:var(--blue);color:white;
+      display:grid;place-items:center;font-weight:900;box-shadow:var(--shadow);flex:0 0 auto;
+    }
+    .brand-title{font-size:16px;font-weight:900;letter-spacing:-.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .brand-sub{font-size:12px;color:var(--muted);font-weight:600;margin-top:1px}
+    .desktop-nav{display:none;gap:4px;align-items:center}
+    .desktop-nav a{padding:9px 14px;border-radius:999px;font-size:14px;font-weight:800;color:#334155}
+    .desktop-nav a:hover{background:var(--soft)}
+    .menu-btn{
+      width:42px;height:42px;border-radius:16px;border:1px solid var(--line);background:white;color:var(--text);
+      display:grid;place-items:center;font-size:20px;font-weight:900;
+    }
+    .mobile-menu{display:none;border-top:1px solid var(--line);padding:10px 0 12px}
+    .mobile-menu.open{display:block}
+    .mobile-menu-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+    .mobile-menu-grid a{background:var(--soft);border-radius:18px;text-align:center;padding:12px;font-weight:900;font-size:14px}
+    .hero{padding:34px 0 26px}
+    .hero-grid{display:grid;gap:20px}
+    .card{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:22px;
+    }
+    .hero-card{padding:24px}
+    .badge{
+      display:inline-flex;align-items:center;
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:5px 10px;
+      font-size:12px;
+      line-height:1;
+      font-weight:900;
+      white-space:nowrap;
+    }
+    .badge-blue{background:var(--blue-soft);border-color:#bfdbfe;color:#1e40af}
+    .badge-violet{background:var(--violet-soft);border-color:#ddd6fe;color:var(--violet)}
+    .badge-green{background:var(--green-soft);border-color:#bbf7d0;color:var(--green)}
+    .badge-amber{background:var(--amber-soft);border-color:#fde68a;color:var(--amber)}
+    .badge-sky{background:var(--sky-soft);border-color:#bae6fd;color:var(--sky)}
+    .badge-slate{background:#f8fafc;border-color:#cbd5e1;color:#334155}
+    h1,h2,h3,p{margin:0}
+    h1{
+      margin-top:18px;
+      font-size:38px;
+      line-height:1.12;
+      letter-spacing:-.055em;
+      font-weight:950;
+      color:var(--text);
+    }
+    h1 .blue{display:block;color:var(--blue);margin-top:6px}
+    .lead{margin-top:18px;color:#334155;font-size:17px;line-height:1.78}
+    .hero-actions{display:grid;gap:10px;margin-top:22px}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:8px;
+      min-height:46px;border-radius:17px;padding:12px 18px;
+      font-size:14px;font-weight:950;border:1px solid transparent;
+      cursor:pointer;
+    }
+    .btn-primary{background:var(--blue);color:white}
+    .btn-primary:hover{background:#1e40af}
+    .btn-secondary{background:white;color:var(--text);border-color:var(--line)}
+    .btn-secondary:hover{background:var(--soft)}
+    .memory{
+      background:var(--blue-soft);
+      border-color:#bfdbfe;
+    }
+    .memory-title{font-size:14px;font-weight:950;color:#1e40af}
+    .memory-grid{display:grid;gap:10px;margin-top:14px}
+    .memory-item{background:white;border:1px solid #bfdbfe;border-radius:19px;padding:14px}
+    .memory-item strong{display:block;color:var(--text);font-size:15px;font-weight:950}
+    .memory-item span{display:block;margin-top:3px;color:#334155;font-size:14px}
+    section{scroll-margin-top:86px}
+    .section{padding:22px 0}
+    .section-head{display:flex;gap:13px;align-items:flex-start;margin-bottom:22px}
+    .section-icon{
+      width:44px;height:44px;border-radius:17px;background:var(--soft);display:grid;place-items:center;flex:0 0 auto;font-size:22px;
+    }
+    .eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.18em;color:#64748b;font-weight:950}
+    .section-title{margin-top:2px;font-size:28px;line-height:1.24;letter-spacing:-.035em;font-weight:950}
+    .section-desc{margin-top:8px;color:#475569;font-size:15px;line-height:1.75;max-width:850px}
+    .flow-scroll{overflow-x:auto;margin-bottom:20px;padding-bottom:8px}
+    .flow-row{display:flex;gap:10px;min-width:max-content;padding-right:12px}
+    .flow-pill{
+      width:158px;display:flex;align-items:center;gap:9px;background:white;border:1px solid var(--line);
+      border-radius:18px;padding:11px;box-shadow:0 4px 14px rgba(15,23,42,.04)
+    }
+    .num{
+      width:30px;height:30px;border-radius:12px;background:#0f172a;color:white;display:grid;place-items:center;font-size:12px;font-weight:950;flex:0 0 auto;
+    }
+    .flow-pill-title{font-weight:950;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .grid-cards{display:grid;gap:14px}
+    .hier-card{background:white;border:1px solid var(--line);border-radius:24px;padding:18px;box-shadow:0 4px 16px rgba(15,23,42,.04)}
+    .hier-card:hover{box-shadow:var(--shadow)}
+    .hier-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+    .hier-title{margin-top:14px;font-size:20px;font-weight:950;letter-spacing:-.02em}
+    .hier-easy{margin-top:7px;color:#334155;font-size:14px;font-weight:800;line-height:1.65}
+    .bound-box{margin-top:14px;background:#f8fafc;border-radius:18px;padding:13px;border:1px solid #e2e8f0}
+    .bound-label{font-size:11px;font-weight:950;text-transform:uppercase;letter-spacing:.14em;color:#64748b}
+    .bound-text{margin-top:6px;font-size:14px;color:#1e293b;line-height:1.65}
+    .tools{display:grid;gap:10px;margin-top:8px}
+    .input-wrap{position:relative}
+    .input-wrap span{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:#94a3b8}
+    input,select{
+      width:100%;height:48px;border-radius:18px;border:1px solid var(--line);
+      background:white;color:var(--text);font-size:14px;font-weight:700;outline:none;
+      padding:0 14px;
+    }
+    input{padding-left:42px}
+    input:focus,select:focus{box-shadow:0 0 0 4px #bfdbfe;border-color:#93c5fd}
+    .accordion-list{display:grid;gap:12px;margin-top:20px}
+    .acc{background:white;border:1px solid var(--line);border-radius:24px;overflow:hidden;box-shadow:0 4px 16px rgba(15,23,42,.04)}
+    .acc-btn{
+      width:100%;border:0;background:white;color:var(--text);display:flex;gap:12px;align-items:flex-start;
+      padding:16px;text-align:left;cursor:pointer;
+    }
+    .acc-btn:hover{background:#fbfdff}
+    .acc-main{flex:1;min-width:0}
+    .acc-title-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+    .acc-title{font-size:19px;font-weight:950;line-height:1.25}
+    .acc-easy{margin-top:7px;color:#334155;font-size:14px;font-weight:800;line-height:1.65}
+    .chev{width:28px;height:28px;border-radius:999px;background:var(--soft);display:grid;place-items:center;color:#475569;font-weight:950;flex:0 0 auto;margin-top:6px}
+    .acc-content{display:none;border-top:1px solid #e2e8f0;background:#f8fafc;padding:16px}
+    .acc.open .acc-content{display:block}
+    .info-grid{display:grid;gap:10px}
+    .info-box{background:white;border:1px solid var(--line);border-radius:18px;padding:14px}
+    .info-label{font-size:11px;font-weight:950;text-transform:uppercase;letter-spacing:.14em;color:#64748b}
+    .info-text{margin-top:7px;color:#1e293b;font-size:14px;line-height:1.7}
+    .detail{margin-top:12px;background:white;border-radius:18px;padding:15px;color:#1e293b;line-height:1.78;border:1px solid #edf2f7}
+    .tag-list{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
+    .compare-grid{display:grid;gap:14px}
+    .compare-box{background:#f8fafc;border:1px solid var(--line);border-radius:24px;padding:17px}
+    .compare-title{font-size:18px;font-weight:950}
+    .compare-list{display:grid;gap:10px;margin-top:13px}
+    .compare-item{background:white;border:1px solid var(--line);border-radius:18px;padding:14px}
+    .compare-item strong{display:block;font-size:15px;font-weight:950}
+    .compare-item span{display:block;margin-top:4px;color:#475569;font-size:14px;line-height:1.65}
+    .compare-item em{display:block;margin-top:6px;color:var(--blue);font-size:12px;font-style:normal;font-weight:950}
+    .two-grid{display:grid;gap:14px}
+    .explain-box{border-radius:24px;padding:18px;border:1px solid}
+    .explain-box h3{font-size:18px;font-weight:950}
+    .explain-box p{margin-top:9px;color:#1e293b;font-size:15px;line-height:1.8}
+    .blue-box{background:var(--blue-soft);border-color:#bfdbfe}
+    .green-box{background:var(--green-soft);border-color:#bbf7d0}
+    .nuance-grid{display:grid;gap:14px}
+    .nuance-card{background:white;border:1px solid var(--line);border-radius:24px;padding:18px;box-shadow:0 4px 16px rgba(15,23,42,.04)}
+    .nuance-card h3{font-size:18px;font-weight:950}
+    .answer{margin-top:10px;background:var(--blue-soft);border:1px solid #bfdbfe;border-radius:17px;padding:12px;color:#1e40af;font-size:14px;font-weight:950;line-height:1.55}
+    .nuance-card p:last-child{margin-top:10px;color:#1e293b;font-size:14px;line-height:1.8}
+    .notice{margin-top:14px;background:var(--amber-soft);border:1px solid #fde68a;border-radius:24px;padding:18px}
+    .notice strong{display:block;color:#92400e;font-weight:950}
+    .notice p{margin-top:7px;color:#1e293b;line-height:1.8}
+    .table-desktop{display:none;overflow:hidden;border:1px solid var(--line);border-radius:20px}
+    table{border-collapse:collapse;width:100%;background:white;font-size:14px}
+    th{background:#f8fafc;color:#0f172a;font-weight:950;text-align:left;padding:14px}
+    td{border-top:1px solid #e2e8f0;color:#334155;padding:14px;vertical-align:top;line-height:1.65}
+    td:first-child{font-weight:950;color:#0f172a}
+    .table-mobile{display:grid;gap:10px}
+    .mrow{background:white;border:1px solid var(--line);border-radius:18px;padding:14px}
+    .mcell + .mcell{border-top:1px solid #e2e8f0;margin-top:11px;padding-top:11px}
+    .mhead{font-size:11px;font-weight:950;text-transform:uppercase;letter-spacing:.14em;color:#64748b}
+    .mtext{margin-top:4px;color:#334155;font-size:14px;line-height:1.65}
+    .mcell:first-child .mtext{font-weight:950;color:var(--text)}
+    .bottom-grid{display:grid;gap:16px}
+    .checks{display:grid;gap:10px;list-style:none;margin:0;padding:0}
+    .checks li{display:flex;gap:11px;align-items:flex-start;background:#f8fafc;border:1px solid var(--line);border-radius:18px;padding:14px}
+    .checks .step{width:30px;height:30px;border-radius:12px;background:#0f172a;color:white;display:grid;place-items:center;font-size:12px;font-weight:950;flex:0 0 auto}
+    .checks span:last-child{font-size:14px;color:#1e293b;font-weight:700;line-height:1.65}
+    .summary-card{background:white;border-color:#bfdbfe}
+    .summary-icon{width:48px;height:48px;border-radius:18px;background:var(--blue);color:white;display:grid;place-items:center;font-size:24px}
+    .summary-title{margin-top:18px;font-size:27px;font-weight:950;letter-spacing:-.03em}
+    .summary-text{margin-top:14px;background:var(--blue-soft);border:1px solid #bfdbfe;border-radius:24px;padding:18px;color:#0f172a;font-size:16px;line-height:1.85}
+    .sense{margin-top:14px;background:white;border:1px solid var(--line);border-radius:24px;padding:18px;box-shadow:0 4px 16px rgba(15,23,42,.04)}
+    .sense strong{color:#1e40af;font-weight:950}
+    .sense p{margin-top:7px;color:#1e293b;line-height:1.75}
+    .bottom-nav{
+      position:fixed;left:0;right:0;bottom:0;z-index:45;
+      background:rgba(255,255,255,.96);border-top:1px solid var(--line);
+      box-shadow:0 -12px 28px rgba(15,23,42,.08);
+      backdrop-filter: blur(12px);
+      padding:8px 12px calc(8px + env(safe-area-inset-bottom));
+    }
+    .bottom-nav-inner{max-width:420px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:4px}
+    .bottom-nav a{display:flex;flex-direction:column;align-items:center;gap:2px;border-radius:16px;padding:8px 4px;font-size:11px;font-weight:950;color:#334155}
+    .bottom-nav a:hover{background:var(--soft)}
+    .empty{background:#f8fafc;border:1px solid var(--line);border-radius:24px;padding:28px;text-align:center;color:#64748b;font-weight:800}
+    footer{padding:10px 0 90px;color:#64748b;font-size:12px;text-align:center}
+    @media (min-width:640px){
+      .wrap{padding:0 24px}
+      .hero-actions{display:flex;flex-wrap:wrap}
+      .grid-cards{grid-template-columns:repeat(2,1fr)}
+      .tools{grid-template-columns:1fr 220px}
+      .memory-grid{grid-template-columns:repeat(2,1fr)}
+      h1{font-size:52px}
+    }
+    @media (min-width:768px){
+      .info-grid{grid-template-columns:repeat(2,1fr)}
+      .two-grid{grid-template-columns:repeat(2,1fr)}
+      .table-desktop{display:block}
+      .table-mobile{display:none}
+      .summary-text{font-size:18px}
+    }
+    @media (min-width:1024px){
+      .desktop-nav{display:flex}
+      .menu-btn{display:none}
+      .hero-grid{grid-template-columns:1.08fr .92fr;align-items:center}
+      .hero{padding:54px 0 38px}
+      .grid-cards{grid-template-columns:repeat(3,1fr)}
+      .compare-grid{grid-template-columns:repeat(3,1fr)}
+      .nuance-grid{grid-template-columns:repeat(3,1fr)}
+      .bottom-grid{grid-template-columns:.92fr 1.08fr}
+      .bottom-nav{display:none}
+      footer{padding-bottom:28px}
+      .memory-grid{grid-template-columns:1fr}
+      h1{font-size:60px}
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap">
+      <div class="topbar-inner">
+        <a class="brand" href="#top" aria-label="처음으로 이동">
+          <div class="brand-icon">⚖</div>
+          <div>
+            <div class="brand-title">법규의 위계 질서 이해</div>
+            <div class="brand-sub">교직원을 위한 법령·자치법규·행정규칙 안내 자료</div>
+          </div>
+        </a>
+        <nav class="desktop-nav" aria-label="상단 메뉴">
+          <a href="#map">위계도</a>
+          <a href="#terms">용어</a>
+          <a href="#compare">비교</a>
+          <a href="#checks">실무 판단</a>
+        </nav>
+        <button class="menu-btn" id="menuBtn" aria-label="메뉴 열기">☰</button>
+      </div>
+      <nav class="mobile-menu" id="mobileMenu" aria-label="모바일 메뉴">
+        <div class="mobile-menu-grid">
+          <a href="#map">위계도</a>
+          <a href="#terms">용어</a>
+          <a href="#compare">비교</a>
+          <a href="#checks">실무 판단</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="top" class="hero">
+      <div class="wrap">
+        <div class="hero-grid">
+          <div class="card hero-card">
+            <span class="badge badge-blue">교직원 연수·공유용</span>
+            <h1>법규는 위로 갈수록 강하고,<span class="blue">아래로 갈수록 구체적입니다.</span></h1>
+            <p class="lead">학교 업무에서 만나는 법률, 시행령, 조례, 교육규칙, 고시, 훈령, 예규, 지침을 한눈에 이해할 수 있도록 구성한 반응형 안내 자료입니다.</p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#map">▣ 위계도 보기</a>
+              <a class="btn btn-secondary" href="#terms">▤ 용어 찾아보기</a>
+            </div>
+          </div>
+
+          <div class="card memory">
+            <p class="memory-title">초간단 기억법</p>
+            <div class="memory-grid">
+              <div class="memory-item"><strong>법률</strong><span>국회가 만든 전국 공통의 큰 법</span></div>
+              <div class="memory-item"><strong>시행령</strong><span>대통령이 만든 구체 기준</span></div>
+              <div class="memory-item"><strong>시행규칙</strong><span>장관이 만든 세부 절차</span></div>
+              <div class="memory-item"><strong>조례</strong><span>지방의회가 의결하는 지역 법규</span></div>
+              <div class="memory-item"><strong>교육규칙</strong><span>교육감이 정하는 세부 실행 기준</span></div>
+              <div class="memory-item"><strong>훈령·예규</strong><span>행정기관 내부의 업무처리 기준</span></div>
+              <div class="memory-item"><strong>지침·매뉴얼</strong><span>현장에서 바로 쓰는 실무 안내</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="map" class="section">
+      <div class="wrap">
+        <div class="card">
+          <div class="section-head">
+            <div class="section-icon">🏛</div>
+            <div>
+              <p class="eyebrow">Hierarchy Map</p>
+              <h2 class="section-title">전체 위계도</h2>
+              <p class="section-desc">상위 규범이 하위 규범보다 우선합니다. 하위 규범은 상위 규범을 어길 수 없습니다.</p>
+            </div>
+          </div>
+          <div class="flow-scroll"><div class="flow-row" id="flowRow"></div></div>
+          <div class="grid-cards" id="hierarchyCards"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="terms" class="section">
+      <div class="wrap">
+        <div class="card">
+          <div class="section-head">
+            <div class="section-icon">📄</div>
+            <div>
+              <p class="eyebrow">Terms</p>
+              <h2 class="section-title">용어별 상세 설명</h2>
+              <p class="section-desc">검색하거나 유형별로 골라 볼 수 있습니다. 스마트기기에서는 펼쳐보기 방식으로 읽기 편하게 구성했습니다.</p>
+            </div>
+          </div>
+          <div class="tools">
+            <label class="input-wrap">
+              <span>🔎</span>
+              <input id="searchInput" type="search" placeholder="예: 조례, 훈령, 구속" autocomplete="off" />
+            </label>
+            <select id="filterSelect" aria-label="유형 선택"></select>
+          </div>
+          <div class="accordion-list" id="accordionList"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="compare" class="section">
+      <div class="wrap">
+        <div class="card">
+          <div class="section-head">
+            <div class="section-icon">📚</div>
+            <div>
+              <p class="eyebrow">Compare</p>
+              <h2 class="section-title">자주 헷갈리는 표현 비교</h2>
+              <p class="section-desc">이름은 비슷하지만 쓰임이 다른 규범들을 나란히 비교했습니다.</p>
+            </div>
+          </div>
+          <div class="compare-grid" id="compareGrid"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="card">
+          <div class="section-head">
+            <div class="section-icon">👥</div>
+            <div>
+              <p class="eyebrow">Binding Force</p>
+              <h2 class="section-title">누가 구속을 받는가?</h2>
+              <p class="section-desc">구속력은 대외적 구속력과 내부적 구속력으로 나누어 이해하면 쉽습니다.</p>
+            </div>
+          </div>
+          <div class="two-grid">
+            <div class="explain-box blue-box">
+              <h3>대외적 구속력</h3>
+              <p>국민, 학생, 학부모, 기관 등 외부 대상에게 직접 권리·의무를 부과할 수 있는 힘입니다. 법률, 시행령, 시행규칙, 조례, 교육규칙은 대외적 구속력이 있을 수 있습니다.</p>
+            </div>
+            <div class="explain-box green-box">
+              <h3>내부적 구속력</h3>
+              <p>행정기관 내부, 소속기관, 공무원, 공립학교에 업무처리 기준으로 적용되는 힘입니다. 훈령, 예규, 지침은 주로 내부적 구속력이 중심입니다.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="card">
+          <div class="section-head">
+            <div class="section-icon">⚖</div>
+            <div>
+              <p class="eyebrow">Important Point</p>
+              <h2 class="section-title">교육부 행정규칙과 교육청 자치법규의 관계</h2>
+              <p class="section-desc">교육부 훈령이 교육청 훈령보다 앞서는 경우가 많지만, 교육부 훈령이 교육청 교육규칙보다 항상 높은 것은 아닙니다. 이름보다 근거와 적용 대상을 확인해야 합니다.</p>
+            </div>
+          </div>
+          <div class="nuance-grid" id="nuanceGrid"></div>
+          <div class="notice">
+            <strong>핵심 보정</strong>
+            <p>‘교육부에서 만들었으니 무조건 교육청 교육규칙보다 높다’도, ‘훈령은 행정규칙이니 무조건 교육규칙보다 낮다’도 모두 위험한 표현입니다. 교육부 기준이 상위 법령의 위임을 받아 정한 것인지 확인하는 것이 가장 안전합니다.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="card">
+          <div class="section-head">
+            <div class="section-icon">⚠</div>
+            <div>
+              <p class="eyebrow">Priority Rule</p>
+              <h2 class="section-title">충돌이 생기면 무엇이 우선인가?</h2>
+              <p class="section-desc">원칙은 간단합니다. 위에 있는 규정이 아래 규정보다 우선합니다.</p>
+            </div>
+          </div>
+          <div class="table-desktop">
+            <table>
+              <thead><tr><th>충돌 상황</th><th>우선 적용</th></tr></thead>
+              <tbody id="conflictTable"></tbody>
+            </table>
+          </div>
+          <div class="table-mobile" id="conflictMobile"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="checks" class="section">
+      <div class="wrap">
+        <div class="bottom-grid">
+          <div class="card">
+            <div class="section-head">
+              <div class="section-icon">✅</div>
+              <div>
+                <p class="eyebrow">Checklist</p>
+                <h2 class="section-title">학교 현장 판단 순서</h2>
+                <p class="section-desc">공문이나 기준을 볼 때 아래 순서로 확인하면 혼선이 줄어듭니다.</p>
+              </div>
+            </div>
+            <ol class="checks" id="checksList"></ol>
+          </div>
+
+          <div class="card summary-card">
+            <div class="summary-icon">⚖</div>
+            <h2 class="summary-title">최종 한 문장 정리</h2>
+            <p class="summary-text">법률은 국회가 정한 전국 공통의 큰 규칙이고, 시행령·시행규칙은 그 법률을 실행하기 위한 국가 기준이며, 조례는 지방의회 의결을 거치는 지역 법규, 교육규칙은 교육감이 정하는 세부 집행 기준, 훈령·예규는 행정기관이 소속기관과 학교의 업무처리를 통일하기 위해 정하는 내부 기준입니다. 다만 교육부 고시·훈령이 상위 법령의 위임을 받아 정한 기준인 경우에는 교육청 자치법규도 그 기준과 충돌할 수 없습니다.</p>
+            <div class="sense">
+              <strong>실무 감각</strong>
+              <p>위로 갈수록 법적 힘이 세고, 아래로 갈수록 학교 현장에서 바로 적용할 수 있을 만큼 구체적입니다.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <nav class="bottom-nav" aria-label="하단 빠른 이동">
+    <div class="bottom-nav-inner">
+      <a href="#map"><span>▣</span><span>위계</span></a>
+      <a href="#terms"><span>▤</span><span>용어</span></a>
+      <a href="#compare"><span>▥</span><span>비교</span></a>
+      <a href="#checks"><span>✓</span><span>판단</span></a>
+    </div>
+  </nav>
+
+  <footer>
+    <div class="wrap">법규의 위계 질서 이해 · 교직원 공유용 정적 웹페이지</div>
+  </footer>
+
+  <script>
+    const hierarchy = [
+      {group:"국가 최고 규범",rank:1,title:"헌법",maker:"헌법 개정 절차",bound:"국가기관, 지방자치단체, 모든 국민, 학교 등",easy:"나라 운영과 기본권의 가장 큰 원칙",detail:"국가의 기본 질서, 국민의 기본권, 국가기관의 구조를 정합니다. 교육받을 권리, 교육의 자주성·전문성·정치적 중립성 같은 큰 원칙의 바탕이 됩니다.",examples:["대한민국 헌법"]},
+      {group:"국가 법령",rank:2,title:"법률",maker:"국회",bound:"국민, 학생, 학부모, 교직원, 학교, 교육청, 국가기관 등",easy:"국회가 정한 전국 공통의 큰 규칙",detail:"국민의 권리와 의무, 국가기관의 권한, 중요한 제도는 법률로 정합니다. 학교 행정에서 반드시 따라야 하는 가장 중요한 전국 기준입니다.",examples:["교육기본법","초·중등교육법","유아교육법","학교폭력예방 및 대책에 관한 법률","지방교육자치에 관한 법률"]},
+      {group:"국가 법령",rank:3,title:"대통령령·시행령",maker:"대통령",bound:"해당 법률의 적용 대상 전체. 교육 분야에서는 교육부, 교육청, 학교, 교직원 등",easy:"법률을 실제로 운영하기 위한 구체 기준",detail:"법률이 큰 원칙을 정하면 시행령은 그 원칙을 어떻게 적용할지 구체화합니다. ‘시행령’은 대체로 법률을 시행하기 위한 대통령령입니다.",examples:["초·중등교육법 시행령","유아교육법 시행령"]},
+      {group:"국가 법령",rank:4,title:"총리령·부령·시행규칙",maker:"국무총리 또는 각 부 장관",bound:"해당 부처 소관 업무 대상. 교육부령은 교육청, 학교, 교직원 등",easy:"시행령보다 더 세부적인 절차와 서식 기준",detail:"시행규칙은 보통 총리령 또는 부령의 형태입니다. 교육 분야에서는 교육부령이 대표적이며, 서식·절차·세부 집행 기준을 정하는 경우가 많습니다.",examples:["초·중등교육법 시행규칙","유아교육법 시행규칙"]},
+      {group:"자치법규",rank:5,title:"조례",maker:"지방의회 의결, 단체장 또는 교육감 공포",bound:"해당 지방자치단체 또는 교육청 관할 기관, 학교, 주민, 관련 사무 대상자",easy:"지역 단위의 큰 법규",detail:"교육청이 초안을 만들 수 있지만, 최종적으로 지방의회 심의·의결을 거쳐야 확정됩니다. 지역 교육행정의 기본 제도와 큰 원칙을 정합니다.",examples:["교육청 학교폭력 예방 조례","교육청 기초학력 보장 지원 조례","교육청 학교안전 관련 조례"]},
+      {group:"자치법규",rank:6,title:"규칙·교육규칙",maker:"지방자치단체장 또는 교육감",bound:"해당 교육감 관할 교육청, 교육지원청, 직속기관, 공립학교, 관련 업무 담당자",easy:"조례와 법령을 실행하기 위한 세부 기준",detail:"조례가 ‘무엇을 할 것인가’를 정한다면, 교육규칙은 ‘어떻게 처리할 것인가’를 정합니다. 교육규칙은 자치법규이므로 순수 내부 행정규칙보다 법규성이 강하지만, 국가 법령이나 법령 위임을 받은 교육부 고시·훈령과 충돌할 수는 없습니다.",examples:["학교 수업료 및 입학금 조례 시행규칙","자율학교 지정 및 운영 규칙"]},
+      {group:"행정규칙",rank:7,title:"고시",maker:"교육부장관, 교육감 등 행정기관장",bound:"고시 내용과 상위 법령 위임 범위에 따라 다름. 경우에 따라 학교와 기관에 직접 적용",easy:"공식적으로 정해 알리는 기준",detail:"고시는 행정기관이 일정한 사항을 대외적으로 공식화하는 형식입니다. 상위 법령이 ‘장관이 정하여 고시한다’고 위임한 경우에는 학교가 반드시 따라야 하는 중요한 기준이 됩니다.",examples:["교육과정 고시","각종 지정 기준 고시"]},
+      {group:"행정규칙",rank:8,title:"훈령",maker:"교육부장관, 교육감 등 행정기관장",bound:"발령기관의 소속기관, 하급기관, 소속 공무원. 교육청 훈령은 공립학교에 적용 가능",easy:"소속기관은 이 기준대로 처리하라는 지속적 업무 명령",detail:"훈령은 행정기관의 장이 소속기관이나 하급기관에 지속적으로 내리는 업무처리 기준입니다. 교육부 훈령과 교육청 훈령이 모두 있을 수 있으며, 교육부 훈령은 교육청 훈령보다 앞서는 경우가 많습니다. 다만 교육부 훈령이 교육청 교육규칙보다 항상 높은 것은 아니며, 법령의 위임을 받은 기준인지, 단순 내부 기준인지, 어떤 사무에 관한 것인지까지 함께 판단해야 합니다.",examples:["생활기록부 작성·관리 관련 기준","공직자 이해충돌 방지제도 운영 규정"]},
+      {group:"행정규칙",rank:9,title:"예규",maker:"교육부장관, 교육감 등 행정기관장",bound:"해당 업무 담당 기관, 하급기관, 담당 공무원",easy:"반복 업무를 통일적으로 처리하기 위한 기준",detail:"예규는 같은 업무를 담당자마다 다르게 처리하지 않도록 정한 실무 기준입니다. 민원, 계약, 감사, 인사, 기록물 관리 같은 반복 업무에서 활용됩니다.",examples:["민원 처리 기준","계약 사무 처리 기준","감사 업무 처리 기준"]},
+      {group:"실무 기준",rank:10,title:"지침·기준·매뉴얼",maker:"교육부, 교육청, 학교 등",bound:"해당 공문·업무의 대상 기관과 담당자",easy:"현장에서 바로 참고하는 실무 안내",detail:"법규보다 아래에 있지만 학교 현장에서는 매우 강하게 체감됩니다. 다만 상위 법령, 조례, 교육규칙과 충돌하면 상위 규범이 우선합니다.",examples:["학사운영 안내","평가 운영 매뉴얼","위기대응 매뉴얼","학교 업무처리 체크리스트"]},
+      {group:"학교 내부 기준",rank:11,title:"학교 내부 규정·계획",maker:"학교",bound:"해당 학교 교직원, 학생, 학부모 등 학교 공동체",easy:"우리 학교 운영 기준",detail:"학교 내부 규정과 계획은 학교 운영에 중요하지만, 상위 법령·조례·교육규칙·교육청 지침을 위반할 수 없습니다.",examples:["학교규칙","학교교육계획","학업성적관리규정","학교생활규정","업무분장","학사일정"]},
+    ];
+
+    const comparisons = [
+      {title:"법률 · 시행령 · 시행규칙",rows:[["법률","무엇을 해야 하는가","전국 공통의 큰 원칙"],["시행령","어떤 기준으로 할 것인가","법률을 구체화"],["시행규칙","어떤 절차와 서식으로 처리할 것인가","세부 집행 방법"]]},
+      {title:"조례 · 교육규칙 · 훈령",rows:[["조례","지역 교육행정의 큰 규칙","의회 의결 필요"],["교육규칙","조례와 법령을 실행하는 세부 기준","교육감이 정하는 자치법규"],["훈령","소속기관의 내부 업무처리 기준","교육부·교육청 모두 발령 가능"]]},
+      {title:"고시 · 훈령 · 예규",rows:[["고시","공식적으로 정해 알리는 기준","상위 법령 위임 시 대외적 효력 강함"],["훈령","소속기관에 내리는 지속적 업무 명령","내부 업무 기준"],["예규","반복 업무의 통일 처리 기준","담당자별 차이 방지"]]},
+    ];
+
+    const conflictRules = [
+      ["조례가 법률과 다를 때","법률 우선"],
+      ["교육규칙이 조례와 다를 때","조례 우선"],
+      ["교육청 훈령이 교육부 훈령과 다를 때","일반적으로 교육부 훈령 우선. 단, 해당 사무와 적용 대상 확인 필요"],
+      ["순수 내부 훈령이 교육규칙과 다를 때","교육규칙 우선"],
+      ["법령 위임을 받은 교육부 고시·훈령이 교육규칙과 다를 때","상위 법령의 위임을 받은 교육부 기준 우선 가능"],
+      ["학교 계획이 교육청 지침과 다를 때","교육청 지침 또는 상위 기준 우선"],
+      ["지침·매뉴얼이 법률과 다를 때","법률 우선"],
+    ];
+
+    const priorityNuances = [
+      {title:"교육부 훈령 vs 교육청 훈령",answer:"대체로 교육부 훈령이 앞섭니다.",detail:"교육부는 국가 교육행정의 상급 중앙행정기관이고, 교육청은 그 기준을 받아 관할 학교에 적용하는 경우가 많습니다. 따라서 같은 사무에 관한 교육부 훈령과 교육청 훈령이 충돌하면 일반적으로 교육부 훈령을 먼저 확인해야 합니다."},
+      {title:"교육부 훈령 vs 교육청 교육규칙",answer:"항상 교육부 훈령이 높다고 단정하면 안 됩니다.",detail:"교육청 교육규칙은 자치법규이고, 훈령은 원칙적으로 행정기관 내부의 업무처리 기준입니다. 그래서 단순 내부 훈령이라면 교육규칙을 바로 무력화한다고 보기 어렵습니다. 다만 교육부 훈령이 법률·시행령·시행규칙의 위임을 받아 구체 기준을 정한 것이라면, 교육청 교육규칙은 그 기준과 충돌할 수 없습니다."},
+      {title:"판단 기준",answer:"이름보다 근거와 적용 대상을 봐야 합니다.",detail:"고시·훈령·예규라는 이름만으로 위계를 정하지 말고, ① 상위 법령의 위임이 있는지, ② 교육부 소관 전국 기준인지, ③ 교육청 관할 자치사무인지, ④ 외부 구속력이 있는지, ⑤ 단순 내부 업무처리 기준인지를 함께 확인해야 합니다."},
+    ];
+
+    const schoolChecks = [
+      "이 문서가 법률에 근거한 것인지 확인한다.",
+      "시행령이나 시행규칙에 세부 기준이 있는지 확인한다.",
+      "조례나 교육규칙에 지역 기준이 있는지 확인한다.",
+      "훈령·예규·지침으로 내려온 업무처리 기준인지 확인한다.",
+      "학교 내부 규정이나 계획을 수정해야 하는지 판단한다.",
+    ];
+
+    const termTags = ["전체","국가 최고 규범","국가 법령","자치법규","행정규칙","실무 기준","학교 내부 기준"];
+    const badgeClass = {
+      "국가 최고 규범":"badge-violet",
+      "국가 법령":"badge-blue",
+      "자치법규":"badge-green",
+      "행정규칙":"badge-amber",
+      "실무 기준":"badge-sky",
+      "학교 내부 기준":"badge-slate"
+    };
+
+    function esc(str){
+      return String(str).replace(/[&<>"']/g, (m)=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[m]));
+    }
+
+    function badge(text, cls){
+      return `<span class="badge ${cls || "badge-slate"}">${esc(text)}</span>`;
+    }
+
+    function renderFlow(){
+      document.getElementById("flowRow").innerHTML = hierarchy.map(item => `
+        <div class="flow-pill">
+          <span class="num">${item.rank}</span>
+          <div>
+            <div class="flow-pill-title">${esc(item.title)}</div>
+            ${badge(item.group, badgeClass[item.group])}
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function renderHierarchyCards(){
+      document.getElementById("hierarchyCards").innerHTML = hierarchy.map(item => `
+        <article class="hier-card">
+          <div class="hier-top">
+            <span class="num">${item.rank}</span>
+            ${badge(item.group, badgeClass[item.group])}
+          </div>
+          <h3 class="hier-title">${esc(item.title)}</h3>
+          <p class="hier-easy">${esc(item.easy)}</p>
+          <div class="bound-box">
+            <div class="bound-label">구속 대상</div>
+            <div class="bound-text">${esc(item.bound)}</div>
+          </div>
+        </article>
+      `).join("");
+    }
+
+    function renderFilters(){
+      const select = document.getElementById("filterSelect");
+      select.innerHTML = termTags.map(tag => `<option value="${esc(tag)}">${esc(tag)}</option>`).join("");
+    }
+
+    function renderAccordions(){
+      const query = document.getElementById("searchInput").value.trim().toLowerCase();
+      const filter = document.getElementById("filterSelect").value;
+      const filtered = hierarchy.filter(item => {
+        const matchesFilter = filter === "전체" || item.group === filter;
+        const text = `${item.title} ${item.group} ${item.maker} ${item.bound} ${item.easy} ${item.detail} ${item.examples.join(" ")}`.toLowerCase();
+        return matchesFilter && (!query || text.includes(query));
+      });
+      const list = document.getElementById("accordionList");
+      if(!filtered.length){
+        list.innerHTML = `<div class="empty">검색 결과가 없습니다.</div>`;
+        return;
+      }
+      list.innerHTML = filtered.map((item, idx) => {
+        const isOpen = idx === 0 && !query && filter === "전체";
+        return `
+          <article class="acc ${isOpen ? "open" : ""}">
+            <button class="acc-btn" type="button" aria-expanded="${isOpen}">
+              <span class="num">${item.rank}</span>
+              <div class="acc-main">
+                <div class="acc-title-row">
+                  <h3 class="acc-title">${esc(item.title)}</h3>
+                  ${badge(item.group, badgeClass[item.group])}
+                </div>
+                <p class="acc-easy">${esc(item.easy)}</p>
+              </div>
+              <span class="chev">${isOpen ? "⌄" : "›"}</span>
+            </button>
+            <div class="acc-content">
+              <div class="info-grid">
+                <div class="info-box">
+                  <div class="info-label">만드는 주체</div>
+                  <div class="info-text">${esc(item.maker)}</div>
+                </div>
+                <div class="info-box">
+                  <div class="info-label">주로 구속받는 사람·기관</div>
+                  <div class="info-text">${esc(item.bound)}</div>
+                </div>
+              </div>
+              <p class="detail">${esc(item.detail)}</p>
+              <div class="tag-list">${item.examples.map(ex => badge(ex, "badge-blue")).join("")}</div>
+            </div>
+          </article>
+        `;
+      }).join("");
+
+      list.querySelectorAll(".acc-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const acc = btn.closest(".acc");
+          const open = acc.classList.toggle("open");
+          btn.setAttribute("aria-expanded", open ? "true" : "false");
+          btn.querySelector(".chev").textContent = open ? "⌄" : "›";
+        });
+      });
+    }
+
+    function renderComparisons(){
+      document.getElementById("compareGrid").innerHTML = comparisons.map(box => `
+        <div class="compare-box">
+          <h3 class="compare-title">${esc(box.title)}</h3>
+          <div class="compare-list">
+            ${box.rows.map(([name, meaning, note]) => `
+              <div class="compare-item">
+                <strong>${esc(name)}</strong>
+                <span>${esc(meaning)}</span>
+                <em>${esc(note)}</em>
+              </div>
+            `).join("")}
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function renderNuances(){
+      document.getElementById("nuanceGrid").innerHTML = priorityNuances.map(item => `
+        <article class="nuance-card">
+          <h3>${esc(item.title)}</h3>
+          <div class="answer">${esc(item.answer)}</div>
+          <p>${esc(item.detail)}</p>
+        </article>
+      `).join("");
+    }
+
+    function renderConflicts(){
+      document.getElementById("conflictTable").innerHTML = conflictRules.map(([a,b]) => `<tr><td>${esc(a)}</td><td>${esc(b)}</td></tr>`).join("");
+      document.getElementById("conflictMobile").innerHTML = conflictRules.map(([a,b]) => `
+        <div class="mrow">
+          <div class="mcell"><div class="mhead">충돌 상황</div><div class="mtext">${esc(a)}</div></div>
+          <div class="mcell"><div class="mhead">우선 적용</div><div class="mtext">${esc(b)}</div></div>
+        </div>
+      `).join("");
+    }
+
+    function renderChecks(){
+      document.getElementById("checksList").innerHTML = schoolChecks.map((check,i) => `
+        <li><span class="step">${i+1}</span><span>${esc(check)}</span></li>
+      `).join("");
+    }
+
+    function initMenu(){
+      const btn = document.getElementById("menuBtn");
+      const menu = document.getElementById("mobileMenu");
+      btn.addEventListener("click", () => {
+        menu.classList.toggle("open");
+        btn.textContent = menu.classList.contains("open") ? "×" : "☰";
+      });
+      menu.querySelectorAll("a").forEach(a => {
+        a.addEventListener("click", () => {
+          menu.classList.remove("open");
+          btn.textContent = "☰";
+        });
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      renderFlow();
+      renderHierarchyCards();
+      renderFilters();
+      renderAccordions();
+      renderComparisons();
+      renderNuances();
+      renderConflicts();
+      renderChecks();
+      initMenu();
+
+      document.getElementById("searchInput").addEventListener("input", renderAccordions);
+      document.getElementById("filterSelect").addEventListener("change", renderAccordions);
+    });
+  </script>
+</body>
+</html>
