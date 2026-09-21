@@ -798,6 +798,27 @@ tr:last-child td{border-bottom:0}
   table{font-size:16px}
   .btn{width:100%;font-size:18px}
 }
+
+.badge-shortcut{
+  display:inline-flex;
+  cursor:pointer;
+  background:linear-gradient(180deg,rgba(255,193,92,.18),rgba(255,255,255,.11));
+  border-color:rgba(255,205,125,.26);
+  transition:transform .16s ease, background .16s ease, border-color .16s ease;
+}
+.badge-shortcut:hover{
+  transform:translateY(-1px);
+  background:linear-gradient(180deg,rgba(255,193,92,.26),rgba(255,255,255,.14));
+  border-color:rgba(255,216,150,.38);
+}
+
+
+@media (max-width:820px), (hover:none) and (pointer:coarse){
+  .badge-shortcut{
+    display:none !important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -812,7 +833,9 @@ tr:last-child td{border-bottom:0}
       <a class="badge badge-google" href="https://docs.google.com/spreadsheets/d/14nKmRpFQdBn83zenDvZdOnUKDGwk_2cRUEbP8i2IXfI/edit?gid=207646043#gid=207646043" target="_blank" rel="noopener" aria-label="마재초 Google 바로가기">
         🌐 마재초 Google <span class="badge-arrow">↗</span>
       </a>
-      <span class="badge">📱 스마트폰 최적화</span>
+      <a class="badge badge-shortcut" href="#" id="makeShortcut" aria-label="현재 페이지 바로가기 파일 만들기" title="Windows PC용 바로가기 파일 만들기">
+        🖥️ 바로가기 만들기
+      </a>
     </div>
     <h1>학교 안전사고 발생 시 담임교사 대응 길라잡이</h1>
     <div class="hero-note">
@@ -1345,6 +1368,44 @@ document.querySelectorAll('.copy').forEach(btn=>{
   const w = weekdays[now.getDay()];
 
   el.textContent = `${y}. ${m}. ${d}.(${w})`;
+})();
+</script>
+
+
+<script>
+(function(){
+  const button = document.getElementById('makeShortcut');
+  if(!button) return;
+
+  button.addEventListener('click', function(e){
+    e.preventDefault();
+
+    const currentUrl = window.location.href;
+    const shortcutText =
+      '[InternetShortcut]\r\n' +
+      'URL=' + currentUrl + '\r\n';
+
+    try{
+      const blob = new Blob([shortcutText], {
+        type: 'application/internet-shortcut;charset=utf-8'
+      });
+
+      const downloadUrl = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = downloadUrl;
+      a.download = '마재초_학교안전사고_대응_길라잡이.url';
+      a.style.display = 'none';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+
+      setTimeout(function(){
+        URL.revokeObjectURL(downloadUrl);
+      }, 1000);
+    }catch(err){
+      alert('바로가기 파일을 만들 수 없습니다. Chrome 또는 Edge에서 다시 시도해 주세요.');
+    }
+  });
 })();
 </script>
 
