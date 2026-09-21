@@ -808,7 +808,7 @@ tr:last-child td{border-bottom:0}
       <a class="badge badge-link" href="https://www.schoolsafe.or.kr/" target="_blank" rel="noopener" aria-label="학교안전공제회 바로가기">
         🛡️ 학교안전공제회 <span class="badge-arrow">↗</span>
       </a>
-      <span class="badge">📅 2026. 9. 21.(월)</span>
+      <span class="badge">📅 <span id="todayDate">2026. 9. 21.(월)</span></span>
       <a class="badge badge-google" href="https://docs.google.com/spreadsheets/d/14nKmRpFQdBn83zenDvZdOnUKDGwk_2cRUEbP8i2IXfI/edit?gid=207646043#gid=207646043" target="_blank" rel="noopener" aria-label="마재초 Google 바로가기">
         🌐 마재초 Google <span class="badge-arrow">↗</span>
       </a>
@@ -1328,6 +1328,24 @@ document.querySelectorAll('.copy').forEach(btn=>{
     }
   });
 });
+</script>
+
+
+<script>
+(function(){
+  const el = document.getElementById('todayDate');
+  if(!el) return;
+
+  const now = new Date();
+  const weekdays = ['일','월','화','수','목','금','토'];
+
+  const y = now.getFullYear();
+  const m = now.getMonth() + 1;
+  const d = now.getDate();
+  const w = weekdays[now.getDay()];
+
+  el.textContent = `${y}. ${m}. ${d}.(${w})`;
+})();
 </script>
 
 </body>
