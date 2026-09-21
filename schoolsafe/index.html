@@ -833,7 +833,11 @@ tr:last-child td{border-bottom:0}
       <a class="badge badge-google" href="https://docs.google.com/spreadsheets/d/14nKmRpFQdBn83zenDvZdOnUKDGwk_2cRUEbP8i2IXfI/edit?gid=207646043#gid=207646043" target="_blank" rel="noopener" aria-label="마재초 Google 바로가기">
         🌐 마재초 Google <span class="badge-arrow">↗</span>
       </a>
-      <a class="badge badge-shortcut" href="#" id="makeShortcut" aria-label="현재 페이지 바로가기 파일 만들기" title="Windows PC용 바로가기 파일 만들기">
+      <a class="badge badge-shortcut"
+         href="마재초_학교_안전사고_대응_길라잡이.url"
+         download="마재초_학교_안전사고_대응_길라잡이.url"
+         title="마재초 학교 안전사고 대응 길라잡이 바로가기 파일 받기"
+         aria-label="마재초 학교 안전사고 대응 길라잡이 바로가기 파일 받기">
         🖥️ 바로가기 만들기
       </a>
     </div>
@@ -1372,42 +1376,7 @@ document.querySelectorAll('.copy').forEach(btn=>{
 </script>
 
 
-<script>
-(function(){
-  const button = document.getElementById('makeShortcut');
-  if(!button) return;
 
-  button.addEventListener('click', function(e){
-    e.preventDefault();
-
-    const currentUrl = window.location.href;
-    const shortcutText =
-      '[InternetShortcut]\r\n' +
-      'URL=' + currentUrl + '\r\n';
-
-    try{
-      const blob = new Blob([shortcutText], {
-        type: 'application/internet-shortcut;charset=utf-8'
-      });
-
-      const downloadUrl = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = downloadUrl;
-      a.download = '마재초_학교안전사고_대응_길라잡이.url';
-      a.style.display = 'none';
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-
-      setTimeout(function(){
-        URL.revokeObjectURL(downloadUrl);
-      }, 1000);
-    }catch(err){
-      alert('바로가기 파일을 만들 수 없습니다. Chrome 또는 Edge에서 다시 시도해 주세요.');
-    }
-  });
-})();
-</script>
 
 </body>
 </html>
