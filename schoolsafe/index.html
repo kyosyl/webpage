@@ -834,9 +834,9 @@ tr:last-child td{border-bottom:0}
         🌐 마재초 Google <span class="badge-arrow">↗</span>
       </a>
       <a class="badge badge-shortcut"
-         href="마재초_학교_안전사고_대응_길라잡이.url"
-         download="마재초_학교_안전사고_대응_길라잡이.url"
-         title="마재초 학교 안전사고 대응 길라잡이 바로가기 파일 받기"
+         href="#"
+         id="makeShortcutZip"
+         title="Windows PC용 바로가기 파일 받기"
          aria-label="마재초 학교 안전사고 대응 길라잡이 바로가기 파일 받기">
         🖥️ 바로가기 만들기
       </a>
@@ -1377,6 +1377,49 @@ document.querySelectorAll('.copy').forEach(btn=>{
 
 
 
+
+
+<script>
+(function(){
+  const button = document.getElementById('makeShortcutZip');
+  if(!button) return;
+
+  const ZIP_BASE64 = 'UEsDBBQAAAgIAOIsNV1Tz7vqSwAAAEkAAAA1AAAA66eI7J6s7LSIX+2Vmeq1kF/slYjsoITsgqzqs6Bf64yA7J2RX+q4uOudvOyeoeydtC51cmx7v3t/tGdeSWpRXmpJcEZ+UUlyaUksL1dokI9tRklJQbGVvn52ZX5xZY5eemZJRmmSXma+fnlqUkFieqp+cXJGfn5OcWJaqj4vFwBQSwECFAMUAAAICADiLDVdU8+76ksAAABJAAAANQAAAAAAAAAAAAAAgAEAAAAA66eI7J6s7LSIX+2Vmeq1kF/slYjsoITsgqzqs6Bf64yA7J2RX+q4uOudvOyeoeydtC51cmxQSwUGAAAAAAEAAQBjAAAAngAAAAAA';
+  const DOWNLOAD_NAME = '마재초_학교_안전사고_대응_길라잡이_바로가기.zip';
+
+  function base64ToBlob(base64, mime){
+    const binary = atob(base64);
+    const bytes = new Uint8Array(binary.length);
+    for(let i = 0; i < binary.length; i++){
+      bytes[i] = binary.charCodeAt(i);
+    }
+    return new Blob([bytes], {type: mime});
+  }
+
+  button.addEventListener('click', function(e){
+    e.preventDefault();
+
+    try{
+      const blob = base64ToBlob(ZIP_BASE64, 'application/zip');
+      const url = URL.createObjectURL(blob);
+
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = DOWNLOAD_NAME;
+      a.style.display = 'none';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+
+      setTimeout(function(){
+        URL.revokeObjectURL(url);
+      }, 1500);
+    }catch(err){
+      alert('바로가기 파일을 만들 수 없습니다. Chrome 또는 Edge에서 다시 시도해 주세요.');
+    }
+  });
+})();
+</script>
 
 </body>
 </html>
