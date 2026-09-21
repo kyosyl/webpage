@@ -242,6 +242,7 @@ main{
 
 .cards{display:flex;flex-direction:column;gap:14px}
 .card{
+  scroll-margin-top:110px;
   background:var(--card);
   border:1px solid rgba(217,227,236,.95);
   border-radius:var(--radius);
@@ -1242,6 +1243,8 @@ document.querySelectorAll('.card-head').forEach(btn=>{
     const card = btn.closest('.card');
     const isOpen = card.classList.contains('open');
 
+    const beforeTop = btn.getBoundingClientRect().top;
+
     document.querySelectorAll('.card.open').forEach(c=>{
       if(c !== card){
         c.classList.remove('open');
@@ -1253,7 +1256,26 @@ document.querySelectorAll('.card-head').forEach(btn=>{
     btn.setAttribute('aria-expanded', String(!isOpen));
 
     if(!isOpen){
-      setTimeout(()=>card.scrollIntoView({behavior:'smooth', block:'start'}), 90);
+      requestAnimationFrame(()=>{
+        const afterTop = btn.getBoundingClientRect().top;
+        const delta = afterTop - beforeTop;
+
+        if(Math.abs(delta) > 1){
+          window.scrollBy({top: delta, left: 0, behavior: 'auto'});
+        }
+
+        setTimeout(()=>{
+          const headerRect = btn.getBoundingClientRect();
+          const panel = card.querySelector('.accordion');
+          const panelRect = panel.getBoundingClientRect();
+          const viewportH = window.innerHeight;
+
+          if(headerRect.top > viewportH * 0.58 || panelRect.top > viewportH * 0.72){
+            const targetY = window.scrollY + headerRect.top - 110;
+            window.scrollTo({top: Math.max(0, targetY), behavior:'smooth'});
+          }
+        }, 340);
+      });
     }
   });
 });
