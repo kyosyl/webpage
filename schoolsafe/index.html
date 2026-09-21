@@ -1,0 +1,820 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>마재초 학교 안전사고 대응 길잡이</title>
+<style>
+:root{
+  --bg:#f4f7fb;
+  --bg2:#eef3f9;
+  --card:#ffffff;
+  --navy:#17324d;
+  --navy2:#24476c;
+  --blue:#2d6cdf;
+  --blue-soft:#edf4ff;
+  --green:#16875d;
+  --green-soft:#eefaf4;
+  --red:#c53b33;
+  --red-soft:#fff3f2;
+  --amber:#9b6a00;
+  --amber-soft:#fff9eb;
+  --text:#213547;
+  --muted:#617282;
+  --line:#d9e3ec;
+  --shadow:0 10px 28px rgba(23,50,77,.08);
+  --shadow-soft:0 4px 14px rgba(23,50,77,.06);
+  --radius:22px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:"Pretendard","Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",system-ui,sans-serif;
+  background:linear-gradient(180deg,var(--bg2) 0,var(--bg) 280px,var(--bg) 100%);
+  color:var(--text);
+  font-size:20px;
+  line-height:1.74;
+  -webkit-font-smoothing:antialiased;
+}
+button,a{font:inherit}
+a{text-decoration:none;color:inherit}
+
+.hero{
+  position:relative;
+  overflow:hidden;
+  padding:42px 18px 108px;
+  background:
+    radial-gradient(circle at 90% 10%, rgba(255,255,255,.10) 0, rgba(255,255,255,0) 36%),
+    radial-gradient(circle at 10% 90%, rgba(255,255,255,.08) 0, rgba(255,255,255,0) 34%),
+    linear-gradient(135deg, #18324d 0%, #23476b 56%, #2c5c8c 100%);
+  color:#fff;
+}
+.hero .inner{max-width:960px;margin:auto;position:relative;z-index:1}
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.badge{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:7px 12px;border-radius:999px;
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.15);
+  font-size:14px;font-weight:850;
+}
+.hero h1{
+  margin:0 0 12px;
+  font-size:clamp(34px,5vw,52px);
+  line-height:1.18;
+  letter-spacing:-.03em;
+  font-weight:950;
+}
+.hero p{
+  margin:0;
+  max-width:760px;
+  font-size:21px;
+  color:#dfeaf3;
+  font-weight:600;
+}
+.hero-note{
+  margin-top:22px;
+  display:inline-flex;
+  align-items:flex-start;
+  gap:10px;
+  padding:12px 14px;
+  border-radius:16px;
+  background:rgba(255,255,255,.11);
+  border:1px solid rgba(255,255,255,.12);
+  font-size:16px;
+  line-height:1.55;
+  max-width:780px;
+}
+.hero-note strong{color:#fff}
+
+main{
+  max-width:960px;
+  margin:-68px auto 0;
+  padding:0 14px 70px;
+  position:relative;
+  z-index:2;
+}
+.surface{
+  background:var(--card);
+  border:1px solid rgba(217,227,236,.9);
+  box-shadow:var(--shadow);
+  border-radius:26px;
+  padding:22px 22px 20px;
+}
+.surface + .surface{margin-top:18px}
+
+.law-card{
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:16px;
+  align-items:start;
+}
+.law-icon{
+  width:52px;height:52px;border-radius:16px;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--green-soft);color:var(--green);
+  font-size:27px;font-weight:900;
+}
+.law-card h2{
+  margin:0 0 6px;
+  font-size:23px;
+  color:var(--navy);
+}
+.law-card p{
+  margin:0;
+  color:var(--muted);
+  font-size:17px;
+  line-height:1.65;
+}
+
+.section-title{
+  display:flex;align-items:center;gap:10px;
+  margin:0 0 14px;
+  color:var(--navy);
+  font-size:25px;
+  font-weight:950;
+}
+.section-sub{
+  margin:-4px 0 16px;
+  color:var(--muted);
+  font-size:17px;
+  line-height:1.6;
+}
+
+.flow{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:10px;
+}
+.flow-card{
+  position:relative;
+  background:linear-gradient(180deg,#fff 0,#fbfdff 100%);
+  border:1px solid var(--line);
+  box-shadow:var(--shadow-soft);
+  border-radius:18px;
+  padding:15px 12px;
+  text-align:center;
+}
+.flow-num{
+  width:34px;height:34px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 8px;
+  background:linear-gradient(180deg,var(--navy2),var(--navy));
+  color:#fff;font-weight:950;font-size:15px;
+}
+.flow-card strong{
+  display:block;
+  font-size:18px;
+  color:var(--navy);
+  line-height:1.35;
+}
+.flow-card small{
+  display:block;
+  margin-top:5px;
+  font-size:14px;
+  color:var(--muted);
+  line-height:1.42;
+}
+
+.highlight-box{
+  margin-top:18px;
+  background:linear-gradient(180deg,#ffffff 0,#f8fbff 100%);
+  border:2px solid #bfd6f8;
+  border-radius:22px;
+  padding:20px 20px 18px;
+  box-shadow:0 8px 22px rgba(45,108,223,.08);
+}
+.highlight-box .eyebrow{
+  display:inline-block;
+  padding:5px 10px;
+  border-radius:999px;
+  background:#eef5ff;
+  color:var(--blue);
+  font-size:14px;
+  font-weight:900;
+  margin-bottom:10px;
+}
+.highlight-box h3{
+  margin:0 0 8px;
+  color:var(--navy);
+  font-size:24px;
+  line-height:1.4;
+}
+.highlight-box p{
+  margin:0;
+  font-size:20px;
+  line-height:1.7;
+}
+.key-blue{color:var(--blue);font-weight:950}
+.key-green{color:var(--green);font-weight:950}
+.key-red{color:var(--red);font-weight:950}
+.key-navy{color:var(--navy);font-weight:950}
+
+.cards{display:flex;flex-direction:column;gap:14px}
+.card{
+  background:var(--card);
+  border:1px solid rgba(217,227,236,.95);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow-soft);
+  overflow:hidden;
+  transition:.24s ease;
+}
+.card.open{
+  box-shadow:var(--shadow);
+  border-color:#bed2e6;
+  transform:translateY(-1px);
+}
+.card-head{
+  width:100%;
+  border:0;
+  background:transparent;
+  padding:18px 18px;
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  gap:14px;
+  align-items:center;
+  text-align:left;
+  cursor:pointer;
+}
+.card-icon{
+  width:54px;height:54px;border-radius:17px;
+  background:linear-gradient(180deg,#f2f7fc 0,#eaf1f8 100%);
+  color:var(--navy2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:28px;font-weight:950;
+  transition:.2s ease;
+}
+.card.open .card-icon{
+  background:linear-gradient(180deg,var(--navy2) 0,var(--navy) 100%);
+  color:#fff;
+}
+.card-title strong{
+  display:block;
+  font-size:24px;
+  line-height:1.33;
+  color:var(--navy);
+}
+.card-title span{
+  display:block;
+  margin-top:4px;
+  font-size:16px;
+  color:var(--muted);
+  line-height:1.5;
+}
+.arrow{
+  width:38px;height:38px;border-radius:50%;
+  background:#f2f6fa;color:#8c9aab;
+  display:flex;align-items:center;justify-content:center;
+  font-size:23px;transition:.24s ease;
+}
+.card.open .arrow{
+  transform:rotate(180deg);
+  background:#ecf4fd;
+  color:var(--blue);
+}
+.accordion{display:grid;grid-template-rows:0fr;transition:grid-template-rows .32s cubic-bezier(.4,0,.2,1)}
+.card.open .accordion{grid-template-rows:1fr}
+.accordion-inner{overflow:hidden}
+.content{
+  padding:2px 18px 22px 86px;
+  border-top:1px solid #edf2f7;
+}
+.content h3{
+  margin:18px 0 8px;
+  color:var(--navy);
+  font-size:21px;
+}
+.content h4{
+  margin:14px 0 6px;
+  font-size:19px;
+}
+.content p{margin:8px 0}
+.content ul,.content ol{margin:8px 0;padding-left:24px}
+.content li{margin:6px 0}
+.callout{
+  border-radius:15px;
+  padding:15px 16px;
+  margin:12px 0;
+  font-size:19px;
+  line-height:1.68;
+}
+.callout.info{background:var(--blue-soft);border:1px solid #d7e7ff}
+.callout.ok{background:var(--green-soft);border:1px solid #d6efe2;color:#16563b}
+.callout.warn{background:var(--red-soft);border:1px solid #ffd7d3;color:#7b2722}
+.callout.note{background:var(--amber-soft);border:1px solid #f2dda3;color:#725400}
+.quote{
+  background:#f8fafc;
+  border-left:5px solid #a0afbe;
+  border-radius:12px;
+  padding:15px 16px;
+  margin:11px 0;
+  font-size:19px;
+  line-height:1.66;
+}
+.quote.good{border-left-color:var(--green)}
+.quote.bad{border-left-color:var(--red);background:#fff8f7}
+
+.two-col{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+.decision{
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:15px 16px;
+  background:#fff;
+  font-size:18px;
+  line-height:1.66;
+}
+.decision.no{background:#fbfcfe}
+.decision.yes{background:#f3fbf7;border-color:#bfdfcd}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:14px;
+  overflow:hidden;
+  font-size:17px;
+}
+th,td{
+  padding:13px 14px;
+  border-bottom:1px solid var(--line);
+  text-align:left;
+  vertical-align:top;
+}
+th{
+  background:#f4f8fb;
+  color:var(--navy);
+  font-weight:950;
+}
+tr:last-child td{border-bottom:0}
+
+.btns{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:12px;
+}
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding:12px 16px;
+  border-radius:13px;
+  background:linear-gradient(180deg,var(--blue) 0,#1f5fcf 100%);
+  color:#fff;
+  border:0;
+  font-weight:950;
+  font-size:17px;
+  cursor:pointer;
+  box-shadow:0 6px 16px rgba(45,108,223,.16);
+}
+.btn.alt{
+  background:#fff;
+  color:var(--navy);
+  border:1px solid #c8d6e4;
+  box-shadow:none;
+}
+
+.security{
+  background:linear-gradient(135deg,var(--navy) 0,var(--navy2) 100%);
+  color:#fff;
+}
+.security .card-title strong{color:#fff}
+.security .card-title span{color:#d7e4ef}
+.security .card-icon{
+  background:rgba(255,255,255,.12);
+  color:#fff;
+}
+.security .arrow{
+  background:rgba(255,255,255,.08);
+  color:#dbe7f1;
+}
+.security .content{
+  border-color:rgba(255,255,255,.12);
+}
+.security .content p,
+.security .content li{color:#f2f7fb}
+.security .callout{
+  background:rgba(255,255,255,.09);
+  border:1px solid rgba(255,255,255,.12);
+  color:#fff;
+}
+
+.footer{
+  text-align:center;
+  color:#7e8d9b;
+  font-size:14px;
+  padding:26px 10px 6px;
+  line-height:1.7;
+}
+
+@media(max-width:820px){
+  body{font-size:19px}
+  .hero{padding:34px 15px 96px}
+  .hero p{font-size:19px}
+  main{padding:0 11px 60px}
+  .flow{grid-template-columns:1fr 1fr}
+}
+@media(max-width:620px){
+  body{font-size:19px}
+  .hero h1{font-size:36px}
+  .hero p{font-size:18px}
+  .hero-note{font-size:15px}
+  .surface{padding:18px 16px}
+  .law-card{grid-template-columns:1fr}
+  .law-icon{width:48px;height:48px}
+  .flow{grid-template-columns:1fr}
+  .flow-card{
+    display:grid;
+    grid-template-columns:auto 1fr;
+    gap:12px;
+    align-items:center;
+    text-align:left;
+  }
+  .flow-num{margin:0}
+  .highlight-box{padding:17px 16px}
+  .highlight-box h3{font-size:22px}
+  .highlight-box p{font-size:19px}
+  .card-head{padding:16px 14px;gap:11px}
+  .card-icon{width:48px;height:48px;font-size:25px}
+  .card-title strong{font-size:21px}
+  .card-title span{font-size:15px}
+  .content{padding:2px 14px 18px}
+  .content h3{font-size:20px}
+  .callout,.quote{font-size:18px}
+  .two-col{grid-template-columns:1fr}
+  table{font-size:16px}
+  .btn{width:100%;font-size:18px}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="inner">
+    <div class="badges">
+      <span class="badge">📅 2026. 9. 21.(월)</span>
+      <span class="badge">🏫 마재초 교직원 연수</span>
+      <span class="badge">📱 스마트폰 최적화</span>
+    </div>
+    <h1>학교 안전사고 발생 시<br>담임교사 대응 길잡이</h1>
+    <p>핵심은 한눈에, 자세한 내용은 필요한 부분만 펼쳐서 확인할 수 있도록 다시 디자인했습니다.</p>
+    <div class="hero-note">
+      <div>✨</div>
+      <div><strong>핵심 원칙</strong> : <strong>학생 안전과 치료가 먼저</strong>이며, <strong>병원진료가 필요한 교육활동 중 사고</strong>는 학부모의 청구 의사와 별개로 <strong>학교안전공제 사고통지</strong> 여부를 검토합니다.</div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="surface">
+    <div class="law-card">
+      <div class="law-icon">⚖</div>
+      <div>
+        <h2>관련 기준</h2>
+        <p><span class="key-navy">「학교안전사고 예방 및 보상에 관한 법률」 제44조제2항</span>은 학교안전사고 발생 시 공제회 통지를 규정하고 있습니다. 교육부 「학교 안전사고관리 지침」은 이를 사고 유형별로 구체화하여 <span class="key-blue">병원치료 필요 여부</span>에 따라 대응절차를 구분합니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="surface">
+    <div class="section-title">🧭 한눈에 보는 전체 절차</div>
+    <div class="section-sub">연수 때는 이 순서만 먼저 설명하고, 상세 내용은 아래 카드를 열어 보여주면 흐름이 훨씬 깔끔합니다.</div>
+    <div class="flow">
+      <div class="flow-card">
+        <div class="flow-num">1</div>
+        <div>
+          <strong>학생 상태 확인</strong>
+          <small>응급처치 · 119 필요 여부</small>
+        </div>
+      </div>
+      <div class="flow-card">
+        <div class="flow-num">2</div>
+        <div>
+          <strong>병원진료 필요 판단</strong>
+          <small>진료 필요성 확인</small>
+        </div>
+      </div>
+      <div class="flow-card">
+        <div class="flow-num">3</div>
+        <div>
+          <strong>보호자 연락 · 진료</strong>
+          <small>필요 시 병원 안내</small>
+        </div>
+      </div>
+      <div class="flow-card">
+        <div class="flow-num">4</div>
+        <div>
+          <strong>학교안전공제 사고통지</strong>
+          <small>마재초는 담임 전산등록</small>
+        </div>
+      </div>
+      <div class="flow-card">
+        <div class="flow-num">5</div>
+        <div>
+          <strong>사후 안내 · 확인</strong>
+          <small>공제급여 · 실손보험</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="highlight-box">
+      <div class="eyebrow">핵심 질문</div>
+      <h3>🏥 “보호자가 병원에 간다고 하면 무조건 통지하나요?”</h3>
+      <p>
+        <span class="key-red">‘병원에 간다’는 말만으로 기계적으로 판단하지는 않습니다.</span><br>
+        다만 <span class="key-blue">교육활동 중 사고로 병원치료가 필요하다고 판단되는 경우</span>에는
+        <span class="key-green">학교안전공제 사고통지</span> 대상입니다.<br>
+        또한 마재초에서는 <span class="key-navy">해당 사고로 실제 의료기관 진료가 이루어진 경우도 사고통지 대상으로 처리</span>하는 것을 실무 기준으로 봅니다.
+      </p>
+    </div>
+  </section>
+
+  <section class="cards">
+
+    <article class="card">
+      <button class="card-head" type="button" aria-expanded="false">
+        <div class="card-icon">★</div>
+        <div class="card-title">
+          <strong>먼저 알아둘 핵심 원칙</strong>
+          <span>연수 시작 전 꼭 짚고 넘어가야 할 기준</span>
+        </div>
+        <div class="arrow">⌄</div>
+      </button>
+      <div class="accordion"><div class="accordion-inner"><div class="content">
+        <div class="callout ok"><strong>학생 안전과 치료가 먼저입니다.</strong> 사고 원인이나 책임 판단은 그 다음입니다.</div>
+        <ul>
+          <li><span class="key-blue">병원진료가 필요한 교육활동 중 학교안전사고</span>는 학부모의 공제급여 청구 의사와 관계없이 <span class="key-green">학교안전공제 사고통지</span> 여부를 검토합니다.</li>
+          <li>법령·교육부 지침상 사고통지 절차의 주체는 공제가입자인 <span class="key-navy">학교</span>이며, <span class="key-green">마재초 내부 업무분장상 담임교사가 전산 등록</span>을 담당합니다.</li>
+          <li>안전생활부장은 대상 여부·시스템 사용·작성방법 등을 안내하고 지원합니다.</li>
+          <li><span class="key-red">개인 실손보험 가입 여부는 학교안전공제 사고통지 생략 기준이 아닙니다.</span></li>
+        </ul>
+      </div></div></div>
+    </article>
+
+    <article class="card">
+      <button class="card-head" type="button" aria-expanded="false">
+        <div class="card-icon">🩹</div>
+        <div class="card-title">
+          <strong>1. 학생 상태 확인</strong>
+          <span>사고 직후 가장 먼저 해야 할 일</span>
+        </div>
+        <div class="arrow">⌄</div>
+      </button>
+      <div class="accordion"><div class="accordion-inner"><div class="content">
+        <h3>먼저 확인합니다</h3>
+        <ul>
+          <li>의식 · 반응 여부</li>
+          <li>호흡 상태</li>
+          <li>심한 출혈 여부</li>
+          <li>통증 부위와 움직임 가능 여부</li>
+        </ul>
+        <div class="callout info">학생 상태를 확인하면서 <strong>가까운 교직원과 보건교사에게 도움을 요청</strong>합니다. 담임교사가 의학적 진단을 하는 것이 아닙니다.</div>
+        <div class="quote good">“○○아, 선생님 말 들리니?”</div>
+        <div class="quote good">“어디가 가장 아픈지 말해줄 수 있겠니?”</div>
+        <div class="callout warn"><strong>생명위급 상황</strong> : 의식저하 · 호흡곤란 · 심한 출혈 · 심각한 머리손상 등이 있으면 보호자 연락을 기다리기보다 <strong>119 신고와 응급처치</strong>를 우선합니다.</div>
+      </div></div></div>
+    </article>
+
+    <article class="card">
+      <button class="card-head" type="button" aria-expanded="false">
+        <div class="card-icon">🏥</div>
+        <div class="card-title">
+          <strong>2. 병원진료 필요 여부 판단</strong>
+          <span>학교안전공제 사고통지 여부를 판단하는 핵심 단계</span>
+        </div>
+        <div class="arrow">⌄</div>
+      </button>
+      <div class="accordion"><div class="accordion-inner"><div class="content">
+        <div class="callout info">
+          교육부 「학교 안전사고관리 지침」은 <span class="key-blue">병원치료가 필요한 일반상해사고</span>와 <span class="key-navy">병원치료가 필요하지 않은 일반상해사고</span>를 구분합니다.
+        </div>
+
+        <div class="two-col">
+          <div class="decision no">
+            <strong class="key-navy">병원진료 불필요</strong><br>
+            보건실 등에서 간단히 처치하고 종결되는 가벼운 찰과상 · 경미한 타박상 등<br>
+            → <strong>학교 내 보고 · 기록 · 관찰</strong>
+          </div>
+          <div class="decision yes">
+            <strong class="key-blue">병원 · 치과 등 진료 필요</strong><br>
+            골절 의심, 치아 손상, 봉합 필요 상처, 지속되는 통증 등<br>
+            → 보호자 연락 및 병원진료 안내<br>
+            → <span class="key-green">학교안전공제 사고통지</span>
+          </div>
+        </div>
+
+        <h3>마재초 실무 기준</h3>
+        <div class="callout ok">
+          ① 교육활동 중 사고로 <span class="key-blue">병원치료가 필요하다고 판단된 경우</span> 또는<br>
+          ② 해당 사고로 <span class="key-blue">실제 의료기관 진료가 이루어진 경우</span><br>
+          → <span class="key-green">학교안전공제 사고통지 대상으로 처리</span>합니다.
+        </div>
+
+        <h3>광주 공제회가 안내하는 사고통지 생략 가능 사례</h3>
+        <table>
+          <tr><th>안내 사례</th><th>실무상 유의</th></tr>
+          <tr><td>보건실 등에서 간단히 치료해 종결된 경우</td><td>학교 내 보고 · 기록 · 관찰</td></tr>
+          <tr><td>의료기관에서 치료를 받지 않아도 될 경우</td><td>학교 내 보고 · 기록 · 관찰</td></tr>
+          <tr><td>향후 공제회에 보상 청구를 하지 않을 것이 확실시되는 경우</td><td>교육부 지침의 병원치료 필요 사고 통지기준을 함께 확인</td></tr>
+          <tr><td>교육활동 중 발생한 사고가 아닌 지병인 경우</td><td>교육활동과 인과관계가 없는 단순 지병인지 구분</td></tr>
+        </table>
+
+        <div class="callout warn">
+          <strong>중요</strong> : <span class="key-red">학부모가 공제급여를 청구하지 않겠다고 하거나, 개인 실손보험이 있다는 이유만으로 사고통지를 생략하지 않습니다.</span>
+        </div>
+      </div></div></div>
+    </article>
+
+    <article class="card">
+      <button class="card-head" type="button" aria-expanded="false">
+        <div class="card-icon">☎</div>
+        <div class="card-title">
+          <strong>3. 보호자 연락 · 병원진료 안내</strong>
+          <span>진료가 필요할 때 어떤 표현으로 설명할지</span>
+        </div>
+        <div class="arrow">⌄</div>
+      </button>
+      <div class="accordion"><div class="accordion-inner"><div class="content">
+        <p><span class="key-navy">사고 사실 → 현재 상태 → 학교에서 한 조치 → 병원진료 필요성</span> 순으로 설명합니다.</p>
+        <div class="quote good" id="parentTxt">“안녕하세요. ○○ 담임입니다. 오늘 체육시간에 ○○가 달리던 중 넘어져 오른쪽 손목을 다쳤습니다. 보건실에서 상태를 확인했는데 현재 통증이 계속되고 손목 움직임이 불편하여 병원에서 정확한 진료를 받아보시는 것이 좋겠습니다. 지금은 안정을 취하고 있습니다.”</div>
+        <div class="btns"><button class="btn alt copy" data-target="parentTxt">안내 문구 복사</button></div>
+
+        <h3>학교 내 공유도 함께 진행합니다</h3>
+        <div class="callout info">교육부 응급상황 가이드라인은 담임교사의 역할로 <strong>보호자 연락</strong>과 <strong>교감 보고</strong>를 함께 제시합니다. 학생 조치가 지연되지 않도록 학생 상태 확인 · 진료 안내와 병행하여 학교 내 대응체계에 따라 공유합니다.</div>
+
+        <div class="quote bad"><strong>피해야 할 표현</strong> : “별일 아닌 것 같습니다.” / “뼈가 부러진 것 같습니다.” / “친구가 밀어서 다쳤습니다.” / “학교 잘못은 아닙니다.”</div>
+      </div></div></div>
+    </article>
+
+    <article class="card">
+      <button class="card-head" type="button" aria-expanded="false">
+        <div class="card-icon">▣</div>
+        <div class="card-title">
+          <strong>4. 학교안전공제 사고통지 등록</strong>
+          <span>마재초에서는 담임교사가 전산 등록</span>
+        </div>
+        <div class="arrow">⌄</div>
+      </button>
+      <div class="accordion"><div class="accordion-inner"><div class="content">
+        <div class="callout ok"><strong>역할 구분</strong> : 법령 · 교육부 지침상 공제가입자인 <span class="key-navy">학교가 사고통지 절차</span>를 이행하고, 마재초 내부 업무분장상 <span class="key-green">담임교사가 전산 등록</span>을 담당합니다.</div>
+
+        <h3>전산처리 순서</h3>
+        <ol>
+          <li>학교안전사고보상지원시스템 접속</li>
+          <li>학교 공용계정으로 로그인</li>
+          <li>학교안전사고통지 메뉴에서 사고내용 입력</li>
+          <li>사고통지서 내부결재</li>
+          <li>공제회로 통보</li>
+          <li>문서 상태를 확인하여 공제회 접수 여부 확인</li>
+        </ol>
+
+        <div class="callout info"><strong>문서 상태</strong> : 미통보 = 아직 공제회 미전송 / 미접수 = 공제회 확인 중 / 접수 = 공제급여 청구 가능. 보완 · 반려 표시는 사유를 확인해 수정합니다.</div>
+
+        <h3>사고경위 작성 예</h3>
+        <div class="quote good" id="incidentTxt">“2026. 9. 18. 10:35경 2교시 후 쉬는 시간 중 4학년 2반 교실 뒤편을 이동하던 ○○학생과 △△학생이 서로 접촉하였고, ○○학생이 바닥에 넘어져 오른쪽 손목 통증을 호소함. 보건실에서 상태 확인 후 보호자에게 연락하여 병원진료를 안내함.”</div>
+        <div class="btns">
+          <button class="btn alt copy" data-target="incidentTxt">사고경위 예시 복사</button>
+          <a class="btn" href="https://www.schoolsafe.or.kr/" target="_blank" rel="noopener">공제 시스템 열기 ↗</a>
+        </div>
+        <div class="quote bad"><strong>피해야 할 표현</strong> : “△△학생의 잘못으로 사고 발생” / “담임교사의 관리 소홀” / “가해학생이 피해학생을 다치게 함”</div>
+      </div></div></div>
+    </article>
+
+    <article class="card">
+      <button class="card-head" type="button" aria-expanded="false">
+        <div class="card-icon">💬</div>
+        <div class="card-title">
+          <strong>5. 공제급여 · 실손보험 · 학부모 FAQ</strong>
+          <span>사고통지 후 무엇을 안내할지</span>
+        </div>
+        <div class="arrow">⌄</div>
+      </button>
+      <div class="accordion"><div class="accordion-inner"><div class="content">
+        <h3>“병원비 전액 나오죠?”</h3>
+        <div class="quote good">“학교안전공제에 공제급여를 청구하실 수 있습니다. 다만 실제 지급 여부와 지급범위는 학교안전공제회가 관련 법령과 지급기준에 따라 심사합니다.”</div>
+
+        <h3>“안전공제 청구 안 할게요.”</h3>
+        <div class="quote good">“실제 공제급여 청구 여부는 보호자께서 결정하시면 됩니다. 다만 병원진료가 필요한 교육활동 중 학교안전사고는 학교에서 사고통지 절차를 진행하겠습니다.”</div>
+
+        <h3>“실손보험과 학교안전공제에서 둘 다 받을 수 있나요?”</h3>
+        <div class="callout note">학교안전공제중앙회는 요양급여와 민영 실손보험 상품의 <strong>중복 청구가 가능할 수 있다</strong>고 안내하지만, 사고일자 · 가입 상품 등에 따라 달라질 수 있습니다. <span class="key-red">학교에서는 “두 곳 모두 지급된다”고 확답하지 않습니다.</span></div>
+
+        <div class="quote good">“<strong>두 곳 모두에서 지급된다고 학교에서 확답할 수는 없습니다.</strong> 학교안전공제는 관련 법령과 공제회 기준에 따라, 개인 실손보험은 사고일자 · 가입 상품 · 보험약관 등에 따라 각각 심사됩니다. 중복청구 가능 여부와 실제 지급액은 학교안전공제회와 가입 보험사에 각각 확인해 주세요.”</div>
+
+        <div class="quote bad"><strong>하지 않아야 할 말</strong> : “실비가 있으니 안전공제는 안 하셔도 됩니다.” / “양쪽에서 두 번 받을 수 있습니다.” / “학교에서 다쳤으니 전액 다 나옵니다.”</div>
+      </div></div></div>
+    </article>
+
+    <article class="card">
+      <button class="card-head" type="button" aria-expanded="false">
+        <div class="card-icon">✓</div>
+        <div class="card-title">
+          <strong>6. 마지막 처리 확인</strong>
+          <span>누락 없이 업무를 마쳤는지 체크</span>
+        </div>
+        <div class="arrow">⌄</div>
+      </button>
+      <div class="accordion"><div class="accordion-inner"><div class="content">
+        <ul>
+          <li>학생 상태 및 이후 경과 확인</li>
+          <li>학교 내 대응체계에 따른 공유 완료</li>
+          <li>보호자 연락 완료</li>
+          <li>사고경위 · 조치사항 기록 완료</li>
+          <li>필요한 경우 학교안전공제 사고통지 입력 완료</li>
+          <li>공제회 실제 통보 및 처리상태 확인</li>
+          <li>보호자에게 공제급여 청구방법 안내(학교 또는 학부모 청구 가능)</li>
+        </ul>
+      </div></div></div>
+    </article>
+
+    <article class="card">
+      <button class="card-head" type="button" aria-expanded="false">
+        <div class="card-icon">🔗</div>
+        <div class="card-title">
+          <strong>공식 사이트 · 근거</strong>
+          <span>필요할 때 원문을 바로 확인</span>
+        </div>
+        <div class="arrow">⌄</div>
+      </button>
+      <div class="accordion"><div class="accordion-inner"><div class="content">
+        <div class="btns">
+          <a class="btn" href="https://www.schoolsafe.or.kr/" target="_blank" rel="noopener">학교안전공제 시스템 ↗</a>
+          <a class="btn alt" href="https://www.schoolsafe24.or.kr/front/contents/9029/cntntsView.do?menuSn=154&upperMenuSn=144" target="_blank" rel="noopener">사고통지 · 청구 절차 ↗</a>
+          <a class="btn alt" href="https://www.law.go.kr/LSW/admRulLsInfoP.do?admRulSeq=2100000261398" target="_blank" rel="noopener">교육부 안전사고관리 지침 ↗</a>
+          <a class="btn alt" href="https://www.ssif.or.kr/complaints/faq.php?mode=read&seq=689" target="_blank" rel="noopener">실손보험 중앙회 FAQ ↗</a>
+        </div>
+      </div></div></div>
+    </article>
+
+    <article class="card security">
+      <button class="card-head" type="button" aria-expanded="false">
+        <div class="card-icon">🔒</div>
+        <div class="card-title">
+          <strong>학교 공용계정 보안 유의사항</strong>
+          <span>아이디 · 비밀번호는 사이트에 게시하지 않습니다</span>
+        </div>
+        <div class="arrow">⌄</div>
+      </button>
+      <div class="accordion"><div class="accordion-inner"><div class="content">
+        <div class="callout"><strong>보안 원칙</strong> : 공용계정 아이디 · 비밀번호를 연수자료 · 사이트 · 공개 메신저에 게시하지 않습니다.</div>
+        <ul>
+          <li>학생 이름 · 전화번호 · 진단내용 등 개인정보를 이 사이트에 저장하지 않습니다.</li>
+          <li>공용계정 정보가 필요한 교직원에게는 별도 내부 방식으로 안내합니다.</li>
+        </ul>
+      </div></div></div>
+    </article>
+
+  </section>
+
+  <div class="footer">
+    마재초등학교 교직원 내부 업무자료 · 2026. 9. 18. 기준 · 교육부 지침 및 광주 공제회 안내 재확인본<br>
+    이후 법령 · 교육부 지침 · 관할 학교안전공제회 안내가 변경되면 최신 기준을 우선 적용합니다.
+  </div>
+</main>
+
+<script>
+document.querySelectorAll('.card-head').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const card = btn.closest('.card');
+    const isOpen = card.classList.contains('open');
+
+    document.querySelectorAll('.card.open').forEach(c=>{
+      if(c !== card){
+        c.classList.remove('open');
+        c.querySelector('.card-head').setAttribute('aria-expanded','false');
+      }
+    });
+
+    card.classList.toggle('open', !isOpen);
+    btn.setAttribute('aria-expanded', String(!isOpen));
+
+    if(!isOpen){
+      setTimeout(()=>card.scrollIntoView({behavior:'smooth', block:'start'}), 90);
+    }
+  });
+});
+
+document.querySelectorAll('.copy').forEach(btn=>{
+  btn.addEventListener('click', async ()=>{
+    const target = document.getElementById(btn.dataset.target)?.innerText || '';
+    try{
+      await navigator.clipboard.writeText(target);
+      const old = btn.textContent;
+      btn.textContent = '복사됨 ✓';
+      setTimeout(()=>btn.textContent = old, 1200);
+    }catch(e){
+      alert('이 환경에서는 자동 복사가 제한됩니다. 문구를 길게 눌러 복사해 주세요.');
+    }
+  });
+});
+</script>
+
+</body>
+</html>
