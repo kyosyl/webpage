@@ -75,6 +75,36 @@ a{text-decoration:none;color:inherit}
   border:1px solid rgba(255,255,255,.15);
   font-size:14px;font-weight:850;
 }
+
+.badge-link{
+  cursor:pointer;
+  background:linear-gradient(180deg,rgba(101,209,174,.22),rgba(255,255,255,.11));
+  border-color:rgba(134,229,198,.30);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.07);
+  transition:transform .16s ease, background .16s ease, border-color .16s ease;
+}
+.badge-link:hover{
+  transform:translateY(-1px);
+  background:linear-gradient(180deg,rgba(101,209,174,.29),rgba(255,255,255,.14));
+  border-color:rgba(154,238,209,.42);
+}
+
+.badge-google{
+  cursor:pointer;
+  background:linear-gradient(180deg,rgba(91,154,255,.20),rgba(255,255,255,.11));
+  border-color:rgba(129,178,255,.28);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.07);
+  transition:transform .16s ease, background .16s ease, border-color .16s ease;
+}
+.badge-google:hover{
+  transform:translateY(-1px);
+  background:linear-gradient(180deg,rgba(91,154,255,.27),rgba(255,255,255,.14));
+  border-color:rgba(149,193,255,.40);
+}
+.badge-link .badge-arrow{
+  opacity:.9;
+  font-size:.9em;
+}
 .hero h1{
   margin:0 0 12px;
   font-size:clamp(34px,4.7vw,48px);
@@ -775,8 +805,13 @@ tr:last-child td{border-bottom:0}
 <header class="hero">
   <div class="inner">
     <div class="badges">
+      <a class="badge badge-link" href="https://www.schoolsafe.or.kr/" target="_blank" rel="noopener" aria-label="학교안전공제회 바로가기">
+        🛡️ 학교안전공제회 <span class="badge-arrow">↗</span>
+      </a>
       <span class="badge">📅 2026. 9. 21.(월)</span>
-      <span class="badge">🏫 마재초 교직원 연수</span>
+      <a class="badge badge-google" href="https://docs.google.com/spreadsheets/d/14nKmRpFQdBn83zenDvZdOnUKDGwk_2cRUEbP8i2IXfI/edit?gid=207646043#gid=207646043" target="_blank" rel="noopener" aria-label="마재초 Google 바로가기">
+        🌐 마재초 Google <span class="badge-arrow">↗</span>
+      </a>
       <span class="badge">📱 스마트폰 최적화</span>
     </div>
     <h1>학교 안전사고 발생 시 담임교사 대응 길라잡이</h1>
