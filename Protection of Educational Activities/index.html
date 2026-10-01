@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#0f5c63" />
   <title>마재초 교육활동 보호 현장대응 시스템</title>
   <style>
@@ -90,8 +90,151 @@
     .footer-note{margin-top:28px;text-align:center;color:#73878c;font-size:12px}
     .modal-backdrop{position:fixed;inset:0;background:rgba(4,22,26,.56);z-index:100;display:none;align-items:center;justify-content:center;padding:18px}.modal-backdrop.open{display:flex}.modal{width:min(720px,100%);max-height:90vh;overflow:auto;background:white;border-radius:20px;padding:22px;box-shadow:0 20px 60px rgba(0,0,0,.25)}.modal h2{margin:0 0 8px}.modal-footer{display:flex;justify-content:flex-end;gap:8px;margin-top:18px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.check-line{display:flex;gap:9px;align-items:flex-start;padding:9px 0}.check-line input{margin-top:4px}.alert-list{display:grid;gap:10px;margin-top:12px}.alert-item{border:1px solid #f1c5c0;background:var(--soft-danger);border-radius:12px;padding:12px}.alert-item.warn{border-color:#ead49c;background:var(--soft-warn)}.alert-item.info{border-color:#c5d7fa;background:var(--soft-info)}.alert-item strong{display:block}.alert-item small{color:#6b5c58}
     .hidden{display:none!important}.muted{color:var(--muted)}.tiny{font-size:11px}.strong{font-weight:800}.mt8{margin-top:8px}.mt12{margin-top:12px}.mt16{margin-top:16px}.flex{display:flex}.gap8{gap:8px}.wrap{flex-wrap:wrap}.right{margin-left:auto}
-    @media (max-width:980px){.grid-4{grid-template-columns:repeat(2,1fr)}.grid-3{grid-template-columns:1fr 1fr}.stepper{grid-template-columns:repeat(3,1fr)}.timeline-fields{grid-template-columns:1fr 1fr}.brand{min-width:220px}.top-actions{display:none}}
-    @media (max-width:700px){.topbar-inner{display:block}.brand{margin-bottom:8px}.nav{width:100%}.container{padding:14px 12px 60px}.hero{padding:24px 20px}.hero h1{font-size:24px}.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}.case-header{display:block}.case-actions{margin-top:10px}.stepper{grid-template-columns:1fr 1fr}.timeline-fields,.form-grid{grid-template-columns:1fr}.case-row{align-items:flex-start;flex-wrap:wrap}.case-row .case-main{min-width:70%}}
+    .mobile-deadline-summary{display:none}
+    /* 터치·스마트기기 공통 */
+    button,.btn,.check-line,.task summary{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+    .nav{scrollbar-width:none;-webkit-overflow-scrolling:touch}.nav::-webkit-scrollbar{display:none}
+    .flow-wrap,.table-wrap{-webkit-overflow-scrolling:touch}
+
+    @media (max-width:980px){
+      .grid-4{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .grid-3{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .stepper{grid-template-columns:repeat(3,minmax(0,1fr))}
+      .timeline-fields{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .brand{min-width:220px}
+      .top-actions{display:none}
+      .route-select{grid-template-columns:1fr}
+      .route-steps{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .branch-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .support-checks{grid-template-columns:1fr}
+    }
+
+    @media (max-width:700px){
+      body{font-size:15px;padding-bottom:env(safe-area-inset-bottom)}
+      .topbar{box-shadow:0 3px 14px rgba(20,54,61,.08)}
+      .topbar-inner{display:block;padding:9px 10px 7px}
+      .brand{min-width:0;width:100%;margin-bottom:6px;gap:9px}
+      .brand-home{width:100%;padding:2px 4px}
+      .brand-mark{width:36px;height:36px;border-radius:10px;font-size:13px;flex:0 0 auto}
+      .brand strong{font-size:14px;line-height:1.25}
+      .brand small{font-size:10px;line-height:1.25;margin-top:2px}
+      .nav{width:100%;gap:5px;padding:2px 1px 3px;scroll-snap-type:x proximity}
+      .nav button{min-height:42px;padding:8px 11px;font-size:12px;flex:0 0 auto;scroll-snap-align:start;border:1px solid transparent}
+      .nav button.active{border-color:#bfe0e3}
+
+      .container{padding:12px 10px calc(78px + env(safe-area-inset-bottom))}
+      .section{margin-top:16px}
+      .section-head{align-items:flex-start;flex-direction:column;gap:5px;margin-bottom:9px}
+      .section-head h1{font-size:23px!important;line-height:1.3}
+      .section-head h2{font-size:18px;line-height:1.35}
+      .section-head p{font-size:12px;line-height:1.45}
+
+      .hero{padding:21px 17px;border-radius:20px}
+      .hero:after{width:210px;height:210px;right:-85px;top:-90px}
+      .hero h1{font-size:22px;line-height:1.35}.hero h1 br{display:none}
+      .hero p{font-size:13px;line-height:1.55}
+      .hero-actions{display:grid;grid-template-columns:1fr;gap:8px;margin-top:16px}
+      .hero-actions .btn{width:100%}
+
+      .grid-2,.grid-3,.grid-4,.timeline-fields,.form-grid,.route-select,.route-steps,.branch-grid,.support-checks{grid-template-columns:1fr}
+      .card{padding:15px;border-radius:15px}
+      .quick-card{min-height:0}.quick-card .btn{width:100%;margin-top:10px}
+      .notice{font-size:13px;padding:11px 12px;border-radius:12px;margin:9px 0}
+
+      .btn{min-height:44px;padding:10px 13px;border-radius:11px}
+      .btn-sm{min-height:40px;padding:8px 11px;font-size:12px}
+      input[type="text"],input[type="datetime-local"],input[type="date"],select,textarea,.select{width:100%;min-height:46px;font-size:16px;padding:10px 11px}
+      textarea{min-height:110px}
+      .field{gap:6px}.field label{font-size:12px}.field small{font-size:11px;line-height:1.4}
+
+      .case-header{display:block;margin-bottom:12px}
+      .case-header h1{font-size:22px;line-height:1.3}
+      .case-meta{font-size:12px;margin-top:4px}
+      .case-actions{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:11px}
+      .case-actions .btn{width:100%}
+      .case-actions .btn:last-child:nth-child(odd){grid-column:1/-1}
+      .case-row{align-items:flex-start;flex-wrap:wrap;padding:13px}
+      .case-row .case-main{min-width:100%}
+      .case-row>.btn{width:100%}
+
+      .mobile-deadline-summary{display:block;margin:10px 0 2px}
+      .mobile-deadline-panel{border:1px solid #c6dfe2;background:linear-gradient(180deg,#f8fcfc,#fff);border-radius:14px;padding:11px;box-shadow:0 4px 14px rgba(20,54,61,.05)}
+      .mobile-deadline-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}
+      .mobile-deadline-head strong{font-size:14px}.mobile-deadline-head small{font-size:10px;color:var(--muted)}
+      .mobile-deadline-cards{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+      .mobile-deadline-chip{border:1px solid var(--line);border-radius:11px;background:#fff;padding:9px 10px;min-width:0}
+      .mobile-deadline-chip b{display:block;font-size:11px;color:#496167;margin-bottom:2px}
+      .mobile-deadline-chip span{display:block;font-size:13px;font-weight:800;line-height:1.25;word-break:keep-all}
+      .mobile-deadline-chip.done{border-color:#b9dbc8;background:var(--soft-good)}
+      .mobile-deadline-chip.soon{border-color:#e4cc8a;background:var(--soft-warn)}
+      .mobile-deadline-chip.overdue{border-color:#efb8b2;background:var(--soft-danger)}
+      .mobile-deadline-panel .btn{width:100%;margin-top:8px;min-height:40px}
+      #deadlineSection{scroll-margin-top:118px}
+      #deadlineGrid{gap:9px}
+      .deadline-card{padding:14px 14px 14px 17px}
+      .deadline-title{font-size:14px}
+      .deadline-date{font-size:19px;line-height:1.3}
+      .deadline-note,.deadline-actual{font-size:11px}
+      .deadline-due{font-size:12px}
+      .deadline-actions .btn{min-height:46px}
+
+      .stepper{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin:10px 0 14px}
+      .step{padding:9px 7px;font-size:11px}.step strong{font-size:12px}
+      .task-group{margin-top:11px}
+      .task{padding:13px 12px;margin-bottom:7px}
+      .task-row{gap:10px}
+      .task input[type="checkbox"]{width:24px;height:24px;margin-top:0}
+      .task-title{font-size:14px;line-height:1.4}
+      .task-desc{font-size:12px;line-height:1.5}
+      .task-meta{gap:5px}.task details{font-size:12px}
+
+      .check-line{border:1px solid var(--line);border-radius:12px;padding:12px;background:#fff;margin:0;min-height:58px}
+      .check-line input{width:23px;height:23px;margin-top:0;accent-color:var(--brand);flex:0 0 auto}
+      .check-line span{min-width:0}.check-line b{font-size:14px}.check-line small{font-size:11px;line-height:1.4}
+
+      .route-panel{padding:14px}
+      .route-summary{padding:13px;font-size:13px}
+      .route-steps{gap:7px}
+      .route-step{padding:12px 13px}
+      .route-step:not(:last-child):after{content:"↓";right:auto;left:50%;top:auto;bottom:-13px;transform:translateX(-50%);background:#fff;padding:0 4px}
+      .support-check{min-height:54px;padding:11px}.support-check input{width:22px;height:22px}
+      .branch-grid{gap:9px}.branch-card{padding:13px}.branch-card h3{font-size:15px}.branch-card ul{font-size:12px;line-height:1.5}
+
+      /* 모바일에서는 흐름도를 가로 스크롤 대신 세로 카드로 */
+      .flow-wrap{overflow:visible;padding-bottom:0}
+      .flowchart{display:grid;grid-template-columns:1fr;min-width:0;gap:22px}
+      .flow-node{padding:14px}
+      .flow-node:not(:last-child):after{content:"↓";right:auto;left:50%;top:auto;bottom:-23px;transform:translateX(-50%);font-size:18px;background:var(--bg);padding:0 5px}
+      .flow-node h3{font-size:14px}.flow-node ul{font-size:12px}
+
+      .filters{width:100%;display:grid;grid-template-columns:1fr}.filters .select{width:100%}
+      .script-box{padding:14px;padding-top:48px;font-size:13px}
+      .script-box .copy{right:9px;top:8px}
+      .contact{gap:10px}.contact-icon{width:38px;height:38px;border-radius:10px}.contact a{font-size:18px;word-break:break-all}
+
+      .table-wrap{margin-left:-4px;margin-right:-4px;border:1px solid var(--line);border-radius:12px}
+      .table{font-size:12px;min-width:650px}.table th,.table td{padding:9px}
+
+      /* 모달은 작은 화면에서 하단 시트처럼 사용 */
+      .modal-backdrop{align-items:flex-end;padding:0}
+      .modal{width:100%;max-height:92dvh;border-radius:20px 20px 0 0;padding:18px 14px calc(18px + env(safe-area-inset-bottom));box-shadow:0 -15px 45px rgba(0,0,0,.22)}
+      .modal h2{font-size:21px}
+      .modal-footer{position:sticky;bottom:0;background:linear-gradient(180deg,rgba(255,255,255,.75),#fff 28%);margin:14px -14px -18px;padding:14px 14px calc(14px + env(safe-area-inset-bottom));display:grid;grid-template-columns:1fr 1fr;z-index:3}
+      .modal-footer .btn{width:100%}
+
+      .footer-note{font-size:11px;line-height:1.5;margin-top:20px;padding:0 6px}
+    }
+
+    @media (max-width:390px){
+      .brand strong{font-size:13px}.brand small{font-size:9.5px}
+      .nav button{padding:8px 9px;font-size:11.5px}
+      .container{padding-left:8px;padding-right:8px}
+      .hero{padding:19px 15px}.hero h1{font-size:20px}
+      .card{padding:13px}
+      .case-actions{grid-template-columns:1fr}
+      .case-actions .btn:last-child:nth-child(odd){grid-column:auto}
+      .stepper{grid-template-columns:1fr 1fr}
+    }
     @media print{.topbar,.btn,.filters,.modal-backdrop,.footer-note{display:none!important}.container{max-width:none;padding:0}.view{display:none!important}.view.active{display:block!important}.card,.task{box-shadow:none;break-inside:avoid}.task details{display:block}.hero{background:white;color:black;border:1px solid #ccc}.hero p{color:#333}}
   </style>
 </head>
@@ -178,6 +321,7 @@
         </div>
         <div class="notice warn">이 화면에는 사안 코드·가명·기한 관리 정보만 입력하세요. 구체적인 진술, 학생·보호자·교직원의 실명·연락처·진단내용은 학교 공식 사안 문서에서 관리합니다.</div>
         <div id="seriousBanner"></div>
+        <div id="mobileDeadlineSummary" class="mobile-deadline-summary" aria-live="polite"></div>
 
         <div class="section card" id="caseTypeSection">
           <div class="section-head"><div><h2>사안 성격</h2><p><b>복수 선택 가능</b>합니다. 여기에서 선택한 사안 성격이 실제 업무절차를 결정합니다.</p></div><span class="pill brand">업무절차 기준</span></div>
@@ -627,7 +771,7 @@
     }
   }
 
-  function go(view){ currentView=view; document.querySelectorAll('.view').forEach(v=>v.classList.remove('active')); document.getElementById('view-'+view).classList.add('active'); document.querySelectorAll('#nav button').forEach(b=>b.classList.toggle('active',b.dataset.view===view)); if(view==='home') renderHome(); if(view==='case') renderCase(); if(view==='settings') renderSettings(); window.scrollTo({top:0,behavior:'smooth'}); }
+  function go(view){ currentView=view; document.querySelectorAll('.view').forEach(v=>v.classList.remove('active')); document.getElementById('view-'+view).classList.add('active'); document.querySelectorAll('#nav button').forEach(b=>b.classList.toggle('active',b.dataset.view===view)); if(view==='home') renderHome(); if(view==='case') renderCase(); if(view==='settings') renderSettings(); if(window.innerWidth<=700){const activeBtn=document.querySelector(`#nav button[data-view="${view}"]`); activeBtn?.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});} window.scrollTo({top:0,behavior:'smooth'}); }
   document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.view)));
   document.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.go)));
 
@@ -685,9 +829,35 @@
     document.querySelectorAll('[data-flag]').forEach(ch=>ch.checked=!!c.flags?.[ch.dataset.flag]);
     const sb=document.getElementById('seriousBanner'); sb.innerHTML=isSerious(c)?'<div class="notice danger"><b>중대사안 가능성 표시됨:</b> 서부교육지원청 담당 장학사(062-600-9861)에 즉시 연락하고, 필요한 경우 FAX 600-9860 보고 및 현장 출동 지원을 요청하세요.</div>':(c.currentDanger?'<div class="notice danger"><b>현재 위험 표시됨:</b> 안전 확보·침해행위 중단·피해교원 상태 확인을 다른 행정 절차보다 우선하세요.</div>':'');
     renderCaseTypes(c);
-    if(isEducationIntrusionCase(c)){ renderDeadlines(c); renderStepper(c); renderTasks(c); } else { document.getElementById('deadlineGrid').innerHTML=''; document.getElementById('stepper').innerHTML=''; document.getElementById('taskArea').innerHTML=''; }
+    if(isEducationIntrusionCase(c)){ renderDeadlines(c); renderMobileDeadlineSummary(c); renderStepper(c); renderTasks(c); } else { document.getElementById('deadlineGrid').innerHTML=''; document.getElementById('stepper').innerHTML=''; document.getElementById('taskArea').innerHTML=''; document.getElementById('mobileDeadlineSummary').innerHTML=''; }
     renderSupportRoute(c); renderNextActions(c);
     document.getElementById('closeCaseBtn').textContent=c.closed?'↩ 진행 중으로 되돌리기':'✓ 사안 종결 표시';
+  }
+
+  function renderMobileDeadlineSummary(c){
+    const box=document.getElementById('mobileDeadlineSummary'); if(!box)return;
+    const firstActual=c.firstReportAt||taskTime(c,'initial_report');
+    const occurrenceActual=c.occurrenceSubmittedAt||taskTime(c,'occurrence_report')||'';
+    const firstDue=c.receivedAt?addHours(c.receivedAt,24):null;
+    const occurrenceDue=firstActual?addBusinessDays(firstActual,5):null;
+    const firstEval=evaluateDeadline(firstDue,firstActual,6);
+    const occurrenceEval=evaluateDeadline(occurrenceDue,occurrenceActual,30);
+    const short=(ev,due,fallback)=>{
+      if(ev.cls==='done') return ev.label;
+      if(!due) return fallback;
+      if(ev.cls==='overdue') return '기한 경과';
+      if(ev.cls==='soon') return '기한 임박';
+      return formatDate(due,false)+'까지';
+    };
+    box.innerHTML=`<div class="mobile-deadline-panel">
+      <div class="mobile-deadline-head"><strong>⏱ 학교 핵심기한</strong><small>교육활동 침해 사안</small></div>
+      <div class="mobile-deadline-cards">
+        <div class="mobile-deadline-chip ${firstEval.cls}"><b>24시간 최초 신고·보고</b><span>${short(firstEval,firstDue,'접수일시 확인')}</span></div>
+        <div class="mobile-deadline-chip ${occurrenceEval.cls}"><b>5일 사안발생보고</b><span>${short(occurrenceEval,occurrenceDue,'24시간 보고 후 계산')}</span></div>
+      </div>
+      <button type="button" class="btn btn-secondary btn-sm" id="mobileDeadlineJump">기한관리에서 처리하기</button>
+    </div>`;
+    document.getElementById('mobileDeadlineJump')?.addEventListener('click',()=>document.getElementById('deadlineSection')?.scrollIntoView({behavior:'smooth',block:'start'}));
   }
 
   function renderDeadlines(c){
