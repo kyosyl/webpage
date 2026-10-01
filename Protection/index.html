@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0f5c63" />
+  <title>삼각초 교육활동 보호 현장대응 시스템</title>
+  <style>
+    :root{
+      --bg:#f4f7f8; --panel:#ffffff; --ink:#173238; --muted:#60747a;
+      --brand:#0f5c63; --brand2:#167985; --line:#d9e3e6;
+      --good:#18794e; --warn:#9a6700; --danger:#b42318; --info:#175cd3;
+      --soft-brand:#e8f4f5; --soft-good:#eaf7f0; --soft-warn:#fff7df; --soft-danger:#fff0ee; --soft-info:#eef4ff;
+      --shadow:0 10px 30px rgba(20,54,61,.08); --radius:18px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",Arial,sans-serif;line-height:1.55}
+    button,input,select,textarea{font:inherit}
+    button{cursor:pointer}
+    a{color:var(--brand2)}
+    .topbar{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+    .topbar-inner{max-width:1260px;margin:auto;padding:12px 18px;display:flex;align-items:center;gap:16px}
+    .brand{display:flex;align-items:center;gap:12px;min-width:285px}
+    .brand-home{border:0;background:transparent;padding:0;text-align:left;color:inherit;font:inherit;cursor:pointer;border-radius:12px}
+    .brand-home:hover{background:#f3f8f8}.brand-home:focus-visible{outline:3px solid #bfe4e7;outline-offset:3px}
+    .brand-mark{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,var(--brand),var(--brand2));color:white;display:grid;place-items:center;font-weight:800;box-shadow:var(--shadow)}
+    .brand strong{display:block;font-size:16px}.brand small{color:var(--muted);display:block;font-size:12px}
+    .nav{display:flex;gap:4px;overflow-x:auto;white-space:nowrap;flex:1;padding-bottom:2px}
+    .nav button{border:0;background:transparent;padding:9px 11px;border-radius:10px;color:#496167;font-size:13px}
+    .nav button:hover,.nav button.active{background:var(--soft-brand);color:var(--brand);font-weight:700}
+    .top-actions{display:flex;gap:8px;align-items:center}.status-dot{width:9px;height:9px;border-radius:50%;background:var(--good);display:inline-block}
+    .container{max-width:1260px;margin:auto;padding:24px 18px 70px}
+    .view{display:none}.view.active{display:block}
+    .hero{background:linear-gradient(130deg,#0d535a,#167985);border-radius:26px;padding:34px;color:white;box-shadow:var(--shadow);position:relative;overflow:hidden}
+    .hero:after{content:"";position:absolute;width:300px;height:300px;border-radius:50%;background:rgba(255,255,255,.06);right:-80px;top:-110px}
+    .hero h1{margin:0 0 8px;font-size:30px;line-height:1.25}.hero p{max-width:780px;margin:0;color:#ddf2f4}
+    .hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+    .btn{border:1px solid transparent;border-radius:12px;padding:10px 14px;font-weight:700;display:inline-flex;gap:7px;align-items:center;justify-content:center;text-decoration:none}
+    .btn-primary{background:var(--brand);color:white}.hero .btn-primary{background:white;color:var(--brand)}
+    .btn-secondary{background:#fff;border-color:var(--line);color:var(--ink)}
+    .btn-danger{background:#fff;border-color:#f0b8b3;color:var(--danger)}
+    .btn-ghost{background:transparent;border-color:var(--line);color:var(--ink)}
+    .btn-sm{padding:7px 10px;font-size:12px;border-radius:9px}
+    .grid{display:grid;gap:16px}.grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}.grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}.grid-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+    .section{margin-top:22px}.section-head{display:flex;justify-content:space-between;align-items:end;gap:12px;margin:0 0 12px}.section-head h2{font-size:20px;margin:0}.section-head p{margin:0;color:var(--muted);font-size:13px}
+    .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:0 4px 18px rgba(20,54,61,.04)}
+    .card h3{margin:0 0 8px;font-size:17px}.card p{margin:6px 0;color:#536a70}
+    .kicker{font-size:12px;font-weight:800;letter-spacing:.04em;color:var(--brand);margin-bottom:6px;text-transform:uppercase}
+    .pill{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:4px 9px;font-size:11px;font-weight:800}
+    .pill.good{background:var(--soft-good);color:var(--good)}.pill.warn{background:var(--soft-warn);color:var(--warn)}.pill.danger{background:var(--soft-danger);color:var(--danger)}.pill.info{background:var(--soft-info);color:var(--info)}.pill.brand{background:var(--soft-brand);color:var(--brand);min-width:0}
+    .notice{border-radius:14px;padding:13px 15px;margin:12px 0;border-left:4px solid var(--info);background:var(--soft-info);color:#24436c;font-size:14px}
+    .notice.warn{border-color:var(--warn);background:var(--soft-warn);color:#6e5200}.notice.danger{border-color:var(--danger);background:var(--soft-danger);color:#7a271a}.notice.good{border-color:var(--good);background:var(--soft-good);color:#14532d}
+    .principle-list{display:flex;flex-direction:column;gap:12px;margin-top:14px}
+    .principle-item{margin:0;display:grid;grid-template-columns:24px minmax(0,1fr);column-gap:7px;align-items:start}
+    .principle-num{font-weight:800;line-height:1.65;text-align:center}
+    .principle-text{min-width:0;line-height:1.65}
+    .principle-text b{font-weight:800}
+    .principle-text .principle-desc{font-weight:400}
+
+    .quick-card{min-height:145px;display:flex;flex-direction:column}.quick-card .icon{font-size:27px}.quick-card .btn{margin-top:auto;align-self:flex-start}
+    .case-list{display:grid;gap:10px}.case-row{display:flex;gap:14px;align-items:center;padding:14px;border:1px solid var(--line);border-radius:14px;background:#fff}.case-row .case-main{flex:1}.case-row strong{display:block}.case-row small{color:var(--muted)}
+    .progress{height:8px;background:#e9eff1;border-radius:99px;overflow:hidden;margin-top:8px}.progress>span{display:block;height:100%;background:linear-gradient(90deg,var(--brand),#34a3ad);border-radius:99px}
+    .case-header{display:flex;gap:14px;align-items:flex-start;justify-content:space-between;margin-bottom:16px}.case-header h1{font-size:26px;margin:0}.case-meta{color:var(--muted);font-size:13px}
+    .case-actions{display:flex;gap:8px;flex-wrap:wrap}
+    .next-actions{display:grid;gap:10px}.next-item{display:flex;gap:11px;align-items:flex-start;padding:12px;border:1px solid var(--line);border-radius:12px;background:#fff}.next-number{width:27px;height:27px;border-radius:50%;display:grid;place-items:center;background:var(--soft-brand);color:var(--brand);font-weight:800;flex:0 0 auto}.next-item p{margin:2px 0 0;font-size:13px;color:var(--muted)}
+    .deadline-card{position:relative;overflow:hidden}.deadline-card:before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:#9fbfc3}.deadline-card.overdue:before{background:var(--danger)}.deadline-card.soon:before{background:var(--warn)}.deadline-card.done:before{background:var(--good)}
+    .deadline-title{font-weight:800}.deadline-date{font-size:18px;font-weight:800;margin-top:6px}.deadline-note{font-size:12px;color:var(--muted);margin-top:5px}
+    .deadline-due{font-size:13px;font-weight:800;color:#3f5960;margin-top:8px}.deadline-actual{font-size:12px;color:#587078;margin-top:4px;line-height:1.45}.deadline-actions{margin-top:11px}.deadline-actions .btn{width:100%}.deadline-card.overdue .deadline-date{color:var(--danger)}.deadline-card.done .deadline-date{color:var(--good)}.deadline-card.soon .deadline-date{color:#8a6500}
+    .stepper{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin:14px 0 20px}.step{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px;text-align:center;font-size:12px}.step strong{display:block;color:var(--brand);font-size:13px;margin-bottom:4px}.step.current{outline:3px solid #bfe4e7;border-color:var(--brand)}.step.done{background:var(--soft-good)}
+    .filters{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.select,input[type="text"],input[type="datetime-local"],input[type="date"],textarea{border:1px solid #cbd8db;background:white;border-radius:10px;padding:9px 10px;color:var(--ink)}
+    textarea{width:100%;min-height:90px;resize:vertical}.field{display:grid;gap:5px}.field label{font-size:12px;font-weight:800;color:#415a60}.field small{color:var(--muted)}
+    .timeline-fields{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+    .task-group{margin-top:14px}.task-group h3{font-size:16px;margin:0 0 9px;display:flex;align-items:center;gap:8px}.task{background:#fff;border:1px solid var(--line);border-radius:13px;padding:13px 14px;margin-bottom:8px;transition:.15s}.task.checked{background:#f8fbf9;border-color:#c7dfd0}.task-row{display:flex;gap:10px;align-items:flex-start}.task input[type="checkbox"]{width:20px;height:20px;margin-top:2px;accent-color:var(--brand);flex:0 0 auto}.task-body{flex:1}.task-title{font-weight:800}.task-desc{font-size:13px;color:#5e7278;margin-top:3px}.task-meta{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.task-time{font-size:11px;color:var(--good);margin-top:5px}.task details{margin-top:8px;font-size:12px;color:#50656b}.task summary{cursor:pointer;font-weight:700;color:var(--brand)}
+    .route-panel{border:2px solid #b9dce0;background:linear-gradient(180deg,#f8fcfc,#ffffff)}
+    .route-select{display:grid;grid-template-columns:minmax(220px,.9fr) minmax(0,2fr);gap:16px;align-items:start}
+    .route-summary{border-radius:14px;padding:15px;border-left:5px solid var(--brand);background:var(--soft-brand)}
+    .route-summary.a{border-color:var(--danger);background:var(--soft-danger)}
+    .route-summary.b{border-color:var(--warn);background:var(--soft-warn)}
+    .route-summary.c{border-color:var(--info);background:var(--soft-info)}
+    .route-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:14px}
+    .route-step{border:1px solid var(--line);border-radius:13px;padding:12px;background:#fff;position:relative}
+    .route-step:not(:last-child):after{content:"→";position:absolute;right:-10px;top:40%;z-index:2;color:#81979c;font-weight:800}
+    .route-step b{display:block;color:var(--brand);margin-bottom:4px}.route-step small{color:var(--muted)}
+    .branch-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+    .branch-card{border:1px solid var(--line);border-radius:16px;padding:15px;background:#fff}
+    .branch-card.a{border-top:5px solid var(--danger)}.branch-card.b{border-top:5px solid var(--warn)}.branch-card.c{border-top:5px solid var(--info)}.branch-card.g{border-top:5px solid var(--brand)}
+    .branch-card h3{margin:4px 0 8px;font-size:16px}.branch-card ul{margin:6px 0 0;padding-left:18px;font-size:13px}
+    .support-checks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:12px}
+    .support-check{display:flex;gap:9px;align-items:flex-start;border:1px solid var(--line);padding:10px;border-radius:11px;background:#fff}
+    .support-check input{width:18px;height:18px;margin-top:2px;accent-color:var(--brand)}
+    .flow-wrap{overflow-x:auto;padding-bottom:8px}.flowchart{display:flex;min-width:1000px;align-items:stretch;gap:10px}.flow-node{flex:1;background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px;position:relative}.flow-node:not(:last-child):after{content:"→";position:absolute;right:-18px;top:48%;font-size:20px;color:#8ea5aa;z-index:2}.flow-node h3{font-size:15px;margin:0 0 8px;color:var(--brand)}.flow-node ul{padding-left:18px;margin:0;font-size:12px;color:#52686e}.flow-node li{margin:4px 0}
+    .table-wrap{overflow:auto}.table{width:100%;border-collapse:collapse;font-size:13px;background:white}.table th,.table td{padding:11px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}.table th{background:#f6f9f9;color:#415a60;white-space:nowrap}
+    .script-box{background:#f7fafb;border:1px solid var(--line);padding:16px;border-radius:14px;white-space:pre-line;position:relative;color:#2b444a}.script-box .copy{position:absolute;right:10px;top:10px}
+    .contact{display:flex;gap:13px;align-items:flex-start}.contact-icon{width:42px;height:42px;display:grid;place-items:center;background:var(--soft-brand);border-radius:12px;font-size:20px}.contact strong{display:block}.contact a{font-size:20px;font-weight:800;text-decoration:none}.contact small{display:block;color:var(--muted);margin-top:3px}
+    .source-item{padding:14px 0;border-bottom:1px solid var(--line)}.source-item:last-child{border-bottom:0}.source-item strong{display:block}.source-item small{color:var(--muted)}
+    .footer-note{margin-top:28px;text-align:center;color:#73878c;font-size:12px}
+    .modal-backdrop{position:fixed;inset:0;background:rgba(4,22,26,.56);z-index:100;display:none;align-items:center;justify-content:center;padding:18px}.modal-backdrop.open{display:flex}.modal{width:min(720px,100%);max-height:90vh;overflow:auto;background:white;border-radius:20px;padding:22px;box-shadow:0 20px 60px rgba(0,0,0,.25)}.modal h2{margin:0 0 8px}.modal-footer{display:flex;justify-content:flex-end;gap:8px;margin-top:18px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.check-line{display:flex;gap:9px;align-items:flex-start;padding:9px 0}.check-line input{margin-top:4px}.alert-list{display:grid;gap:10px;margin-top:12px}.alert-item{border:1px solid #f1c5c0;background:var(--soft-danger);border-radius:12px;padding:12px}.alert-item.warn{border-color:#ead49c;background:var(--soft-warn)}.alert-item.info{border-color:#c5d7fa;background:var(--soft-info)}.alert-item strong{display:block}.alert-item small{color:#6b5c58}
+    .hidden{display:none!important}.muted{color:var(--muted)}.tiny{font-size:11px}.strong{font-weight:800}.mt8{margin-top:8px}.mt12{margin-top:12px}.mt16{margin-top:16px}.flex{display:flex}.gap8{gap:8px}.wrap{flex-wrap:wrap}.right{margin-left:auto}
+    .mobile-deadline-summary{display:none}
+    /* 터치·스마트기기 공통 */
+    button,.btn,.check-line,.task summary{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+    .nav{scrollbar-width:none;-webkit-overflow-scrolling:touch}.nav::-webkit-scrollbar{display:none}
+    .flow-wrap,.table-wrap{-webkit-overflow-scrolling:touch}
+
+    @media (max-width:980px){
+      .grid-4{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .grid-3{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .stepper{grid-template-columns:repeat(3,minmax(0,1fr))}
+      .timeline-fields{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .brand{min-width:220px}
+      .top-actions{display:none}
+      .route-select{grid-template-columns:1fr}
+      .route-steps{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .branch-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .support-checks{grid-template-columns:1fr}
+    }
+
+    @media (max-width:700px){
+      body{font-size:15px;padding-bottom:env(safe-area-inset-bottom)}
+      .topbar{box-shadow:0 3px 14px rgba(20,54,61,.08)}
+      .topbar-inner{display:block;padding:9px 10px 7px}
+      .brand{min-width:0;width:100%;margin-bottom:6px;gap:9px}
+      .brand-home{width:100%;padding:2px 4px}
+      .brand-mark{width:36px;height:36px;border-radius:10px;font-size:13px;flex:0 0 auto}
+      .brand strong{font-size:14px;line-height:1.25}
+      .brand small{font-size:10px;line-height:1.25;margin-top:2px}
+      .nav{width:100%;gap:5px;padding:2px 1px 3px;scroll-snap-type:x proximity}
+      .nav button{min-height:42px;padding:8px 11px;font-size:12px;flex:0 0 auto;scroll-snap-align:start;border:1px solid transparent}
+      .nav button.active{border-color:#bfe0e3}
+
+      .container{padding:12px 10px calc(78px + env(safe-area-inset-bottom))}
+      .section{margin-top:16px}
+      .section-head{align-items:flex-start;flex-direction:column;gap:5px;margin-bottom:9px}
+      .section-head h1{font-size:23px!important;line-height:1.3}
+      .section-head h2{font-size:18px;line-height:1.35}
+      .section-head p{font-size:12px;line-height:1.45}
+
+      .hero{padding:21px 17px;border-radius:20px}
+      .hero:after{width:210px;height:210px;right:-85px;top:-90px}
+      .hero h1{font-size:22px;line-height:1.35}.hero h1 br{display:none}
+      .hero p{font-size:13px;line-height:1.55}
+      .hero-actions{display:grid;grid-template-columns:1fr;gap:8px;margin-top:16px}
+      .hero-actions .btn{width:100%}
+
+      .grid-2,.grid-3,.grid-4,.timeline-fields,.form-grid,.route-select,.route-steps,.branch-grid,.support-checks{grid-template-columns:1fr}
+      .card{padding:15px;border-radius:15px}
+      .quick-card{min-height:0}.quick-card .btn{width:100%;margin-top:10px}
+      .notice{font-size:13px;padding:11px 12px;border-radius:12px;margin:9px 0}
+
+      .btn{min-height:44px;padding:10px 13px;border-radius:11px}
+      .btn-sm{min-height:40px;padding:8px 11px;font-size:12px}
+      input[type="text"],input[type="datetime-local"],input[type="date"],select,textarea,.select{width:100%;min-height:46px;font-size:16px;padding:10px 11px}
+      textarea{min-height:110px}
+      .field{gap:6px}.field label{font-size:12px}.field small{font-size:11px;line-height:1.4}
+
+      .case-header{display:block;margin-bottom:12px}
+      .case-header h1{font-size:22px;line-height:1.3}
+      .case-meta{font-size:12px;margin-top:4px}
+      .case-actions{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:11px}
+      .case-actions .btn{width:100%}
+      .case-actions .btn:last-child:nth-child(odd){grid-column:1/-1}
+      .case-row{align-items:flex-start;flex-wrap:wrap;padding:13px}
+      .case-row .case-main{min-width:100%}
+      .case-row>.btn{width:100%}
+
+      .mobile-deadline-summary{display:block;margin:10px 0 2px}
+      .mobile-deadline-panel{border:1px solid #c6dfe2;background:linear-gradient(180deg,#f8fcfc,#fff);border-radius:14px;padding:11px;box-shadow:0 4px 14px rgba(20,54,61,.05)}
+      .mobile-deadline-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}
+      .mobile-deadline-head strong{font-size:14px}.mobile-deadline-head small{font-size:10px;color:var(--muted)}
+      .mobile-deadline-cards{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+      .mobile-deadline-chip{border:1px solid var(--line);border-radius:11px;background:#fff;padding:9px 10px;min-width:0}
+      .mobile-deadline-chip b{display:block;font-size:11px;color:#496167;margin-bottom:2px}
+      .mobile-deadline-chip span{display:block;font-size:13px;font-weight:800;line-height:1.25;word-break:keep-all}
+      .mobile-deadline-chip.done{border-color:#b9dbc8;background:var(--soft-good)}
+      .mobile-deadline-chip.soon{border-color:#e4cc8a;background:var(--soft-warn)}
+      .mobile-deadline-chip.overdue{border-color:#efb8b2;background:var(--soft-danger)}
+      .mobile-deadline-panel .btn{width:100%;margin-top:8px;min-height:40px}
+      #deadlineSection{scroll-margin-top:118px}
+      #deadlineGrid{gap:9px}
+      .deadline-card{padding:14px 14px 14px 17px}
+      .deadline-title{font-size:14px}
+      .deadline-date{font-size:19px;line-height:1.3}
+      .deadline-note,.deadline-actual{font-size:11px}
+      .deadline-due{font-size:12px}
+      .deadline-actions .btn{min-height:46px}
+
+      .stepper{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin:10px 0 14px}
+      .step{padding:9px 7px;font-size:11px}.step strong{font-size:12px}
+      .task-group{margin-top:11px}
+      .task{padding:13px 12px;margin-bottom:7px}
+      .task-row{gap:10px}
+      .task input[type="checkbox"]{width:24px;height:24px;margin-top:0}
+      .task-title{font-size:14px;line-height:1.4}
+      .task-desc{font-size:12px;line-height:1.5}
+      .task-meta{gap:5px}.task details{font-size:12px}
+
+      .check-line{border:1px solid var(--line);border-radius:12px;padding:12px;background:#fff;margin:0;min-height:58px}
+      .check-line input{width:23px;height:23px;margin-top:0;accent-color:var(--brand);flex:0 0 auto}
+      .check-line span{min-width:0}.check-line b{font-size:14px}.check-line small{font-size:11px;line-height:1.4}
+
+      .route-panel{padding:14px}
+      .route-summary{padding:13px;font-size:13px}
+      .route-steps{gap:7px}
+      .route-step{padding:12px 13px}
+      .route-step:not(:last-child):after{content:"↓";right:auto;left:50%;top:auto;bottom:-13px;transform:translateX(-50%);background:#fff;padding:0 4px}
+      .support-check{min-height:54px;padding:11px}.support-check input{width:22px;height:22px}
+      .branch-grid{gap:9px}.branch-card{padding:13px}.branch-card h3{font-size:15px}.branch-card ul{font-size:12px;line-height:1.5}
+
+      /* 모바일에서는 흐름도를 가로 스크롤 대신 세로 카드로 */
+      .flow-wrap{overflow:visible;padding-bottom:0}
+      .flowchart{display:grid;grid-template-columns:1fr;min-width:0;gap:22px}
+      .flow-node{padding:14px}
+      .flow-node:not(:last-child):after{content:"↓";right:auto;left:50%;top:auto;bottom:-23px;transform:translateX(-50%);font-size:18px;background:var(--bg);padding:0 5px}
+      .flow-node h3{font-size:14px}.flow-node ul{font-size:12px}
+
+      .filters{width:100%;display:grid;grid-template-columns:1fr}.filters .select{width:100%}
+      .script-box{padding:14px;padding-top:48px;font-size:13px}
+      .script-box .copy{right:9px;top:8px}
+      .contact{gap:10px}.contact-icon{width:38px;height:38px;border-radius:10px}.contact a{font-size:18px;word-break:break-all}
+
+      .table-wrap{margin-left:-4px;margin-right:-4px;border:1px solid var(--line);border-radius:12px}
+      .table{font-size:12px;min-width:650px}.table th,.table td{padding:9px}
+
+      /* 모달은 작은 화면에서 하단 시트처럼 사용 */
+      .modal-backdrop{align-items:flex-end;padding:0}
+      .modal{width:100%;max-height:92dvh;border-radius:20px 20px 0 0;padding:18px 14px calc(18px + env(safe-area-inset-bottom));box-shadow:0 -15px 45px rgba(0,0,0,.22)}
+      .modal h2{font-size:21px}
+      .modal-footer{position:sticky;bottom:0;background:linear-gradient(180deg,rgba(255,255,255,.75),#fff 28%);margin:14px -14px -18px;padding:14px 14px calc(14px + env(safe-area-inset-bottom));display:grid;grid-template-columns:1fr 1fr;z-index:3}
+      .modal-footer .btn{width:100%}
+
+      .footer-note{font-size:11px;line-height:1.5;margin-top:20px;padding:0 6px}
+    }
+
+    @media (max-width:390px){
+      .brand strong{font-size:13px}.brand small{font-size:9.5px}
+      .nav button{padding:8px 9px;font-size:11.5px}
+      .container{padding-left:8px;padding-right:8px}
+      .hero{padding:19px 15px}.hero h1{font-size:20px}
+      .card{padding:13px}
+      .case-actions{grid-template-columns:1fr}
+      .case-actions .btn:last-child:nth-child(odd){grid-column:auto}
+      .stepper{grid-template-columns:1fr 1fr}
+    }
+    @media print{.topbar,.btn,.filters,.modal-backdrop,.footer-note{display:none!important}.container{max-width:none;padding:0}.view{display:none!important}.view.active{display:block!important}.card,.task{box-shadow:none;break-inside:avoid}.task details{display:block}.hero{background:white;color:black;border:1px solid #ccc}.hero p{color:#333}}
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <button type="button" class="brand brand-home" id="brandHomeBtn" title="처음 화면으로 이동">
+        <div class="brand-mark">보호</div>
+        <div><strong>삼각초 교육활동 보호 현장대응</strong><small>업무담당자 · 교감용 / 2026.10.1. 기준</small></div>
+      </button>
+      <nav class="nav" id="nav">
+        <button data-view="home" class="active">🏠 처음으로</button>
+        <button data-view="case">📂 진행 사안</button>
+        <button data-view="flow">🧭 전체 흐름</button>
+        <button data-view="teacher">🛡 피해교원 보호</button>
+        <button data-view="media">📰 언론 대응</button>
+        <button data-view="contacts">☎ 연락처</button>
+        <button data-view="references">📚 근거</button>
+        <button data-view="settings">⚙ 저장·백업</button>
+      </nav>
+      <div class="top-actions"><span class="status-dot"></span><span class="tiny">자동 저장</span></div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="view-home" class="view active">
+      <div class="hero">
+        <div class="kicker" style="color:#bce9ed">실제 사안이 발생했을 때 바로 보는 화면</div>
+        <h1>다음에 무엇을 해야 하는지, 빠뜨린 것은 없는지<br>한 단계씩 확인합니다.</h1>
+        <p>교육활동 침해 사안의 초기 대응, 피해교원 보호, 동부교육지원청 보고, 기한 관리, 언론 대응까지 한 화면에서 점검합니다. 실명·상세 진술은 입력하지 않고 사안 코드나 가명을 사용하세요.</p>
+        <div class="hero-actions">
+          <button class="btn btn-primary" id="newCaseBtn">＋ 새 사안 시작</button>
+          <button class="btn btn-secondary" id="continueBtn">▶ 진행 중 사안 이어가기</button>
+          <button class="btn btn-secondary" data-go="contacts">☎ 동부지원청 연락처</button>
+        </div>
+      </div>
+
+      <div id="homeAlertArea" class="section"></div>
+
+      <div class="section">
+        <div class="section-head"><div><h2>지금 가장 먼저 확인</h2><p>사안 성립 여부를 학교가 성급히 단정하기보다 안전·보호·보고부터 처리합니다.</p></div></div>
+        <div class="grid grid-3">
+          <div class="card quick-card"><div class="icon">🚨</div><h3>위험이 계속되고 있습니까?</h3><p>침해행위 중단, 현장 이탈, 피해교원 상태 확인, 필요 시 응급조치와 112 신고를 우선합니다.</p><button class="btn btn-secondary btn-sm" data-go="flow">초기대응 보기</button></div>
+          <div class="card quick-card"><div class="icon">🛡️</div><h3>피해교원을 먼저 보호합니다</h3><p>즉시 분리 의사, 복무, 수업·업무 대행, 상담·치료·법률지원, 복귀 전후 모니터링을 함께 봅니다.</p><button class="btn btn-secondary btn-sm" data-go="teacher">보호조치 보기</button></div>
+          <div class="card quick-card"><div class="icon">📞</div><h3>삼각초는 동부교육지원청으로</h3><p>24시간 이내 최초 신고·보고, 이후 5일 이내 사안발생보고서를 제출합니다. 서식과 제출방법을 구분해 확인합니다.</p><button class="btn btn-secondary btn-sm" data-go="contacts">보고처 보기</button></div>
+        </div>
+      </div>
+
+      <div class="section grid grid-2">
+        <div class="card">
+          <div class="kicker">절대 놓치지 않기</div><h3>초기 대응 4원칙</h3>
+          <div class="principle-list">
+            <div class="notice danger principle-item"><span class="principle-num">①</span><div class="principle-text"><b>안전·보호가 먼저</b><span class="principle-desc"> — 피해교원의 신체·심리 상태를 확인하고 필요하면 응급조치·병원 후송을 지원합니다.</span></div></div>
+            <div class="notice principle-item"><span class="principle-num">②</span><div class="principle-text"><b>즉시 분리 의사 확인</b><span class="principle-desc"> — 교원의 반대 의사 등 특별한 사유가 없으면 관련자와 피해교원을 즉시 분리합니다.</span></div></div>
+            <div class="notice warn principle-item"><span class="principle-num">③</span><div class="principle-text"><b>학교가 침해 여부를 미리 확정하지 않기</b><span class="principle-desc"> — 조치 결정 전에는 ‘침해학생’보다 ‘침해 관련 학생’ 등 중립적 표현을 사용합니다.</span></div></div>
+            <div class="notice good principle-item"><span class="principle-num">④</span><div class="principle-text"><b>보고와 기록을 동시에</b><span class="principle-desc"> — 24시간, 5일 등 기한을 기록하고 체크합니다.</span></div></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="kicker">2026.10.1. 강화 · 두 축으로 판단</div><h3>① 사안 성격과 ② A/B/C 현장지원 유형을 구분합니다</h3>
+          <p><b>사안 성격</b>은 학교가 따라야 할 업무절차를 정하고, <b>A/B/C</b>는 교육청 현장지원의 속도와 방식을 정합니다. 두 기준은 서로 대체하지 않으며 필요하면 여러 절차가 동시에 진행됩니다.</p>
+          <div class="notice danger"><b>A형</b> 중대 교육활동 침해·중대한 아동학대 피신고 → <b>즉시 출동</b>, A형 사안조사 지원은 1시간 이내 출동 기준</div>
+          <div class="notice warn"><b>B형</b> 일반 아동학대 피신고·악성(특이)민원 → <b>24시간 이내 현장 지원</b></div>
+          <div class="notice"><b>C형</b> 단순 교권 문의 → 서면·상담 중심 지원</div>
+          <div class="notice good"><b>예:</b> ‘교육활동 침해 + A형’이면 <b>즉시 출동 지원</b>과 함께 학교의 <b>24시간 신고·5일 사안발생보고</b> 절차도 그대로 진행합니다.</div>
+          <button class="btn btn-secondary btn-sm" data-go="flow">두 축이 반영된 업무절차 보기</button>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-head"><div><h2>진행 중인 사안</h2><p>체크 상태와 날짜는 이 브라우저에 자동 저장됩니다.</p></div></div>
+        <div id="caseList" class="case-list"></div>
+      </div>
+      <div class="footer-note">이 페이지는 절차 관리용입니다. 실명·연락처·상세 진술·진단내용 등 민감정보는 입력하지 마세요.</div>
+    </section>
+
+    <section id="view-case" class="view">
+      <div id="caseEmpty" class="card">
+        <h2>진행 중인 사안이 없습니다.</h2><p>사안 코드와 접수 일시만 등록하면 단계별 체크와 기한 계산을 시작할 수 있습니다.</p>
+        <button class="btn btn-primary" id="newCaseBtn2">＋ 새 사안 시작</button>
+      </div>
+      <div id="caseContent" class="hidden">
+        <div class="case-header">
+          <div><div class="kicker">진행 사안</div><h1 id="caseTitle"></h1><div class="case-meta" id="caseMeta"></div></div>
+          <div class="case-actions"><button class="btn btn-secondary btn-sm" id="printBtn">🖨 처리현황 인쇄</button><button class="btn btn-secondary btn-sm" id="closeCaseBtn">✓ 사안 종결 표시</button><button class="btn btn-danger btn-sm" id="deleteCaseBtn">삭제</button></div>
+        </div>
+        <div class="notice warn">이 화면에는 사안 코드·가명·기한 관리 정보만 입력하세요. 구체적인 진술, 학생·보호자·교직원의 실명·연락처·진단내용은 학교 공식 사안 문서에서 관리합니다.</div>
+        <div id="seriousBanner"></div>
+        <div id="mobileDeadlineSummary" class="mobile-deadline-summary" aria-live="polite"></div>
+
+        <div class="section card" id="caseTypeSection">
+          <div class="section-head"><div><h2>사안 성격</h2><p><b>복수 선택 가능</b>합니다. 여기에서 선택한 사안 성격이 실제 업무절차를 결정합니다.</p></div><span class="pill brand">업무절차 기준</span></div>
+          <div class="grid grid-2">
+            <label class="check-line"><input type="checkbox" data-case-type="educationIntrusion"><span><b>교육활동 침해 사안</b><br><small class="muted">선택 시 24시간 최초 신고·보고, 5일 사안발생보고, 지역교권보호위원회 절차를 표시</small></span></label>
+            <label class="check-line"><input type="checkbox" data-case-type="childAbuseReported"><span><b>교원 아동학대 피신고 사안</b><br><small class="muted">교육감 의견 제출·법률지원·조사 대응 등 피신고 교원 지원 절차를 병행</small></span></label>
+            <label class="check-line"><input type="checkbox" data-case-type="maliciousComplaint"><span><b>악성(특이)민원</b><br><small class="muted">학교 공식 민원창구·기관 대응·교육지원청 민원대응지원 절차를 병행</small></span></label>
+            <label class="check-line"><input type="checkbox" data-case-type="inquiry"><span><b>단순 교권 문의·상담</b><br><small class="muted">서면·상담 중심. 실제 침해사안으로 확인되면 ‘교육활동 침해 사안’을 추가 선택</small></span></label>
+          </div>
+          <div class="notice mt16" id="caseTypeGuide"></div>
+        </div>
+
+        <div class="section card route-panel">
+          <div class="section-head"><div><h2>2026.10.1. 강화 현장지원 경로</h2><p>기존 교육활동 침해 처리절차와 별개가 아니라, <b>초기 단계에 겹쳐서 즉시 가동</b>되는 지원 경로입니다.</p></div><span class="pill danger">초기 분기</span></div>
+          <div class="route-select">
+            <div class="field"><label>2026.10.1. 현장지원 유형</label><select id="supportRouteSelect" class="select">
+              <option value="STANDARD">일반·기존 지원 — A/B/C 강화 분류 미적용</option>
+              <option value="A">A형 — 즉시 출동 지원</option>
+              <option value="B">B형 — 24시간 이내 현장 지원</option>
+              <option value="C">C형 — 서면·상담 지원</option>
+              <option value="UNSURE">판단 어려움 — 동부교육지원청에 유형 확인</option>
+            </select><small><b>A/B/C는 업무절차를 없애거나 바꾸는 분류가 아니라 교육청의 현장지원 속도·방식입니다.</b> 중대한 아동학대 피신고의 세부 판별기준은 제공 자료에 별도로 제시되어 있지 않으므로 학교가 임의 확정하지 말고 지원청에 확인합니다.</small></div>
+            <div id="supportRouteSummary"></div>
+          </div>
+          <div id="supportRouteSteps"></div>
+          <div id="supportRouteChecks"></div>
+        </div>
+
+        <div class="section card hidden" id="childAbuseLegalPanel">
+          <div class="section-head"><div><h2>아동학대 피신고 교원 — 변호사 바로 연결</h2><p>교원이 아동학대로 신고된 경우, 조사·수사 대응을 혼자 맡기지 않고 교육지원청의 원스톱 법률지원에 즉시 연결합니다.</p></div><span class="pill danger" id="childAbuseLegalBadge">피신고 교원 지원</span></div>
+          <div class="notice danger"><b>핵심:</b> 조사·수사기관의 연락이나 출석 요구를 받은 사실을 알게 되면 동부교육지원청에 즉시 알리고, <b>변호사 상담·조사 동행·교육감 의견 제출 지원</b>을 함께 요청합니다. A형이면 즉시 출동, B형이면 24시간 이내 현장지원 기준이 적용됩니다.</div>
+          <div class="grid grid-3 mt16">
+            <div class="card contact"><div class="contact-icon">🧭</div><div><strong>1. 사안 지원 요청</strong><a href="tel:0626055761">062-605-5761</a><small>동부교육지원청 장학사 · A/B 분류, 현장지원, 교육감 의견 제출 절차</small></div></div>
+            <div class="card contact"><div class="contact-icon">⚖️</div><div><strong>2. 변호사 바로 연결</strong><a href="tel:0626055762">062-605-5762</a><small>동부교육지원청 변호사 · 법률상담, 1:1 전담변호사, 조사 동행·소송지원 연계</small></div></div>
+            <div class="card contact"><div class="contact-icon">💬</div><div><strong>3. 심리 지원</strong><a href="tel:0626055763">062-605-5763</a><small>전문상담사 · 피신고 교원의 심리상담·회복 지원</small></div></div>
+          </div>
+          <div class="grid grid-2 mt16">
+            <div>
+              <h3 style="margin-top:0">학교에서 바로 이렇게 연결</h3>
+              <ol><li>교원에게 신고·조사 연락 여부와 현재 가장 필요한 지원을 확인합니다.</li><li>장학사 605-5761에 <b>“교원 아동학대 피신고 사안”</b>임을 알리고 원스톱 안심 서비스와 교육감 의견 제출 절차를 요청합니다.</li><li>변호사 605-5762에 바로 연결하여 <b>법률상담·조사 동행·1:1 전담변호사 지원</b>을 요청합니다.</li><li>조사·수사 일정이나 기관의 연락 내용을 지원청과 공유하고, 학교는 교육활동 확인서 작성 등 필요한 사실확인에 협조합니다.</li></ol>
+              <div class="notice"><b>교육감 의견 제출 일정:</b> 조사·수사기관이 신고사항을 교육지원청에 공유하면 지원청은 <b>3일 이내 사안 확인</b>, <b>5일 이내 교육청으로 교육활동 확인서 상신</b>, 교육감은 <b>7일 이내(공휴일 제외) 의견 제출</b> 절차를 진행합니다.</div>
+            </div>
+            <div>
+              <h3 style="margin-top:0">연결 요청 문구 예시</h3>
+              <div class="script-box" id="abuseLawyerScript">삼각초 교원 아동학대 피신고 사안입니다. 피신고 교원이 조사·수사 대응을 준비할 수 있도록 원스톱 밀착 법률지원과 변호사 상담·조사 동행 연계를 요청드립니다. 교육감 의견 제출을 위해 학교에서 협조해야 할 자료와 절차도 함께 안내 부탁드립니다.<button class="btn btn-secondary btn-sm copy" data-copy="abuseLawyerScript">복사</button></div>
+              <div class="notice warn"><b>실무 예시 문구입니다.</b> 공식 서식 문구가 아니며, 통화에서는 실명·구체적 진술을 이 사이트에 입력하지 말고 공식 연락·문서 절차로 전달합니다.</div>
+            </div>
+          </div>
+          <div id="childAbuseLegalChecks" class="mt16"></div>
+        </div>
+
+        <div class="section grid grid-2">
+          <div class="card"><div class="section-head"><div><h2>다음으로 할 일</h2><p>미완료 중요 항목 중 우선순위를 보여줍니다.</p></div></div><div id="nextActions" class="next-actions"></div></div>
+          <div class="card"><div class="section-head"><div><h2>진행률</h2><p>현재 사안의 체크 현황</p></div><span class="pill brand" id="progressLabel"></span></div><div class="progress"><span id="progressBar" style="width:0%"></span></div><div id="progressText" class="mt12 muted tiny"></div></div>
+        </div>
+
+        <div class="section" id="deadlineSection">
+          <div class="section-head"><div><h2>기한 관리</h2><p><b>24시간 최초 신고·보고</b>와 <b>5일 사안발생보고서 제출</b>은 실제 처리일시를 기록하면 기한 준수 여부를 자동 판정합니다.</p></div></div>
+          <div id="deadlineGrid" class="grid grid-4"></div>
+        </div>
+
+        <div class="section card" id="timingSection">
+          <div class="section-head"><div><h2 id="timingSectionTitle">기준 일시</h2><p id="timingSectionDesc">정확한 기한 계산을 위해 확인된 시점을 기록합니다.</p></div></div>
+          <div class="timeline-fields">
+            <div class="field"><label>사안 인지·접수 일시</label><input id="receivedAtInput" type="datetime-local"><small>24시간 최초 보고 기준</small></div>
+            <div class="field"><label>교육지원청 최초 신고·보고 완료 일시</label><input id="firstReportAtInput" type="datetime-local"><small>입력 즉시 24시간 준수 여부 판정 · 5일 기한 계산 시작</small></div>
+            <div class="field"><label>학교 사안발생보고서 제출 완료 일시</label><input id="occurrenceSubmittedAtInput" type="datetime-local"><small>입력 즉시 5일 제출기한 준수 여부 판정</small></div>
+            <div class="field"><label>교육지원청 사안발생보고서 접수 일시</label><input id="occurrenceReceivedAtInput" type="datetime-local"><small>지원청의 실제 접수일을 알면 입력 · 21일 위원회 참고 기한 계산</small></div>
+            <div class="field"><label>지역교권보호위원회 개최 일시</label><input id="committeeAtInput" type="datetime-local"><small>14일 결과 통지 참고 계산</small></div>
+            <div class="field"><label>심의결과 수령 일시</label><input id="resultAtInput" type="datetime-local"><small>조치이행·피해회복 추수지도 시작점</small></div>
+            <div class="field"><label>사안 메모(가명·간단 키워드만)</label><input id="caseNoteInput" type="text" maxlength="100" placeholder="예: 보호자 반복민원 / 학생 관련 사안"><small>민감정보 입력 금지</small></div>
+          </div>
+          <div class="notice mt16" id="timingGuide"><b>기한 기록 방법:</b> 실제로 보고·제출을 마친 뒤 해당 완료 일시를 입력하세요. 위 기한 카드가 <b>기한 내 완료 / 기한 경과 후 완료 / 미완료</b>를 자동 판정합니다. 5일 계산은 토요일·일요일과 ‘설정’에 등록한 추가 제외일을 제외합니다. 법정 공휴일이 있는 경우 설정에서 해당 날짜를 추가하세요.</div>
+        </div>
+
+        <div class="section" id="taskChecklistSection">
+          <div class="section-head"><div><h2>단계별 체크</h2><p>처리한 항목을 체크하면 자동 저장됩니다.</p></div><div class="filters"><select id="roleFilter" class="select"><option value="all">전체 역할</option><option value="담당자">업무담당자</option><option value="교감">교감·관리자</option><option value="학교장">학교장</option><option value="공통">공통</option></select></div></div>
+          <div class="stepper" id="stepper"></div>
+          <div id="taskArea"></div>
+        </div>
+
+        <div class="section card" id="seriousCheckSection">
+          <div class="section-head"><div><h2>중대사안 빠른 확인</h2><p>해당하면 즉시 지원청 연락과 강화된 현장지원을 함께 검토합니다.</p></div></div>
+          <div class="grid grid-2">
+            <label class="check-line"><input type="checkbox" data-flag="injury4wk"><span><b>상해·폭행 범죄로 사망 또는 4주 이상 치료 진단</b><br><small class="muted">교원지위법 시행령 제18조 관련</small></span></label>
+            <label class="check-line"><input type="checkbox" data-flag="sexualCrime"><span><b>성폭력범죄에 해당</b><br><small class="muted">성폭력처벌법 제2조제1항 관련</small></span></label>
+            <label class="check-line"><input type="checkbox" data-flag="illegalInfo4wk"><span><b>특정 불법정보 유통으로 4주 이상 정신건강의학과 치료 진단</b><br><small class="muted">교원지위법 시행령 제18조 관련</small></span></label>
+            <label class="check-line"><input type="checkbox" data-flag="equivalentSerious"><span><b>그 밖에 이에 준하는 중대한 사안</b><br><small class="muted">교육부장관 요청 또는 교육감이 중대 보고 필요 인정</small></span></label>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-flow" class="view">
+      <div class="section-head"><div><h1 style="margin:0">교육활동 침해 사안 전체 흐름</h1><p>학교가 해야 할 일과 교육지원청 단계가 어디에서 바뀌는지 구분합니다.</p></div></div>
+      <div class="notice danger"><b>핵심:</b> 피해교원 보호와 즉시 분리는 위원회 개최를 기다리는 절차가 아닙니다. 사안을 인지한 즉시 필요한 보호조치를 시작합니다.</div>
+
+      <div class="section card">
+        <div class="section-head"><div><h2>0. 사안 접수 직후 — 2026.10.1. 강화 현장지원 분기</h2><p>학교 내부 초기 보호조치와 동시에 교육청의 현장지원 유형을 확인합니다.</p></div></div>
+        <div class="branch-grid">
+          <div class="branch-card a"><span class="pill danger">A형</span><h3>중대 교육활동 침해</h3><ul><li><b>지체 없이</b> 동부교육지원청 연락</li><li>즉시 출동 지원 요청</li><li>A형 사안조사 지원: 1시간 이내 출동 기준</li><li>분리·보호·증거확보·역할분담</li><li>이와 동시에 기존 침해 사안 보고절차도 계속 진행</li></ul></div>
+          <div class="branch-card a"><span class="pill danger">A형</span><h3>중대한 아동학대 피신고</h3><ul><li>즉시 교육청 현장지원 요청</li><li>1:1 법률지원·조사 동행 연계</li><li>심리·신변·복귀지원 연계</li><li>세부 중대성 판별은 지원청과 확인</li></ul></div>
+          <div class="branch-card b"><span class="pill warn">B형</span><h3>일반 아동학대 피신고·악성민원</h3><ul><li>인지 즉시 지원 요청</li><li>교육청 <b>24시간 이내</b> 현장지원 기준</li><li>아동학대: 교육감 의견제출·법률지원 경로</li><li>악성민원: 기관 대응·민원대응지원팀 연계</li></ul></div>
+          <div class="branch-card c"><span class="pill info">C형</span><h3>단순 교권 문의</h3><ul><li>서면·상담 중심</li><li>법령·절차 확인</li><li>필요 시 장학사·변호사·상담사 연결</li><li>교육활동 침해 사안으로 접수된 경우에는 기존 절차 별도 진행</li></ul></div>
+        </div>
+        <div class="notice warn mt16"><b>중요한 구분:</b> A/B/C는 교육청의 ‘현장지원 방식’입니다. 교육활동 침해 사안 자체의 법정·매뉴얼상 신고·보호·보고 절차를 대체하지 않습니다. 특히 <b>A형 중대 교육활동 침해는 24시간까지 기다리는 것이 아니라 즉시 연락</b>해야 합니다.</div>
+      </div>
+
+      <div class="flow-wrap section"><div class="flowchart">
+        <div class="flow-node"><h3>1. 신고·접수</h3><ul><li>구두·전화·메일 등 가능</li><li>피해교원·관련자 상태 확인</li><li>교감·학교장 보고</li></ul></div>
+        <div class="flow-node"><h3>2. 초기 보호</h3><ul><li>침해행위 중단</li><li>즉시 분리 의사 확인</li><li>복무·응급·상담 지원</li><li>언론창구 단일화</li></ul></div>
+        <div class="flow-node"><h3>3. 24시간 이내</h3><ul><li>동부교육지원청 최초 신고·보고</li><li>필요 시 유선·구두 우선</li><li>2026 광주 매뉴얼상 서식1·2 팩스</li></ul></div>
+        <div class="flow-node"><h3>4. 5일 이내</h3><ul><li>사안 파악·면담</li><li>증거·참고인 자료</li><li>사안발생보고서 공문 제출</li><li>주말·공휴일 제외</li></ul></div>
+        <div class="flow-node"><h3>5. 지원청 조사·교보위</h3><ul><li>사안조사</li><li>접수 후 21일 내 개최 원칙</li><li>주말·공휴일 포함</li><li>당사자 진술 기회</li></ul></div>
+        <div class="flow-node"><h3>6. 결과·회복</h3><ul><li>심의결과 통지 14일 내</li><li>조치 이행 협조</li><li>피해교원 심리치료·복귀 지원</li><li>재발방지·추수지도</li></ul></div>
+      </div></div>
+
+      <div class="section card">
+        <h2>기한 한눈에 보기</h2>
+        <div class="table-wrap"><table class="table">
+          <thead><tr><th>항목</th><th>기준</th><th>주말·공휴일</th><th>주체</th><th>삼각초 실무 포인트</th></tr></thead>
+          <tbody>
+            <tr><td><b>최초 신고·보고</b></td><td>사안 접수 시부터 24시간 이내</td><td>별도 제외 규정 없음 → 경과시간 기준 관리</td><td>학교</td><td>동부교육지원청에 유선·구두 또는 서식 보고. 보호조치 때문에 서식 제출이 늦어져도 우선 연락.</td></tr>
+            <tr><td><b>사안발생보고서</b></td><td>최초 사안보고 후 5일 이내</td><td><b>주말·공휴일 제외</b></td><td>학교</td><td>동부교육지원청 학교지원센터 수신 공문, 관련 의견서·참고인 자료 첨부.</td></tr>
+            <tr><td><b>지역교권보호위원회</b></td><td>사안발생보고서 접수 후 21일 이내 조속히</td><td><b>포함</b></td><td>교육지원청</td><td>불가피한 사유로 연장 가능. 학교는 접수일·개최일을 추적.</td></tr>
+            <tr><td><b>심의결과 통지</b></td><td>심의 후 14일 이내</td><td><b>포함</b></td><td>교육지원청</td><td>결과 수령 후 조치이행 협조 및 피해교원 회복·추수지도.</td></tr>
+            <tr><td><b>즉시 분리</b></td><td>사안 인지 즉시 의사 확인·방법 결정</td><td>분리기간 계산 시 토·공휴일 포함</td><td>학교장</td><td>기간은 심각성·지속성·고의성을 고려, 매뉴얼상 최대 7일 범위 권장.</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="section grid grid-2">
+        <div class="card"><h2>사안 파악 때 하지 말아야 할 것</h2><ul><li>침해행위 성립 여부를 업무담당자가 자의적으로 확정하기</li><li>당사자에게 진술을 강요하거나 한쪽 책임을 미리 추궁하기</li><li>피해교원에게 성급한 화해·사과 수용을 종용하기</li><li>위원회 결정 전 ‘침해학생’이라고 단정하기</li><li>상대방에게 진술서·신고서 등 자료를 그대로 전달하기</li></ul></div>
+        <div class="card"><h2>분리조치 핵심</h2><ul><li>피해교원의 즉시 분리 의사 확인</li><li>분리 대상·기간·공간·방법 결정</li><li>쉬는 시간·점심시간 동선까지 고려</li><li>관련 학생 학습권 보장 방안 마련</li><li>관련 학생·보호자에게 취지·기간·출결·이후 절차 안내</li></ul></div>
+      </div>
+    </section>
+
+    <section id="view-teacher" class="view">
+      <div class="section-head"><div><h1 style="margin:0">피해교원 보호조치</h1><p>‘사안 처리’와 ‘선생님 회복’은 별도의 축으로 계속 확인합니다.</p></div></div>
+      <div class="notice good"><b>학교장의 즉시 보호의무:</b> 교육활동 침해 사실을 알게 된 경우 피해교원의 치유와 교권 회복에 필요한 심리상담·치료·그 밖의 조치를 즉시 시작합니다.</div>
+      <div class="grid grid-3 section">
+        <div class="card"><div class="kicker">즉시</div><h3>안전·분리·업무 안정</h3><ul><li>신체·심리 상태 확인</li><li>관련자와 분리 의사 확인</li><li>필요 시 수업·업무 대행자 지정</li><li>목격 학생 안정화</li><li>응급처치·병원 후송</li></ul></div>
+        <div class="card"><div class="kicker">복무</div><h3>특별휴가·조퇴·병가</h3><ul><li><b>특별휴가:</b> 5일 범위</li><li>상해·폭행 및 성폭력범죄에 해당 시 <b>추가 5일 범위</b> 가능</li><li>원칙적으로 사안 인지 직후, 연속 사용</li><li>위원회 개최 전에도 학교장 판단으로 허가 가능</li></ul></div>
+        <div class="card"><div class="kicker">치료</div><h3>공무상 병가·요양</h3><ul><li>6일 이내 단순안정이 필요한 경미한 공무상 질병·부상은 학교장이 공무상 여부 판단 후 승인 가능</li><li>공무상 요양 승인 시 연 180일 범위 공무상 병가 가능</li><li>치료비·심리상담 비용 지원 제도 안내</li></ul></div>
+      </div>
+      <div class="section card">
+        <div class="section-head"><div><h2>교원이 아동학대로 신고된 경우 — 즉시 법률지원 연결</h2><p>2026.10.1. 강화방안은 아동학대 피신고 교원에게 원스톱 안심 서비스와 밀착 법률지원을 제공하도록 하고 있습니다.</p></div><span class="pill danger">변호사 연결</span></div>
+        <div class="grid grid-3">
+          <div class="card contact"><div class="contact-icon">🧭</div><div><strong>동부 장학사</strong><a href="tel:0626055761">062-605-5761</a><small>사안 접수·현장지원·교육감 의견 제출 절차</small></div></div>
+          <div class="card contact"><div class="contact-icon">⚖️</div><div><strong>동부 변호사</strong><a href="tel:0626055762">062-605-5762</a><small>법률상담·1:1 전담변호사·조사 동행·소송지원 연계</small></div></div>
+          <div class="card contact"><div class="contact-icon">📞</div><div><strong>교육활동보호 대표</strong><a href="tel:0621395">062-1395</a><small>또는 1644-9575 · 담당자 연계</small></div></div>
+        </div>
+        <div class="notice mt16"><b>권장 연결 순서:</b> 아동학대 신고·조사 사실 확인 → 동부 장학사에 원스톱 안심서비스 요청 → 변호사 연결 및 조사 동행 여부 확인 → 교육감 의견 제출을 위한 학교 사실확인 협조 → 심리·복귀 지원까지 계속 확인.</div>
+      </div>
+      <div class="section grid grid-2">
+        <div class="card"><h2>동부교육지원청 연결</h2><div class="contact"><div class="contact-icon">💬</div><div><strong>전문상담사</strong><a href="tel:0626055763">062-605-5763</a><small>심리상담·회복 지원, 외부 상담기관 연계</small></div></div><div class="contact mt16"><div class="contact-icon">⚖️</div><div><strong>변호사</strong><a href="tel:0626055762">062-605-5762</a><small>법률상담·절차·수사 및 소송 지원 연계</small></div></div><div class="contact mt16"><div class="contact-icon">🧭</div><div><strong>담당 장학사</strong><a href="tel:0626055761">062-605-5761</a><small>사안처리·현장지원·지역교권보호위원회 절차</small></div></div></div>
+        <div class="card"><h2>삼각초 실무 모니터링 권장</h2><p class="muted">아래는 법정 기한이 아니라 ‘행정처리가 끝나도 선생님을 계속 보호한다’는 학교 내부 관리용 권장 항목입니다.</p><ul><li>사안 발생 당일: 상태·희망 보호조치 다시 확인</li><li>다음 근무일: 수업·업무 부담 조정이 실제 작동하는지 확인</li><li>3일 전후: 상담·치료·법률지원 연결 여부 확인</li><li>특별휴가·병가 후 복귀 전: 복귀 의사·우려·접촉 가능성 확인</li><li>복귀 후: 관련자 동선·민원창구·업무부담 재점검</li></ul></div>
+      </div>
+      <div class="section card"><h2>특별휴가 유의사항</h2><div class="grid grid-2"><div><div class="notice"><b>적절한 사용</b><br>피해교원을 분리·보호하기 위한 휴가이므로 특별한 사유가 없다면 사안 인지 직후 사용하고, 회복 목적을 고려해 연속 사용을 원칙으로 합니다.</div><div class="notice warn"><b>위원회에서 침해 아님으로 판단된 경우</b><br>기존 특별휴가는 병가 또는 연가로 정정할 수 있으므로 사안 문서와 복무 문서를 함께 관리합니다.</div></div><div><div class="notice"><b>지역교권보호위원회 미개최를 희망하더라도</b><br>학교장이 교육활동 침해 피해교원으로 판단하면 예외적으로 특별휴가가 가능하나, 관련 사안을 교육지원청에 접수하고 필요한 서류를 제출해야 합니다.</div><div class="notice good"><b>보호조치 비용</b><br>심리상담·치료·요양·의약품 등의 비용 지원 제도가 있으며, 신속한 치료를 위해 관할청이 우선 부담하고 구상권을 행사하는 방식도 가능합니다.</div></div></div></div>
+    </section>
+
+    <section id="view-media" class="view">
+      <div class="section-head"><div><h1 style="margin:0">언론 등 대응창구 단일화</h1><p>매뉴얼의 ‘언론 등 대응창구 단일화’를 삼각초 내부 실무에 맞게 구체화한 화면입니다.</p></div></div>
+      <div class="notice danger"><b>삼각초 내부 원칙:</b> 언론 문의는 교감에게 일원화합니다. 교직원 개인은 사실관계 설명·평가·추측을 하지 않고 ‘학교 공식 창구로 연결’하는 데까지만 응대합니다.</div>
+      <div class="grid grid-2 section">
+        <div class="card"><h2>교감 1차 응대 예시</h2><div class="script-box" id="mediaScript">현재 학교는 학생과 교직원의 안전을 우선으로 관련 사실관계를 확인하고 있습니다.
+사안은 관련 법령과 절차에 따라 교육지원청과 협의하여 처리하고 있습니다.
+당사자 보호와 개인정보를 위해 구체적인 개인 정보 및 확인되지 않은 내용은 말씀드리기 어렵습니다.
+추가로 확인이 필요한 사항은 학교 공식 대응창구를 통해 안내드리겠습니다.<button class="btn btn-secondary btn-sm copy" data-copy="mediaScript">복사</button></div><div class="notice warn"><b>이 문구는 실무 예시입니다.</b> 매뉴얼의 공식 문구가 아니며, 실제 사안에서는 교육지원청과 공유한 사실관계 범위 안에서 조정해 사용합니다.</div></div>
+        <div class="card"><h2>교직원 안내 메시지 예시</h2><div class="script-box" id="staffScript">[교육활동 보호 사안 관련 안내]
+해당 사안과 관련하여 언론사·외부 매체 등으로부터 문의를 받을 경우 개별적으로 설명하거나 답변하지 마시고 교감에게 연결해 주시기 바랍니다.
+확인되지 않은 사실, 학생·보호자·교직원 관련 개인정보, 사안 처리 과정의 내부 자료를 외부에 전달하지 않도록 유의해 주세요.
+개인 SNS나 단체대화방 등에도 사안 관련 내용·사진·영상·추측성 의견을 게시하지 않도록 부탁드립니다.<button class="btn btn-secondary btn-sm copy" data-copy="staffScript">복사</button></div></div>
+      </div>
+      <div class="section grid grid-2">
+        <div class="card"><h2>교직원 주의사항</h2><ul><li>기자의 개인 연락·문자·DM에 사실관계를 설명하지 않기</li><li>“제가 알기로는…”, “아마…”, “그 학생은 원래…” 같은 추측·평가 금지</li><li>신고서·진술서·CCTV·녹음·사진 등 내부자료를 임의 전달하지 않기</li><li>학생·보호자·피해교원의 이름·학년·연락처 등 식별정보 보호</li><li>온라인 커뮤니티·SNS·단체대화방에 사안 내용을 공유하지 않기</li><li>언론 문의가 왔다는 사실과 연락처·질문 내용을 교감에게 전달하기</li></ul></div>
+        <div class="card"><h2>교감 확인 체크리스트</h2><ul><li>학교장에게 언론 문의 사실·질문 내용 보고</li><li>교육지원청 담당자와 답변 범위·사실관계 공유</li><li>확인된 사실과 미확인 사실 분리</li><li>당사자 개인정보·2차 피해 가능성 점검</li><li>학교가 할 수 없는 판단(위원회 결과 등) 선행 발언 금지</li><li>언론 문의 일시·매체·질문·답변 범위를 간단히 기록</li></ul></div>
+      </div>
+    </section>
+
+    <section id="view-contacts" class="view">
+      <div class="section-head"><div><h1 style="margin:0">삼각초 보고·지원 연락처</h1><p>2026.9.29. 안내 및 2026.10.1. 강화방안 반영</p></div></div>
+      <div class="notice"><b>삼각초 관할:</b> 광주동부교육지원청. 사안이 발생하면 학교 내 교감·학교장 보고와 함께 관할 교육지원청 신고·보고를 진행합니다.</div>
+      <div class="grid grid-3 section">
+        <div class="card contact"><div class="contact-icon">📞</div><div><strong>교육활동보호 대표번호</strong><a href="tel:0621395">062-1395</a><small>또는 1644-9575</small><a href="tel:16449575" style="font-size:14px">1644-9575 전화</a></div></div>
+        <div class="card contact"><div class="contact-icon">🧭</div><div><strong>동부교육지원청 장학사</strong><a href="tel:0626055761">062-605-5761</a><small>사안 신고·절차·현장지원</small></div></div>
+        <div class="card contact"><div class="contact-icon">⚖️</div><div><strong>동부교육지원청 변호사</strong><a href="tel:0626055762">062-605-5762</a><small>법률상담·밀착 법률지원</small></div></div>
+        <div class="card contact"><div class="contact-icon">💬</div><div><strong>동부교육지원청 전문상담사</strong><a href="tel:0626055763">062-605-5763</a><small>심리상담·치유·복귀 지원</small></div></div>
+        <div class="card contact"><div class="contact-icon">📠</div><div><strong>동부교육지원청 FAX</strong><span style="font-size:20px;font-weight:800">062-605-5580</span><small>2026 광주 매뉴얼상 사안신고서·즉시분리 의사 확인서·중대사안 보고 등</small></div></div>
+        <div class="card contact"><div class="contact-icon">🏢</div><div><strong>광주청사 장학사</strong><a href="tel:0625701332">062-570-1332</a><small>062-570-1333도 안내됨</small><a href="tel:0625701333" style="font-size:14px">570-1333 전화</a></div></div>
+      </div>
+      <div class="section grid grid-2">
+        <div class="card"><h2>최초 신고·보고 방법</h2><ol><li>사안 접수·인지 → 피해교원 상태 확인, 교감·학교장 보고</li><li>24시간 이내 동부교육지원청에 유선·구두 또는 서식으로 신고·보고</li><li>2026 광주 교육활동 보호 매뉴얼 기준: <b>서식1 사안신고서 + 서식2 즉시 분리 의사 확인서</b>를 FAX 605-5580으로 보고</li><li>보호조치 등으로 24시간 내 서식 제출이 어렵다면 <b>먼저 유선·구두 보고</b> 후 후속 서류 제출</li></ol></div>
+        <div class="card"><h2>5일 이내 공문 제출</h2><p>최초 사안보고 후 5일(주말·공휴일 제외) 이내 동부교육지원청으로 공문 제출합니다.</p><ul><li>서식3 교육활동 침해 사안 발생보고서</li><li>서식4·4-1 침해 관련자 의견서</li><li>서식5 참고인 의견서</li><li>희망 시 서식6 분쟁조정 신청서</li></ul><div class="notice warn"><b>서식 번호 혼동 주의:</b> 교육부 2026 매뉴얼과 광주 배포 매뉴얼의 서식 번호가 다를 수 있습니다. 실제 제출 시 ‘서식 제목’을 함께 확인하세요.</div></div>
+      </div>
+      <div class="section card"><h2>긴급 범죄 상황</h2><p>범죄행위로 판단되는 긴급 상황은 <a class="btn btn-danger btn-sm" href="tel:112">112 신고</a>가 가능합니다. 학교의 교육지원청 보고·피해교원 보호조치와 별도로 즉시 안전을 확보합니다.</p></div>
+    </section>
+
+    <section id="view-references" class="view">
+      <div class="section-head"><div><h1 style="margin:0">근거 자료</h1><p>사이트의 절차·기한·연락처를 구성한 기준 자료입니다.</p></div></div>
+      <div class="card section">
+        <div class="source-item"><strong>2026 교육활동 보호 매뉴얼 (교육부·한국교육개발원, 2026 일부개정)</strong><small>사안 처리 흐름, 초기 대응, 피해교원 보호, 즉시 분리, 24시간·5일·21일·14일 기한, 특별휴가·공무상병가, 비밀누설 금지 등</small><div class="tiny muted mt8">주요 참고: p.31~42, p.70~75</div></div>
+        <div class="source-item"><strong>광주 교육활동보호센터 「2026 교육활동 보호 매뉴얼」</strong><small>삼각초 관할 동부교육지원청 연락처, 동부 FAX 605-5580, 사안 신고·보고 및 교육활동 보호 지원 안내</small><div class="tiny muted mt8">동부: 장학사 605-5761 · 변호사 605-5762 · 전문상담사 605-5763 · FAX 605-5580</div></div>
+        <div class="source-item"><strong>「전남광주교육 교육활동 보호 강화 방안」 (2026.9.)</strong><small>2026.10.1. 즉시 시행: 현장 중심 근무 및 즉시 출동 체계, 중대사안·아동학대 피신고 사안 밀착지원, 책임형 밀착지원·원스톱 법률서비스</small></div>
+        <div class="source-item"><strong>「[중요/안내] 전남광주교육 교육활동 보호 강화 방안 안내」 (2026.9.29.)</strong><small>교육활동보호센터 대표번호 및 광주청사·동부·서부교육지원청 장학사·변호사·전문상담사 연락처</small></div>
+      </div>
+      <div class="section card"><h2>운영 원칙</h2><ul><li>상급기관 최신 공문·현행 법령이 개정되면 해당 내용을 우선 적용합니다.</li><li>이 사이트는 학교가 교육활동 침해 여부를 최종 판단하는 도구가 아니라, <b>보호·보고·기한·절차 누락을 막는 업무지원 도구</b>입니다.</li><li>서식 번호가 자료마다 다를 수 있어 ‘서식 제목’을 기준으로 확인합니다.</li><li>실명·상세 진술·진단정보 등은 사이트에 저장하지 않습니다.</li></ul></div>
+    </section>
+
+    <section id="view-settings" class="view">
+      <div class="section-head"><div><h1 style="margin:0">저장·백업 설정</h1><p>GitHub Pages에서도 체크 상태는 현재 브라우저에 저장됩니다.</p></div></div>
+      <div class="notice"><b>저장 방식:</b> 사안 코드, 체크 상태, 기한 기준 일시는 브라우저의 Local Storage에만 저장됩니다. GitHub 저장소로 업로드되거나 서버로 전송되지 않습니다.</div>
+      <div class="grid grid-2 section">
+        <div class="card"><h2>추가 제외일 관리</h2><p class="muted">5일 업무기한 계산에서 주말 외에 제외할 공휴일을 등록합니다.</p><div class="flex gap8"><input type="date" id="holidayInput"><button class="btn btn-secondary btn-sm" id="addHolidayBtn">추가</button></div><div id="holidayList" class="mt12"></div></div>
+        <div class="card"><h2>데이터 백업</h2><p class="muted">브라우저 초기화나 다른 PC로 옮길 때 사용할 수 있습니다. 백업파일에도 실명·민감정보를 넣지 않는 것을 전제로 합니다.</p><div class="flex gap8 wrap"><button class="btn btn-secondary" id="exportBtn">⬇ 백업 내보내기</button><label class="btn btn-secondary" for="importFile">⬆ 백업 불러오기</label><input type="file" id="importFile" accept="application/json" class="hidden"><button class="btn btn-danger" id="clearBtn">전체 저장정보 초기화</button></div></div>
+      </div>
+    </section>
+  </main>
+
+  <div class="modal-backdrop" id="newCaseModal">
+    <div class="modal"><h2>새 사안 시작</h2><p class="muted">실명 대신 사안 코드 또는 가명을 사용하세요.</p>
+      <div class="form-grid mt16">
+        <div class="field"><label>사안 코드·가명</label><input type="text" id="newAlias" maxlength="40" placeholder="예: 2026-01 / 사안 A"></div>
+        <div class="field"><label>사안 인지·접수 일시</label><input type="datetime-local" id="newReceivedAt"></div>
+        <div class="field"><label>관련자 유형</label><select id="newSubjectType" class="select"><option value="학생">학생</option><option value="보호자">보호자 등</option><option value="기타">기타</option></select></div>
+        <div class="field"><label>2026.10.1. 현장지원 유형·대상</label><select id="newSupportRoute" class="select"><option value="STANDARD">일반·기존 지원 — 교육활동 침해 기본절차 등</option><option value="A_EDU">A형 — 중대 교육활동 침해</option><option value="A_ABUSE">A형 — 중대한 아동학대 피신고</option><option value="B_ABUSE">B형 — 일반 아동학대 피신고</option><option value="B_COMPLAINT">B형 — 악성(특이)민원</option><option value="C_INQUIRY">C형 — 단순 교권 문의·상담</option><option value="UNSURE">판단 어려움 — 지원청 확인</option></select><small><b>선택하면 아래 관련 사안 성격을 자동 체크합니다.</b> 복합사안이면 아래에서 다른 성격을 추가로 체크할 수 있습니다.</small></div>
+        <div class="field"><label>간단 키워드(선택)</label><input type="text" id="newNote" maxlength="100" placeholder="예: 수업방해 / 반복민원"></div>
+      </div>
+      <div class="mt16"><b>사안 성격(복수 선택 가능)</b></div>
+      <div class="grid grid-2 mt8">
+        <label class="check-line"><input id="newTypeEdu" type="checkbox" checked><span><b>교육활동 침해 사안</b><br><small class="muted">24시간 신고·5일 사안발생보고 절차 적용</small></span></label>
+        <label class="check-line"><input id="newTypeAbuse" type="checkbox"><span><b>교원 아동학대 피신고</b><br><small class="muted">피신고 교원 지원 절차 병행</small></span></label>
+        <label class="check-line"><input id="newTypeComplaint" type="checkbox"><span><b>악성(특이)민원</b><br><small class="muted">학교 기관 대응·지원청 민원지원 절차 병행</small></span></label>
+        <label class="check-line"><input id="newTypeInquiry" type="checkbox"><span><b>단순 교권 문의·상담</b><br><small class="muted">서면·상담 중심</small></span></label>
+      </div>
+      <div class="notice warn mt16">이 사이트에는 이름, 학년·반, 연락처, 구체적 진술, 진단명 등 개인을 식별할 수 있는 내용을 입력하지 마세요.</div>
+      <label class="check-line"><input id="newDanger" type="checkbox"><span><b>현재 위험 또는 침해행위가 계속되고 있음</b><br><small class="muted">체크 시 초기 안전조치를 최우선으로 안내</small></span></label>
+      <label class="check-line"><input id="newSerious" type="checkbox"><span><b>중대 교육활동 침해 가능성이 있어 즉시 지원청 확인이 필요함</b><br><small class="muted">체크 시 ‘교육활동 침해 사안’ + ‘A형 즉시 출동 지원’으로 자동 연동. 정확한 기준은 사안 화면에서 다시 확인</small></span></label>
+      <div class="modal-footer"><button class="btn btn-secondary" data-close-modal="newCaseModal">취소</button><button class="btn btn-primary" id="createCaseBtn">시작하기</button></div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="alertModal">
+    <div class="modal"><h2>⚠ 확인이 필요한 업무가 있습니다</h2><p class="muted">진행 중 사안의 미완료 항목과 기한을 점검했습니다.</p><div id="alertList" class="alert-list"></div><div class="modal-footer"><button class="btn btn-secondary" data-close-modal="alertModal">확인</button><button class="btn btn-primary" id="goAlertCaseBtn">진행 사안 열기</button></div></div>
+  </div>
+
+<script>
+(() => {
+  const STORAGE_KEY = 'samgakEduProtectionV1';
+  const nowLocalValue = () => {
+    const d = new Date(); d.setMinutes(d.getMinutes() - d.getTimezoneOffset()); return d.toISOString().slice(0,16);
+  };
+  const defaultState = { cases: [], activeCaseId: null, extraHolidays: [] };
+  let state = migrateState(loadState());
+  let currentView = 'home';
+
+  const supportRoutes = {
+    STANDARD:{label:'일반·기존 지원',level:'g',headline:'기존 절차를 그대로 진행',summary:'A/B/C 강화 지원 분류와 별개로, 선택한 사안 성격에 따른 학교 업무절차를 진행합니다.',steps:['사안 성격에 따른 기본 절차','필요 시 지원청 상담·지원'],checks:[]},
+    A:{label:'A형 · 즉시 출동 지원',level:'a',headline:'지금 즉시 동부교육지원청에 연락',summary:'A형은 즉시 출동 대상입니다. 교육활동 침해 사안이라면 즉시 출동 지원과 동시에 24시간 신고·5일 사안발생보고 등 기존 절차도 그대로 진행합니다.',steps:['즉시 605-5761 연락','현장대응(지원)팀 즉시 출동','A형 사안조사 지원: 1시간 이내 출동 기준','법률·신변·상담·복귀 밀착지원'],checks:[]},
+    B:{label:'B형 · 24시간 이내 현장 지원',level:'b',headline:'인지 즉시 지원 요청',summary:'B형은 교육청의 24시간 이내 현장지원 기준입니다. 학교가 24시간을 기다리는 뜻이 아니며, 인지 즉시 지원을 요청합니다.',steps:['인지 즉시 지원 요청','24시간 이내 현장지원 기준','사안별 법률·상담·민원대응 지원','후속 지원 확인'],checks:[]},
+    C:{label:'C형 · 서면·상담 지원',level:'c',headline:'서면·상담 중심으로 신속 확인',summary:'C형은 단순 교권 문의 등에 대한 서면·상담 지원입니다. 실제 교육활동 침해 사안으로 신고·접수되면 교육활동 침해 절차를 별도로 함께 진행합니다.',steps:['문의내용 정리','장학사·변호사 상담','법령·절차 확인','필요 시 다른 사안 절차 병행'],checks:[]},
+    UNSURE:{label:'판단 어려움',level:'c',headline:'학교에서 무리하게 분류하지 말고 지원청 확인',summary:'A/B/C 여부가 모호하면 동부교육지원청 장학사에게 현재 상황을 간단히 설명하고 지원유형과 다음 절차를 확인합니다.',steps:['현재 위험·교원 상태 확인','605-5761 연락','지원유형 확인','해당 지원 경로 가동'],checks:[]}
+  };
+
+  const caseTypeMeta = {
+    educationIntrusion:{label:'교육활동 침해',short:'교육활동 침해'},
+    childAbuseReported:{label:'교원 아동학대 피신고',short:'아동학대 피신고'},
+    maliciousComplaint:{label:'악성(특이)민원',short:'악성민원'},
+    inquiry:{label:'단순 교권 문의·상담',short:'교권 문의'}
+  };
+
+  const stages = [
+    {n:0, title:'초기 안전', short:'안전·보고'},
+    {n:1, title:'피해교원 보호', short:'보호·분리'},
+    {n:2, title:'24시간 신고', short:'최초 보고'},
+    {n:3, title:'5일 발생보고', short:'사안 파악'},
+    {n:4, title:'지원청·교보위', short:'조사·심의'},
+    {n:5, title:'결과·회복', short:'이행·복귀'}
+  ];
+
+  const tasks = [
+    {id:'teacher_state',stage:0,role:'담당자',title:'피해교원 신체·심리 상태 확인',desc:'부상·불안·공황 등 현재 상태와 즉시 필요한 도움을 확인합니다.',urgency:'즉시',critical:true,source:'2026 매뉴얼 p.31, p.37~38 / 교원지위법 제20조'},
+    {id:'stop_and_safe',stage:0,role:'교감',title:'침해행위 중단·현장 안전 확보',desc:'필요하면 주변 도움을 요청하고 피해교원이 현장에서 벗어날 수 있도록 합니다. 범죄 긴급상황은 112 신고를 병행할 수 있습니다.',urgency:'즉시',critical:true,source:'2026 매뉴얼 p.31, p.37~38'},
+    {id:'report_principal',stage:0,role:'교감',title:'학교장에게 사안 발생 보고',desc:'학교 내부 대응 책임체계를 가동하고 보호조치·분리·지원청 보고를 지체하지 않도록 합니다.',urgency:'즉시',critical:true,source:'2026 매뉴얼 p.31'},
+    {id:'emergency_care',stage:0,role:'공통',title:'응급처치·병원 후송 필요 여부 판단',desc:'응급 상황이면 응급처치와 병원 후송을 연계합니다.',urgency:'즉시',critical:false,source:'2026 매뉴얼 p.32, p.37'},
+    {id:'evidence',stage:0,role:'담당자',title:'필요한 증거·목격자 자료 보존',desc:'현장사진, 목격자, 관련 기록 등 필요한 자료를 보존합니다. 당사자 진술을 강요하지 않습니다.',urgency:'신속',critical:false,source:'2026 매뉴얼 p.32, p.41~42'},
+    {id:'media_window',stage:0,role:'교감',title:'언론 등 대응창구 단일화 확인',desc:'언론 문의 가능성이 있으면 교직원에게 개별 대응 금지와 교감 연결 원칙을 안내합니다.',urgency:'필요 시',critical:false,source:'2026 매뉴얼 p.38'},
+
+    {id:'separation_intent',stage:1,role:'교감',title:'피해교원 즉시 분리 의사 확인',desc:'교원의 반대 의사 등 특별한 사유가 없으면 관련자와 피해교원을 즉시 분리합니다.',urgency:'즉시',critical:true,source:'교원지위법 제20조제2항 / 시행령 제17조 / 2026 매뉴얼 p.40'},
+    {id:'separation_plan',stage:1,role:'학교장',title:'분리 방법·기간·공간 결정 및 관련자 안내',desc:'심각성·지속성·고의성을 고려하고 학생의 학습권 및 쉬는 시간·점심시간 동선을 함께 계획합니다.',urgency:'즉시',critical:true,source:'2026 교육활동 보호 매뉴얼'},
+    {id:'guardian_notice',stage:1,role:'담당자',title:'침해 관련 학생 보호자에게 통보',desc:'학생 관련 사안이면 확인된 사실과 처리 절차를 객관적으로 안내합니다. 피해교원 개인정보는 보호합니다.',urgency:'신속',critical:false,subject:'학생',source:'2026 매뉴얼 p.38'},
+    {id:'leave_guidance',stage:1,role:'교감',title:'특별휴가·조퇴·병가 등 복무 안내',desc:'피해교원 의사를 듣고 필요한 복무조치를 안내합니다. 특별휴가는 위원회 개최 전에도 학교장 판단으로 허가 가능합니다.',urgency:'즉시',critical:true,source:'교원휴가에 관한 예규 제8조 / 2026 매뉴얼 p.71~72'},
+    {id:'counsel_support',stage:1,role:'담당자',title:'심리상담·치료 지원 안내',desc:'전문상담사 및 필요 시 외부 상담·정신건강의학과 연계를 안내합니다.',urgency:'신속',critical:false,source:'2026 교육활동 보호 매뉴얼 / 광주 교육활동보호센터 안내'},
+    {id:'legal_support',stage:1,role:'교감',title:'법률상담·법률지원 필요 여부 확인',desc:'동부교육지원청 변호사 및 원스톱 밀착 법률지원 연결을 검토합니다.',urgency:'필요 시',critical:false,source:'2026.10.1 교육활동 보호 강화방안 / 광주 교육활동보호센터 안내'},
+
+    {id:'initial_report',stage:2,role:'교감',title:'동부교육지원청 최초 신고·보고',desc:'사안 접수 시부터 24시간 이내 보고합니다. 서식이 바로 준비되지 않으면 유선·구두 보고를 먼저 할 수 있습니다.',urgency:'24시간',critical:true,source:'2026 교육활동 보호 매뉴얼 / 광주 2026 매뉴얼'},
+    {id:'fax_forms',stage:2,role:'담당자',title:'2026 광주 매뉴얼 기준 서식1·2 FAX 보고',desc:'사안신고서와 즉시 분리 의사 확인서를 FAX 062-605-5580으로 보고합니다. 매뉴얼상 보호조치로 24시간 내 제출이 곤란하면 우선 유선·구두 보고 후 후속 제출할 수 있습니다.',urgency:'24시간',critical:false,source:'2026 광주 교육활동 보호 매뉴얼 / 2026 매뉴얼 p.38'},
+    {id:'serious_report',stage:2,role:'교감',title:'중대사안 여부 확인·즉시 유선 및 팩스 보고',desc:'중대사안 기준에 해당하면 교육지원청에 지체 없이 연락하고 현장 출동 지원을 요청합니다.',urgency:'해당 시 즉시',critical:false,source:'교원지위법 시행령 제18조 / 광주 2026 매뉴얼 / 2026.10.1 강화방안'},
+
+    {id:'teacher_interview',stage:3,role:'담당자',title:'피해교원 면담·요청사항 확인',desc:'보호조치, 지역교권보호위원회 개최 희망, 분쟁조정 의사, 사안 경위를 확인합니다.',urgency:'5일 내',critical:true,source:'2026 매뉴얼 p.41~42'},
+    {id:'related_interview',stage:3,role:'담당자',title:'침해 관련자 면담·의견서 안내',desc:'관련자의 진술 기회를 보장하고 객관적으로 사안 경위를 파악합니다.',urgency:'5일 내',critical:false,source:'2026 매뉴얼 p.41~43'},
+    {id:'witness_docs',stage:3,role:'담당자',title:'참고인 진술·증거자료 정리',desc:'참고인 진술서 작성은 사안 당사자의 개입 없이 공정하게 진행합니다.',urgency:'5일 내',critical:false,source:'2026 매뉴얼 p.41'},
+    {id:'occurrence_report',stage:3,role:'담당자',title:'사안발생보고서 공문 제출',desc:'최초 사안보고 후 5일(주말·공휴일 제외) 이내 동부교육지원청으로 공문 제출합니다.',urgency:'5일',critical:true,source:'2026 교육활동 보호 매뉴얼 / 광주 2026 매뉴얼'},
+    {id:'preference_confirm',stage:3,role:'교감',title:'지역교권보호위원회 개최·분쟁조정 의사 확인',desc:'피해교원의 의사를 우선적으로 확인합니다. 미개최 희망 종결 시 정해진 종결 확인 절차를 따릅니다.',urgency:'5일 내',critical:false,source:'2026 매뉴얼 p.42, p.55'},
+
+    {id:'support_investigation',stage:4,role:'공통',title:'교육지원청 사안조사 협조',desc:'추가 자료나 면담 요청이 있으면 객관적 자료를 제공하고 피해교원 보호가 흔들리지 않도록 합니다.',urgency:'진행',critical:false,source:'2026 매뉴얼 p.44~45'},
+    {id:'committee_schedule',stage:4,role:'교감',title:'지역교권보호위원회 일정·출석통지 확인',desc:'사안발생보고서 접수 후 21일 이내 조속히 개최가 원칙이며 주말·공휴일을 포함합니다.',urgency:'21일 참고',critical:false,source:'2026 교육활동 보호 매뉴얼'},
+    {id:'teacher_committee_support',stage:4,role:'교감',title:'피해교원 위원회 참여·진술 지원',desc:'사실관계·보호조치 의견을 정리하고 필요 시 서면진술 등 절차를 안내합니다.',urgency:'개최 전',critical:false,source:'2026 매뉴얼 p.45~49'},
+
+    {id:'result_received',stage:5,role:'교감',title:'심의결과 통지 수령·내용 확인',desc:'교육지원청의 심의결과 통지를 확인하고 학교가 협조해야 할 조치를 정리합니다.',urgency:'14일 참고',critical:true,source:'2026 매뉴얼 p.32'},
+    {id:'implementation',stage:5,role:'담당자',title:'조치 이행 협조·결과 관리',desc:'학생·보호자 조치, 특별교육·심리치료 등 이행에 필요한 학교 협조사항을 점검합니다.',urgency:'결과 후',critical:false,source:'2026 매뉴얼 p.32, p.52~53'},
+    {id:'followup_teacher',stage:5,role:'교감',title:'피해교원 회복·복귀 후속 확인',desc:'심리치료, 업무부담, 관련자 동선, 민원창구 등을 재점검합니다.',urgency:'지속',critical:true,source:'2026 매뉴얼 p.74~75 / 2026.10.1 강화방안'},
+    {id:'followup_1d',stage:5,role:'교감',title:'사안 발생 후 다음 근무일 상태 확인',desc:'삼각초 내부 권장 모니터링: 법정 기한은 아니며 피해교원 보호가 실제 작동하는지 확인합니다.',urgency:'학교 권장',critical:false,practical:'1d',source:'삼각초 실무 권장(매뉴얼의 회복·복귀 지원 취지 반영)'},
+    {id:'followup_3d',stage:5,role:'교감',title:'사안 발생 3일 전후 지원 연결 확인',desc:'삼각초 내부 권장 모니터링: 상담·치료·법률지원·업무조정의 실제 연결 여부를 확인합니다.',urgency:'학교 권장',critical:false,practical:'3d',source:'삼각초 실무 권장(매뉴얼의 회복·복귀 지원 취지 반영)'}
+  ];
+
+  function loadState(){
+    try{ const raw=localStorage.getItem(STORAGE_KEY); if(!raw) return structuredClone(defaultState); const v=JSON.parse(raw); return {...structuredClone(defaultState),...v}; }
+    catch(e){ return structuredClone(defaultState); }
+  }
+  function migrateState(s){
+    const out={...structuredClone(defaultState),...s};
+    out.cases=(out.cases||[]).map(c=>{
+      c.caseTypes=c.caseTypes||{};
+      const old=c.supportRoute||'';
+      if(!Object.values(c.caseTypes).some(Boolean)){
+        if(old==='edu_general'||old==='A_EDU') c.caseTypes.educationIntrusion=true;
+        if(old==='A_ABUSE'||old==='B_ABUSE') c.caseTypes.childAbuseReported=true;
+        if(old==='B_COMPLAINT') c.caseTypes.maliciousComplaint=true;
+        if(old==='C_INQUIRY') c.caseTypes.inquiry=true;
+        if(!Object.values(c.caseTypes).some(Boolean)) c.caseTypes.educationIntrusion=true;
+      }
+      if(old==='A_EDU'||old==='A_ABUSE') c.supportRoute='A';
+      else if(old==='B_ABUSE'||old==='B_COMPLAINT') c.supportRoute='B';
+      else if(old==='C_INQUIRY') c.supportRoute='C';
+      else if(old==='UNSURE') c.supportRoute='UNSURE';
+      else if(!['STANDARD','A','B','C','UNSURE'].includes(old)) c.supportRoute='STANDARD';
+      if(c.quickSerious){ c.caseTypes.educationIntrusion=true; c.supportRoute='A'; }
+      c.supportChecks=c.supportChecks||{}; c.supportCheckTimes=c.supportCheckTimes||{};
+      return c;
+    });
+    return out;
+  }
+  function saveState(){ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); renderHomeAlerts(); }
+  function activeCase(){ return state.cases.find(c=>c.id===state.activeCaseId) || null; }
+  function newId(){ return 'case_'+Date.now().toString(36)+'_'+Math.random().toString(36).slice(2,7); }
+  function formatDate(v, withTime=true){ if(!v) return '미입력'; const d=new Date(v); if(Number.isNaN(d.getTime())) return '미입력'; return new Intl.DateTimeFormat('ko-KR',withTime?{year:'numeric',month:'2-digit',day:'2-digit',weekday:'short',hour:'2-digit',minute:'2-digit'}:{year:'numeric',month:'2-digit',day:'2-digit',weekday:'short'}).format(d); }
+  function toInputValue(v){ if(!v) return ''; const d=new Date(v); d.setMinutes(d.getMinutes()-d.getTimezoneOffset()); return d.toISOString().slice(0,16); }
+  function fromInputValue(v){ return v ? new Date(v).toISOString() : ''; }
+  function addHours(v,h){ const d=new Date(v); d.setHours(d.getHours()+h); return d; }
+  function dateKey(d){ const x=new Date(d); x.setMinutes(x.getMinutes()-x.getTimezoneOffset()); return x.toISOString().slice(0,10); }
+  function isExcludedBusinessDate(d){ const day=d.getDay(); return day===0||day===6||state.extraHolidays.includes(dateKey(d)); }
+  function addBusinessDays(v,days){ const d=new Date(v); let n=0; while(n<days){ d.setDate(d.getDate()+1); if(!isExcludedBusinessDate(d)) n++; } return d; }
+  function addCalendarDays(v,days){ const d=new Date(v); d.setDate(d.getDate()+days); return d; }
+  function diffHours(a,b=new Date()){ return (new Date(b)-new Date(a))/36e5; }
+  function deadlineStatus(d,done=false,soonHours=24){ if(done) return 'done'; if(!d) return ''; const h=(new Date(d)-new Date())/36e5; if(h<0) return 'overdue'; if(h<=soonHours) return 'soon'; return ''; }
+  function durationText(minutes){ const m=Math.max(0,Math.round(Math.abs(minutes))); const days=Math.floor(m/1440); const hours=Math.floor((m%1440)/60); const mins=m%60; const parts=[]; if(days)parts.push(`${days}일`); if(hours)parts.push(`${hours}시간`); if(!days && mins)parts.push(`${mins}분`); return parts.join(' ')||'0분'; }
+  function evaluateDeadline(due,actual,soonHours=24){
+    if(!due) return {cls:'',pill:'info',label:'기준일 입력 필요',detail:'기한 계산에 필요한 기준 일시를 먼저 입력하세요.'};
+    const dueDate=new Date(due);
+    if(actual){
+      const actualDate=new Date(actual); const diffMin=(dueDate-actualDate)/60000;
+      if(diffMin>=0) return {cls:'done',pill:'good',label:'기한 내 완료',detail:`실제 처리 ${formatDate(actual)} · ${durationText(diffMin)} 여유`};
+      return {cls:'overdue',pill:'danger',label:'기한 경과 후 완료',detail:`실제 처리 ${formatDate(actual)} · ${durationText(diffMin)} 초과`};
+    }
+    const leftMin=(dueDate-new Date())/60000;
+    if(leftMin<0) return {cls:'overdue',pill:'danger',label:'미완료 · 기한 경과',detail:`${durationText(leftMin)} 경과`};
+    if(leftMin<=soonHours*60) return {cls:'soon',pill:'warn',label:'미완료 · 기한 임박',detail:`약 ${durationText(leftMin)} 남음`};
+    return {cls:'',pill:'info',label:'미완료 · 기한 전',detail:`약 ${durationText(leftMin)} 남음`};
+  }
+  function taskDone(c,id){ return !!c.tasks?.[id]; }
+  function taskTime(c,id){ return c.taskTimes?.[id] || ''; }
+  function hasSeriousCriteria(c){ return !!(c.flags?.injury4wk || c.flags?.sexualCrime || c.flags?.illegalInfo4wk || c.flags?.equivalentSerious); }
+  function ensureCaseTypes(c){
+    c.caseTypes=c.caseTypes||{};
+    for(const k of Object.keys(caseTypeMeta)) if(typeof c.caseTypes[k]!=='boolean') c.caseTypes[k]=false;
+    return c.caseTypes;
+  }
+  function hasCaseType(c,key){ return !!ensureCaseTypes(c)[key]; }
+  function isEducationIntrusionCase(c){ return hasCaseType(c,'educationIntrusion'); }
+  function caseTypeLabels(c){
+    const t=ensureCaseTypes(c); return Object.keys(caseTypeMeta).filter(k=>t[k]).map(k=>caseTypeMeta[k].short);
+  }
+  function caseSupportRoute(c){
+    ensureCaseTypes(c);
+    if((hasSeriousCriteria(c)||c.quickSerious) && isEducationIntrusionCase(c)) c.supportRoute='A';
+    if(!['STANDARD','A','B','C','UNSURE'].includes(c.supportRoute)) c.supportRoute='STANDARD';
+    return c.supportRoute;
+  }
+  function isSerious(c){ return isEducationIntrusionCase(c) && (!!c.quickSerious || hasSeriousCriteria(c)); }
+  function visibleTasks(c){
+    if(!isEducationIntrusionCase(c)) return [];
+    return tasks.filter(t=>!t.subject || t.subject===c.subjectType);
+  }
+  function supportCheckDone(c,id){ return !!c.supportChecks?.[id]; }
+  function childAbuseLegalChecks(c){
+    if(!hasCaseType(c,'childAbuseReported')) return [];
+    return [
+      ['abuse_support_request','동부교육지원청 장학사에 피신고 사안 지원 요청'],
+      ['abuse_lawyer_connect','동부교육지원청 변호사 연결·1:1 법률지원 요청'],
+      ['abuse_investigation_support','조사·수사 일정 확인 후 법률자문·조사 동행 지원 확인'],
+      ['abuse_opinion_support','교육활동 확인서·교육감 의견 제출 절차 협조사항 확인'],
+      ['abuse_psych_support','피신고 교원 심리상담·회복지원 필요 여부 확인']
+    ];
+  }
+  function uniqueChecks(arr){ const seen=new Set(); return arr.filter(([id])=>!seen.has(id)&&seen.add(id)); }
+  function supportProfile(c){
+    const key=caseSupportRoute(c), base=supportRoutes[key]||supportRoutes.UNSURE, t=ensureCaseTypes(c);
+    let checks=[]; let summary=base.summary; let steps=[...base.steps];
+    if(key==='A'){
+      checks.push(['a_support_request','동부교육지원청에 A형 즉시 출동 지원 요청'],['a_role_plan','현장지원팀과 학교장·담당자 역할분담 및 후속조치 계획 협의'],['a_lawyer','1:1 전담변호사·법률지원 필요 여부 확인'],['a_recovery','신변보호·상담·심리치료·복귀지원 필요 여부 확인']);
+      if(t.childAbuseReported) checks.push(['a_abuse_confirm','중대한 아동학대 피신고 상황의 A형 분류 여부를 지원청과 확인']);
+      if(t.educationIntrusion) summary='A형 즉시 출동 지원을 요청하면서도 교육활동 침해의 24시간 최초 신고·보고, 5일 사안발생보고, 지역교권보호위원회 절차는 그대로 병행합니다.';
+    }
+    if(key==='B'){
+      checks.push(['b_support_request','동부교육지원청에 B형 현장지원 요청']);
+      if(t.childAbuseReported) checks.push(['b_materials','교육지원청의 교육활동 확인 자료 요청에 협조'],['b_legal','법률상담·조사 동행 지원 연결'],['b_feedback','교원 상태·지원 만족·추가 필요사항 확인']);
+      if(t.maliciousComplaint) checks.push(['b_window','학교 공식 민원창구로 일원화·교직원 개인응대 차단'],['b_record','반복·위법·부당 요구 및 학교 조치 기록 정리'],['b_legal','법률지원·접근제한·경호 등 보호 필요 여부 확인']);
+      if(t.educationIntrusion) summary='B형 현장지원은 추가 지원 경로입니다. 교육활동 침해 사안으로도 접수되었다면 24시간 최초 신고·보고와 5일 사안발생보고 절차를 동시에 진행합니다.';
+    }
+    if(key==='C'){
+      checks.push(['c_consult','동부교육지원청 장학사·변호사 등 서면·상담 지원 연결'],['c_record','안내받은 법령·절차와 후속 필요사항 확인']);
+      if(t.educationIntrusion) summary='C형 상담 지원과 별개로 ‘교육활동 침해 사안’이 선택되어 있으므로 24시간·5일 교육활동 침해 절차도 계속 진행합니다.';
+    }
+    if(key==='UNSURE') checks.push(['u_confirm','동부교육지원청에 지원유형·다음 절차 확인']);
+    if(key==='STANDARD' && t.educationIntrusion){ summary='A/B/C 강화 분류와 별개로 교육활동 침해 기본절차를 진행합니다. 피해교원 보호·분리와 함께 24시간 최초 신고·보고, 5일 사안발생보고를 관리합니다.'; steps=['초기 보호·분리','24시간 최초 신고·보고','5일 사안발생보고','지원청 조사·지역교권보호위원회']; }
+    return {...base,summary,steps,checks:uniqueChecks(checks)};
+  }
+  function suggestedSupportRoute(c){
+    if(isSerious(c)) return 'A';
+    const t=ensureCaseTypes(c);
+    if(t.childAbuseReported||t.maliciousComplaint) return 'B';
+    if(t.inquiry && !t.educationIntrusion) return 'C';
+    return 'STANDARD';
+  }
+  function progress(c){
+    const list=visibleTasks(c);
+    const route=supportProfile(c);
+    const routeChecks=route.checks||[];
+    const abuseChecks=childAbuseLegalChecks(c);
+    const taskDoneCount=list.filter(t=>taskDone(c,t.id)).length;
+    const routeDoneCount=routeChecks.filter(([id])=>supportCheckDone(c,id)).length;
+    const abuseDoneCount=abuseChecks.filter(([id])=>supportCheckDone(c,id)).length;
+    const total=list.length+routeChecks.length+abuseChecks.length, done=taskDoneCount+routeDoneCount+abuseDoneCount;
+    return {done,total,pct:total?Math.round(done/total*100):0};
+  }
+  function currentStage(c){ const list=visibleTasks(c); for(const s of stages){ if(list.some(t=>t.stage===s.n&&!taskDone(c,t.id))) return s.n; } return 5; }
+  function renderCaseTypes(c){
+    ensureCaseTypes(c);
+    document.querySelectorAll('[data-case-type]').forEach(ch=>ch.checked=!!c.caseTypes[ch.dataset.caseType]);
+    const types=caseTypeLabels(c), suggested=suggestedSupportRoute(c), route=caseSupportRoute(c);
+    const guide=document.getElementById('caseTypeGuide');
+    if(guide){
+      const edu=isEducationIntrusionCase(c);
+      guide.className='notice mt16 '+(edu?'good':'');
+      guide.innerHTML=`<b>현재 사안:</b> ${types.length?types.map(escapeHtml).join(' + '):'선택 필요'}<br><span class="tiny">${edu?'‘교육활동 침해 사안’이 선택되어 있으므로 A/B/C와 관계없이 24시간 최초 신고·보고와 5일 사안발생보고 절차를 표시합니다.':'교육활동 침해가 별도로 신고·접수된 경우 ‘교육활동 침해 사안’을 추가 선택하면 24시간·5일 절차가 함께 열립니다.'}</span>${suggested!==route?`<div class="tiny mt8"><b>자료상 참고:</b> 현재 사안 성격을 기준으로는 ${escapeHtml(supportRoutes[suggested].label)} 경로도 확인해 보세요. 최종 현장지원 분류는 지원청과 확인할 수 있습니다.</div>`:''}`;
+    }
+  }
+  function renderSupportRoute(c){
+    const key=caseSupportRoute(c), r=supportProfile(c);
+    const sel=document.getElementById('supportRouteSelect'); if(sel) sel.value=key;
+    const sum=document.getElementById('supportRouteSummary'); if(sum) sum.innerHTML=`<div class="route-summary ${r.level}"><span class="pill ${r.level==='a'?'danger':r.level==='b'?'warn':r.level==='c'?'info':'brand'}">${escapeHtml(r.label)}</span><h3 style="margin:8px 0 4px">${escapeHtml(r.headline)}</h3><div>${escapeHtml(r.summary)}</div>${key==='A'?'<div class="mt8"><b>동부교육지원청 장학사 062-605-5761 · FAX 062-605-5580</b></div>':''}</div>`;
+    const steps=document.getElementById('supportRouteSteps'); if(steps) steps.innerHTML=`<div class="route-steps">${r.steps.map((x,i)=>`<div class="route-step"><b>${i+1}. ${escapeHtml(x)}</b><small>${i===0?'사안 인지 직후 시작':'앞 단계와 병행 가능'}</small></div>`).join('')}</div>`;
+    const checks=document.getElementById('supportRouteChecks'); if(checks){
+      if(!r.checks.length){checks.innerHTML='<div class="notice mt16"><b>현장지원 분류와 학교 업무절차는 별개입니다.</b> 위 ‘사안 성격’에서 교육활동 침해가 선택되어 있다면 아래 24시간·5일 기한 및 단계별 체크를 계속 진행하세요.</div>';}
+      else checks.innerHTML=`<div class="support-checks">${r.checks.map(([id,label])=>`<label class="support-check"><input type="checkbox" data-support-check="${id}" ${supportCheckDone(c,id)?'checked':''}><span><b>${escapeHtml(label)}</b></span></label>`).join('')}</div>`;
+      checks.querySelectorAll('[data-support-check]').forEach(ch=>ch.addEventListener('change',()=>{c.supportChecks=c.supportChecks||{};c.supportChecks[ch.dataset.supportCheck]=ch.checked;if(ch.checked){c.supportCheckTimes=c.supportCheckTimes||{};c.supportCheckTimes[ch.dataset.supportCheck]=new Date().toISOString();}else if(c.supportCheckTimes){delete c.supportCheckTimes[ch.dataset.supportCheck];}saveState();renderCase();}));
+    }
+  }
+
+  function renderChildAbuseLegal(c){
+    const panel=document.getElementById('childAbuseLegalPanel');
+    if(!panel) return;
+    const show=hasCaseType(c,'childAbuseReported');
+    panel.classList.toggle('hidden',!show);
+    if(!show) return;
+    const route=caseSupportRoute(c);
+    const badge=document.getElementById('childAbuseLegalBadge');
+    if(badge){
+      badge.textContent=route==='A'?'A형 · 즉시 출동':route==='B'?'B형 · 24시간 이내 지원':'피신고 교원 지원';
+      badge.className='pill '+(route==='A'?'danger':route==='B'?'warn':'brand');
+    }
+    const checks=document.getElementById('childAbuseLegalChecks');
+    const items=childAbuseLegalChecks(c);
+    checks.innerHTML=`<div class="support-checks">${items.map(([id,label])=>`<label class="support-check"><input type="checkbox" data-abuse-legal-check="${id}" ${supportCheckDone(c,id)?'checked':''}><span><b>${escapeHtml(label)}</b></span></label>`).join('')}</div>`;
+    checks.querySelectorAll('[data-abuse-legal-check]').forEach(ch=>ch.addEventListener('change',()=>{
+      c.supportChecks=c.supportChecks||{}; c.supportCheckTimes=c.supportCheckTimes||{};
+      c.supportChecks[ch.dataset.abuseLegalCheck]=ch.checked;
+      if(ch.checked)c.supportCheckTimes[ch.dataset.abuseLegalCheck]=new Date().toISOString();
+      else delete c.supportCheckTimes[ch.dataset.abuseLegalCheck];
+      saveState(); renderCase();
+    }));
+  }
+
+  function applyRouteVisibility(c){
+    const edu=isEducationIntrusionCase(c);
+    const deadlineSection=document.getElementById('deadlineSection');
+    const taskSection=document.getElementById('taskChecklistSection');
+    const seriousSection=document.getElementById('seriousCheckSection');
+    if(deadlineSection) deadlineSection.classList.toggle('hidden',!edu);
+    if(taskSection) taskSection.classList.toggle('hidden',!edu);
+    if(seriousSection) seriousSection.classList.toggle('hidden',!edu);
+
+    const deadlineFieldIds=['firstReportAtInput','occurrenceSubmittedAtInput','occurrenceReceivedAtInput','committeeAtInput','resultAtInput'];
+    deadlineFieldIds.forEach(id=>{const el=document.getElementById(id); if(el?.closest('.field')) el.closest('.field').style.display=edu?'':'none';});
+    const title=document.getElementById('timingSectionTitle'), desc=document.getElementById('timingSectionDesc'), guide=document.getElementById('timingGuide');
+    if(edu){
+      if(title) title.textContent='기준 일시';
+      if(desc) desc.textContent='교육활동 침해 절차의 정확한 기한 계산을 위해 확인된 시점을 기록합니다.';
+      if(guide) guide.innerHTML='<b>기한 기록 방법:</b> 실제로 보고·제출을 마친 뒤 해당 완료 일시를 입력하세요. 위 기한 카드가 <b>기한 내 완료 / 기한 경과 후 완료 / 미완료</b>를 자동 판정합니다. 5일 계산은 토요일·일요일과 ‘설정’에 등록한 추가 제외일을 제외합니다. 법정 공휴일이 있는 경우 설정에서 해당 날짜를 추가하세요.';
+    }else{
+      if(title) title.textContent='사안 기본 기록';
+      if(desc) desc.textContent='현재는 교육활동 침해 사안이 선택되어 있지 않아 24시간·5일 교육활동 침해 기한을 적용하지 않습니다.';
+      if(guide) guide.innerHTML='<b>중요:</b> A/B/C 현장지원 유형 때문에 24시간·5일 절차가 숨겨지는 것이 아닙니다. 실제로 <b>교육활동 침해 사안도 함께 신고·접수</b>되었다면 위 ‘사안 성격’에서 <b>교육활동 침해 사안</b>을 추가 선택하세요. 즉시 24시간·5일 기한관리와 단계별 체크가 함께 나타납니다.';
+    }
+  }
+
+  function go(view){ currentView=view; document.querySelectorAll('.view').forEach(v=>v.classList.remove('active')); document.getElementById('view-'+view).classList.add('active'); document.querySelectorAll('#nav button').forEach(b=>b.classList.toggle('active',b.dataset.view===view)); if(view==='home') renderHome(); if(view==='case') renderCase(); if(view==='settings') renderSettings(); if(window.innerWidth<=700){const activeBtn=document.querySelector(`#nav button[data-view="${view}"]`); activeBtn?.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});} window.scrollTo({top:0,behavior:'smooth'}); }
+  document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.view)));
+  document.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.go)));
+
+  function openModal(id){ document.getElementById(id).classList.add('open'); }
+  function closeModal(id){ document.getElementById(id).classList.remove('open'); }
+  document.querySelectorAll('[data-close-modal]').forEach(b=>b.addEventListener('click',()=>closeModal(b.dataset.closeModal)));
+  document.querySelectorAll('.modal-backdrop').forEach(m=>m.addEventListener('click',e=>{if(e.target===m) closeModal(m.id)}));
+
+  function openNewCase(){
+    document.getElementById('newAlias').value=''; document.getElementById('newReceivedAt').value=nowLocalValue(); document.getElementById('newSubjectType').value='학생';
+    document.getElementById('newSupportRoute').value='STANDARD'; document.getElementById('newNote').value=''; document.getElementById('newDanger').checked=false; document.getElementById('newSerious').checked=false;
+    document.getElementById('newTypeEdu').checked=true; document.getElementById('newTypeAbuse').checked=false; document.getElementById('newTypeComplaint').checked=false; document.getElementById('newTypeInquiry').checked=false;
+    openModal('newCaseModal');
+  }
+  document.getElementById('newCaseBtn').addEventListener('click',openNewCase); document.getElementById('newCaseBtn2').addEventListener('click',openNewCase);
+  const newSupportScenarioToRoute={STANDARD:'STANDARD',A_EDU:'A',A_ABUSE:'A',B_ABUSE:'B',B_COMPLAINT:'B',C_INQUIRY:'C',UNSURE:'UNSURE'};
+  function setNewCaseTypes({edu=false,abuse=false,complaint=false,inquiry=false}){
+    document.getElementById('newTypeEdu').checked=edu;
+    document.getElementById('newTypeAbuse').checked=abuse;
+    document.getElementById('newTypeComplaint').checked=complaint;
+    document.getElementById('newTypeInquiry').checked=inquiry;
+  }
+  function applyNewSupportScenario(){
+    const scenario=document.getElementById('newSupportRoute').value;
+    if(scenario==='A_EDU'){setNewCaseTypes({edu:true});document.getElementById('newSerious').checked=true;}
+    else if(scenario==='A_ABUSE'){setNewCaseTypes({abuse:true});document.getElementById('newSerious').checked=false;}
+    else if(scenario==='B_ABUSE'){setNewCaseTypes({abuse:true});document.getElementById('newSerious').checked=false;}
+    else if(scenario==='B_COMPLAINT'){setNewCaseTypes({complaint:true});document.getElementById('newSerious').checked=false;}
+    else if(scenario==='C_INQUIRY'){setNewCaseTypes({inquiry:true});document.getElementById('newSerious').checked=false;}
+    else if(scenario==='STANDARD'){setNewCaseTypes({edu:true});document.getElementById('newSerious').checked=false;}
+    // 판단 어려움은 사용자가 아래에서 현재 파악된 사안 성격을 직접 선택하도록 기존 체크를 유지한다.
+  }
+  document.getElementById('newSupportRoute').addEventListener('change',applyNewSupportScenario);
+  document.getElementById('newSerious').addEventListener('change',e=>{
+    if(e.target.checked){document.getElementById('newSupportRoute').value='A_EDU';document.getElementById('newTypeEdu').checked=true;}
+  });
+  // 사안 성격을 수동으로 추가·해제해도 이미 선택한 A/B/C 현장지원 유형은 자동으로 바꾸지 않는다.
+  // 따라서 A형을 선택한 뒤 ‘교원 아동학대 피신고’를 추가해도 B형으로 되돌아가지 않는다.
+  document.getElementById('createCaseBtn').addEventListener('click',()=>{
+    const alias=document.getElementById('newAlias').value.trim() || `사안 ${state.cases.length+1}`;
+    const received=document.getElementById('newReceivedAt').value || nowLocalValue();
+    const scenario=document.getElementById('newSupportRoute').value;
+    const quickSerious=document.getElementById('newSerious').checked || scenario==='A_EDU';
+    const selectedRoute=newSupportScenarioToRoute[scenario]||'UNSURE';
+    const caseTypes={educationIntrusion:document.getElementById('newTypeEdu').checked,childAbuseReported:document.getElementById('newTypeAbuse').checked,maliciousComplaint:document.getElementById('newTypeComplaint').checked,inquiry:document.getElementById('newTypeInquiry').checked};
+    if(quickSerious) caseTypes.educationIntrusion=true;
+    if(!Object.values(caseTypes).some(Boolean)){ alert('사안 성격을 하나 이상 선택해 주세요.'); return; }
+    const c={id:newId(),alias,receivedAt:fromInputValue(received),subjectType:document.getElementById('newSubjectType').value,caseTypes,supportRoute:selectedRoute,supportScenario:scenario,note:document.getElementById('newNote').value.trim(),currentDanger:document.getElementById('newDanger').checked,quickSerious:quickSerious,flags:{},tasks:{},taskTimes:{},supportChecks:{},supportCheckTimes:{},firstReportAt:'',occurrenceSubmittedAt:'',occurrenceReceivedAt:'',committeeAt:'',resultAt:'',closed:false,createdAt:new Date().toISOString()};
+    state.cases.unshift(c); state.activeCaseId=c.id; saveState(); closeModal('newCaseModal'); go('case');
+  });
+
+  function renderHome(){ renderCaseList(); renderHomeAlerts(); const c=activeCase(); document.getElementById('continueBtn').disabled=!c; document.getElementById('continueBtn').style.opacity=c?'1':'.5'; }
+  function renderCaseList(){ const box=document.getElementById('caseList'); if(!state.cases.length){ box.innerHTML='<div class="card muted">아직 저장된 사안이 없습니다. ‘새 사안 시작’에서 사안 코드와 접수 일시만 등록하면 됩니다.</div>'; return; }
+    box.innerHTML=state.cases.map(c=>{const p=progress(c); const alerts=getAlerts(c); const badge=c.closed?'<span class="pill good">종결 표시</span>':alerts.some(a=>a.level==='danger')?'<span class="pill danger">확인 필요</span>':alerts.length?'<span class="pill warn">점검 '+alerts.length+'</span>':'<span class="pill good">진행 정상</span>'; const types=caseTypeLabels(c).join(' + '); return `<div class="case-row"><div class="case-main"><strong>${escapeHtml(c.alias)} ${badge}</strong><small>접수 ${formatDate(c.receivedAt)} · ${escapeHtml(c.subjectType)} 관련 · ${escapeHtml(types)} · ${escapeHtml(supportRoutes[caseSupportRoute(c)].label)}</small><div class="progress"><span style="width:${p.pct}%"></span></div></div><span class="pill brand">${p.done}/${p.total}</span><button class="btn btn-secondary btn-sm" data-open-case="${c.id}">열기</button></div>`}).join('');
+    box.querySelectorAll('[data-open-case]').forEach(b=>b.addEventListener('click',()=>{state.activeCaseId=b.dataset.openCase;saveState();go('case')}));
+  }
+  function renderHomeAlerts(){ const area=document.getElementById('homeAlertArea'); const active=state.cases.filter(c=>!c.closed); const alerts=active.flatMap(c=>getAlerts(c).map(a=>({...a,case:c}))); if(!alerts.length){area.innerHTML='';return;} const danger=alerts.filter(a=>a.level==='danger').length; area.innerHTML=`<div class="card"><div class="section-head"><div><h2>${danger?'⚠':'🔎'} 진행 사안 점검</h2><p>${active.length}건의 진행 중 사안에서 ${alerts.length}개의 확인 항목이 있습니다.</p></div><button class="btn btn-secondary btn-sm" id="homeAlertOpen">자세히 보기</button></div><div class="notice ${danger?'danger':'warn'}"><b>${danger?danger+'개 기한·즉시조치 확인 필요':'기한 임박 또는 내부 모니터링 확인 필요'}</b> — 페이지를 열 때 자동으로 다시 점검합니다.</div></div>`; document.getElementById('homeAlertOpen').addEventListener('click',showAlertModal); }
+
+  function renderCase(){ const c=activeCase(); document.getElementById('caseEmpty').classList.toggle('hidden',!!c); document.getElementById('caseContent').classList.toggle('hidden',!c); if(!c) return;
+    caseSupportRoute(c);
+    applyRouteVisibility(c);
+    const p=progress(c); document.getElementById('caseTitle').textContent=c.alias; document.getElementById('caseMeta').textContent=`접수 ${formatDate(c.receivedAt)} · ${c.subjectType} 관련 · ${caseTypeLabels(c).join(' + ')} · ${supportRoutes[caseSupportRoute(c)].label} · ${c.closed?'종결 표시':'진행 중'}`;
+    document.getElementById('progressLabel').textContent=`${p.pct}%`; document.getElementById('progressBar').style.width=p.pct+'%'; document.getElementById('progressText').textContent=`완료 ${p.done}개 / 전체 ${p.total}개`;
+    document.getElementById('receivedAtInput').value=toInputValue(c.receivedAt); document.getElementById('firstReportAtInput').value=toInputValue(c.firstReportAt||taskTime(c,'initial_report')); document.getElementById('occurrenceSubmittedAtInput').value=toInputValue(c.occurrenceSubmittedAt||taskTime(c,'occurrence_report')); document.getElementById('occurrenceReceivedAtInput').value=toInputValue(c.occurrenceReceivedAt); document.getElementById('committeeAtInput').value=toInputValue(c.committeeAt); document.getElementById('resultAtInput').value=toInputValue(c.resultAt); document.getElementById('caseNoteInput').value=c.note||'';
+    document.querySelectorAll('[data-flag]').forEach(ch=>ch.checked=!!c.flags?.[ch.dataset.flag]);
+    const sb=document.getElementById('seriousBanner'); sb.innerHTML=isSerious(c)?'<div class="notice danger"><b>중대사안 가능성 표시됨:</b> 동부교육지원청 담당 장학사(062-605-5761)에 즉시 연락하고, 필요한 경우 FAX 605-5580 보고 및 현장 출동 지원을 요청하세요.</div>':(c.currentDanger?'<div class="notice danger"><b>현재 위험 표시됨:</b> 안전 확보·침해행위 중단·피해교원 상태 확인을 다른 행정 절차보다 우선하세요.</div>':'');
+    renderCaseTypes(c);
+    if(isEducationIntrusionCase(c)){ renderDeadlines(c); renderMobileDeadlineSummary(c); renderStepper(c); renderTasks(c); } else { document.getElementById('deadlineGrid').innerHTML=''; document.getElementById('stepper').innerHTML=''; document.getElementById('taskArea').innerHTML=''; document.getElementById('mobileDeadlineSummary').innerHTML=''; }
+    renderSupportRoute(c); renderChildAbuseLegal(c); renderNextActions(c);
+    document.getElementById('closeCaseBtn').textContent=c.closed?'↩ 진행 중으로 되돌리기':'✓ 사안 종결 표시';
+  }
+
+  function renderMobileDeadlineSummary(c){
+    const box=document.getElementById('mobileDeadlineSummary'); if(!box)return;
+    const firstActual=c.firstReportAt||taskTime(c,'initial_report');
+    const occurrenceActual=c.occurrenceSubmittedAt||taskTime(c,'occurrence_report')||'';
+    const firstDue=c.receivedAt?addHours(c.receivedAt,24):null;
+    const occurrenceDue=firstActual?addBusinessDays(firstActual,5):null;
+    const firstEval=evaluateDeadline(firstDue,firstActual,6);
+    const occurrenceEval=evaluateDeadline(occurrenceDue,occurrenceActual,30);
+    const short=(ev,due,fallback)=>{
+      if(ev.cls==='done') return ev.label;
+      if(!due) return fallback;
+      if(ev.cls==='overdue') return '기한 경과';
+      if(ev.cls==='soon') return '기한 임박';
+      return formatDate(due,false)+'까지';
+    };
+    box.innerHTML=`<div class="mobile-deadline-panel">
+      <div class="mobile-deadline-head"><strong>⏱ 학교 핵심기한</strong><small>교육활동 침해 사안</small></div>
+      <div class="mobile-deadline-cards">
+        <div class="mobile-deadline-chip ${firstEval.cls}"><b>24시간 최초 신고·보고</b><span>${short(firstEval,firstDue,'접수일시 확인')}</span></div>
+        <div class="mobile-deadline-chip ${occurrenceEval.cls}"><b>5일 사안발생보고</b><span>${short(occurrenceEval,occurrenceDue,'24시간 보고 후 계산')}</span></div>
+      </div>
+      <button type="button" class="btn btn-secondary btn-sm" id="mobileDeadlineJump">기한관리에서 처리하기</button>
+    </div>`;
+    document.getElementById('mobileDeadlineJump')?.addEventListener('click',()=>document.getElementById('deadlineSection')?.scrollIntoView({behavior:'smooth',block:'start'}));
+  }
+
+  function renderDeadlines(c){
+    const firstActual=c.firstReportAt||taskTime(c,'initial_report');
+    const occurrenceActual=c.occurrenceSubmittedAt||taskTime(c,'occurrence_report')||'';
+    const firstDue=c.receivedAt?addHours(c.receivedAt,24):null;
+    const occurrenceDue=firstActual?addBusinessDays(firstActual,5):null;
+    const firstEval=evaluateDeadline(firstDue,firstActual,6);
+    const occurrenceEval=evaluateDeadline(occurrenceDue,occurrenceActual,30);
+    const commDue=c.occurrenceReceivedAt?addCalendarDays(c.occurrenceReceivedAt,21):null;
+    const resultDue=c.committeeAt?addCalendarDays(c.committeeAt,14):null;
+    const resultDone=taskDone(c,'result_received');
+
+    const schoolCards=[
+      {title:'최초 신고·보고 (24시간)',due:firstDue,actual:firstActual,eval:firstEval,note:'사안 인지·접수부터 24시간 · 주말·공휴일 제외 규정 없음',action:'first',actionLabel:'방금 보고했다면 현재시각 기록'},
+      {title:'사안발생보고서 제출 (5일)',due:occurrenceDue,actual:occurrenceActual,eval:occurrenceEval,note:firstActual?'최초 신고·보고 후 5일 · 주말·공휴일 제외':'최초 신고·보고 완료 일시를 입력하면 5일 마감 자동 계산',action:'occurrence',actionLabel:'방금 제출했다면 현재시각 기록'}
+    ];
+    const supportCards=[
+      {title:'지역교권보호위원회',date:commDue,status:deadlineStatus(commDue,false,48),note:c.occurrenceReceivedAt?'지원청 접수 후 21일 · 주말·공휴일 포함':'지원청 접수 일시 입력 시 참고 계산'},
+      {title:'심의결과 통지',date:resultDue,status:deadlineStatus(resultDue,resultDone,48),note:c.committeeAt?'위원회 후 14일 · 주말·공휴일 포함':'위원회 일시 입력 시 참고 계산',done:resultDone}
+    ];
+
+    let html=schoolCards.map(x=>`<div class="card deadline-card ${x.eval.cls}">
+      <span class="pill brand">학교 핵심기한</span>
+      <div class="deadline-title mt8">${x.title}</div>
+      <div class="deadline-date">${x.eval.label}</div>
+      <div class="deadline-due">마감: ${x.due?formatDate(x.due):'기준일 미입력'}</div>
+      <div class="deadline-actual">${x.eval.detail}</div>
+      <div class="deadline-note">${x.note}</div>
+      ${!x.actual?`<div class="deadline-actions"><button class="btn btn-secondary btn-sm" data-record-deadline="${x.action}">${x.actionLabel}</button></div>`:`<div class="deadline-actions"><button class="btn btn-secondary btn-sm" data-cancel-deadline="${x.action}">완료 취소</button></div>`}
+    </div>`).join('');
+
+    html+=supportCards.map(x=>`<div class="card deadline-card ${x.status}"><span class="pill info">지원청 참고</span><div class="deadline-title mt8">${x.title}</div><div class="deadline-date">${x.done?'완료':(x.date?formatDate(x.date,false):'기준일 미입력')}</div><div class="deadline-note">${x.note}</div>${x.status==='overdue'&&!x.done?'<div class="pill danger mt8">기한 경과 확인</div>':x.status==='soon'&&!x.done?'<div class="pill warn mt8">기한 임박</div>':''}</div>`).join('');
+    const grid=document.getElementById('deadlineGrid'); grid.innerHTML=html;
+    grid.querySelectorAll('[data-record-deadline]').forEach(btn=>btn.addEventListener('click',()=>{
+      const c=activeCase(); if(!c)return; const now=new Date().toISOString(); c.tasks=c.tasks||{}; c.taskTimes=c.taskTimes||{};
+      if(btn.dataset.recordDeadline==='first'){ c.firstReportAt=now; c.tasks.initial_report=true; c.taskTimes.initial_report=now; }
+      if(btn.dataset.recordDeadline==='occurrence'){
+        c.occurrenceSubmittedAt=now; c.tasks.occurrence_report=true; c.taskTimes.occurrence_report=now;
+        // 학교가 제출한 시점과 지원청 접수 시점은 실제로 다를 수 있으나,
+        // 현장 업무 편의를 위해 '방금 제출'을 누르면 접수 일시도 우선 같은 시각으로 채운다.
+        // 이후 실제 접수시각을 알게 되면 기준 일시 입력란에서 수정할 수 있다.
+        if(!c.occurrenceReceivedAt){ c.occurrenceReceivedAt=now; c.occurrenceReceivedAuto=true; }
+      }
+      saveState(); renderCase();
+    }));
+    grid.querySelectorAll('[data-cancel-deadline]').forEach(btn=>btn.addEventListener('click',()=>{
+      const c=activeCase(); if(!c)return; c.tasks=c.tasks||{}; c.taskTimes=c.taskTimes||{};
+      if(btn.dataset.cancelDeadline==='first'){
+        c.firstReportAt=''; c.tasks.initial_report=false; delete c.taskTimes.initial_report;
+      }
+      if(btn.dataset.cancelDeadline==='occurrence'){
+        c.occurrenceSubmittedAt=''; c.tasks.occurrence_report=false; delete c.taskTimes.occurrence_report;
+        // '방금 제출' 버튼이 자동으로 함께 기록한 지원청 접수시각만 같이 되돌린다.
+        // 사용자가 실제 접수시각을 별도로 수정해 둔 경우에는 보존한다.
+        if(c.occurrenceReceivedAuto){ c.occurrenceReceivedAt=''; c.occurrenceReceivedAuto=false; }
+      }
+      saveState(); renderCase();
+    }));
+  }
+
+  function renderNextActions(c){
+    const route=supportProfile(c);
+    const routePending=(route.checks||[]).filter(([id])=>!supportCheckDone(c,id)).map(([id,label],idx)=>({kind:'route',id,title:label,desc:route.steps[Math.min(idx,route.steps.length-1)]||route.summary,urgency:route.level==='a'?'즉시':route.level==='b'?'신속':'확인'}));
+    const abusePending=childAbuseLegalChecks(c).filter(([id])=>!supportCheckDone(c,id)).map(([id,label],idx)=>({kind:'abuse',id,title:label,desc:['피신고 교원 지원 요청','변호사와 직접 연결','조사·수사 대응 지원','교육감 의견 제출 절차','심리·회복 지원'][idx]||'피신고 교원 지원',urgency:idx<2?'즉시':'확인'}));
+    let taskPending=visibleTasks(c).filter(t=>!taskDone(c,t.id)); taskPending.sort((a,b)=>a.stage-b.stage || Number(b.critical)-Number(a.critical));
+    const list=[...routePending,...abusePending,...taskPending].slice(0,4);
+    const box=document.getElementById('nextActions');
+    if(!list.length){box.innerHTML='<div class="notice good">현재 표시된 체크 항목이 완료되었습니다. 선택된 다른 사안 성격의 후속지원이 필요한지 다시 확인하세요.</div>';return;}
+    box.innerHTML=list.map((t,i)=>`<div class="next-item"><div class="next-number">${i+1}</div><div><b>${escapeHtml(t.title)}</b> <span class="pill ${(t.kind==='route'&&route.level==='a')||(t.kind==='abuse'&&t.urgency==='즉시')?'danger':t.critical?'danger':'brand'}">${escapeHtml(t.urgency)}</span><p>${escapeHtml(t.desc||'')}</p></div></div>`).join('');
+  }
+
+  function renderStepper(c){ const cs=currentStage(c); document.getElementById('stepper').innerHTML=stages.map(s=>{const stageTasks=visibleTasks(c).filter(t=>t.stage===s.n);const allDone=stageTasks.length&&stageTasks.every(t=>taskDone(c,t.id));return `<div class="step ${allDone?'done':''} ${cs===s.n?'current':''}"><strong>${s.n+1}. ${s.short}</strong>${allDone?'완료':cs===s.n?'현재 단계':'대기'}</div>`}).join(''); }
+
+  function renderTasks(c){ const role=document.getElementById('roleFilter').value; const list=visibleTasks(c).filter(t=>role==='all'||t.role===role||t.role==='공통'); let html=''; stages.forEach(s=>{const arr=list.filter(t=>t.stage===s.n); if(!arr.length)return; html+=`<div class="task-group"><h3><span class="pill brand">${s.n+1}단계</span> ${s.title}</h3>`; arr.forEach(t=>{const done=taskDone(c,t.id); const tm=taskTime(c,t.id); html+=`<div class="task ${done?'checked':''}"><div class="task-row"><input type="checkbox" data-task="${t.id}" ${done?'checked':''}><div class="task-body"><div class="task-title">${t.title}</div><div class="task-desc">${t.desc}</div><div class="task-meta"><span class="pill brand">${t.role}</span><span class="pill ${t.critical?'danger':'info'}">${t.urgency}</span>${t.practical?'<span class="pill warn">학교 내부 권장</span>':''}</div>${tm?`<div class="task-time">✓ 완료 기록 ${formatDate(tm)}</div>`:''}<details><summary>근거·유의사항</summary>${escapeHtml(t.source)}</details></div></div></div>`; }); html+='</div>'; }); document.getElementById('taskArea').innerHTML=html;
+    document.querySelectorAll('[data-task]').forEach(ch=>ch.addEventListener('change',()=>{const c=activeCase();if(!c)return;c.tasks=c.tasks||{};c.taskTimes=c.taskTimes||{};c.tasks[ch.dataset.task]=ch.checked;if(ch.checked){c.taskTimes[ch.dataset.task]=new Date().toISOString();if(ch.dataset.task==='initial_report'&&!c.firstReportAt)c.firstReportAt=c.taskTimes[ch.dataset.task];if(ch.dataset.task==='occurrence_report'&&!c.occurrenceSubmittedAt)c.occurrenceSubmittedAt=c.taskTimes[ch.dataset.task];}else{delete c.taskTimes[ch.dataset.task];if(ch.dataset.task==='initial_report')c.firstReportAt='';if(ch.dataset.task==='occurrence_report')c.occurrenceSubmittedAt='';}saveState();renderCase();}));
+  }
+  document.getElementById('roleFilter').addEventListener('change',()=>{const c=activeCase();if(c)renderTasks(c)});
+  document.getElementById('supportRouteSelect').addEventListener('change',e=>{
+    const c=activeCase(); if(!c)return; const next=e.target.value;
+    if(hasSeriousCriteria(c) && next!=='A'){
+      alert('중대 교육활동 침해 기준이 체크되어 있어 A형 즉시 출동 지원 경로가 유지됩니다. 다른 지원유형으로 바꾸려면 먼저 중대사안 기준 체크를 해제해 주세요.');
+      e.target.value='A'; return;
+    }
+    if(next!=='A') c.quickSerious=false;
+    c.supportRoute=next;
+    c.supportChecks={}; c.supportCheckTimes={};
+    saveState(); renderCase();
+  });
+
+  document.querySelectorAll('[data-case-type]').forEach(ch=>ch.addEventListener('change',()=>{
+    const c=activeCase(); if(!c)return; ensureCaseTypes(c);
+    if(ch.dataset.caseType==='educationIntrusion' && !ch.checked && hasSeriousCriteria(c)){
+      alert('중대 교육활동 침해 기준이 체크되어 있어 ‘교육활동 침해 사안’을 해제할 수 없습니다. 먼저 중대사안 기준 체크를 해제해 주세요.');
+      ch.checked=true; return;
+    }
+    if(ch.dataset.caseType==='educationIntrusion' && !ch.checked) c.quickSerious=false;
+    c.caseTypes[ch.dataset.caseType]=ch.checked;
+    if(!Object.values(c.caseTypes).some(Boolean)){ alert('사안 성격은 하나 이상 선택해야 합니다.'); c.caseTypes[ch.dataset.caseType]=true; ch.checked=true; return; }
+    if(ch.dataset.caseType==='educationIntrusion' && ch.checked && hasSeriousCriteria(c)) c.supportRoute='A';
+    saveState(); renderCase();
+  }));
+
+  function bindCaseInput(id,key){ document.getElementById(id).addEventListener('change',e=>{const c=activeCase();if(!c)return;const value=e.target.type==='datetime-local'?fromInputValue(e.target.value):e.target.value;c[key]=value;c.tasks=c.tasks||{};c.taskTimes=c.taskTimes||{};if(key==='firstReportAt'){c.tasks.initial_report=!!value;if(value)c.taskTimes.initial_report=value;else delete c.taskTimes.initial_report;}if(key==='occurrenceSubmittedAt'){c.tasks.occurrence_report=!!value;if(value)c.taskTimes.occurrence_report=value;else delete c.taskTimes.occurrence_report;}if(key==='occurrenceReceivedAt'){c.occurrenceReceivedAuto=false;}saveState();renderCase();}); }
+  bindCaseInput('receivedAtInput','receivedAt');bindCaseInput('firstReportAtInput','firstReportAt');bindCaseInput('occurrenceSubmittedAtInput','occurrenceSubmittedAt');bindCaseInput('occurrenceReceivedAtInput','occurrenceReceivedAt');bindCaseInput('committeeAtInput','committeeAt');bindCaseInput('resultAtInput','resultAt');bindCaseInput('caseNoteInput','note');
+  document.querySelectorAll('[data-flag]').forEach(ch=>ch.addEventListener('change',()=>{
+    const c=activeCase();if(!c)return;c.flags=c.flags||{};c.flags[ch.dataset.flag]=ch.checked;
+    if(hasSeriousCriteria(c)){ ensureCaseTypes(c).educationIntrusion=true; c.supportRoute='A'; c.quickSerious=true; }
+    else if(c.quickSerious){ c.quickSerious=false; }
+    saveState();renderCase();
+  }));
+
+  document.getElementById('closeCaseBtn').addEventListener('click',()=>{const c=activeCase();if(!c)return;c.closed=!c.closed;saveState();renderCase();});
+  document.getElementById('deleteCaseBtn').addEventListener('click',()=>{const c=activeCase();if(!c)return;if(!confirm(`'${c.alias}' 저장 정보를 삭제할까요?`))return;state.cases=state.cases.filter(x=>x.id!==c.id);state.activeCaseId=state.cases[0]?.id||null;saveState();renderCase();});
+  document.getElementById('printBtn').addEventListener('click',()=>window.print());
+
+  function getAlerts(c){ if(!c||c.closed)return[]; const a=[]; const age=diffHours(c.receivedAt); const route=caseSupportRoute(c);
+    if(isEducationIntrusionCase(c)){
+      const firstDue=addHours(c.receivedAt,24);
+      const immediate=['teacher_state','stop_and_safe','report_principal','separation_intent']; if(age>.5){ immediate.forEach(id=>{if(!taskDone(c,id)){const t=tasks.find(x=>x.id===id);a.push({level:'danger',title:`${t.title} 미확인`,detail:'매뉴얼상 인지 즉시 확인·조치가 필요한 항목입니다. 법정 30분 기한을 의미하는 것은 아닙니다.'});}}); }
+      if(!(c.firstReportAt||taskTime(c,'initial_report'))){const h=(firstDue-new Date())/36e5;if(h<0)a.push({level:'danger',title:'24시간 최초 신고·보고 확인 필요',detail:`기준시각 ${formatDate(firstDue)}이 경과했습니다.`});else if(h<=6)a.push({level:'warn',title:'24시간 최초 신고·보고 기한 임박',detail:`약 ${Math.max(0,Math.ceil(h))}시간 남았습니다.`});}
+      const firstBase=c.firstReportAt||taskTime(c,'initial_report'); const occurrenceDoneAt=c.occurrenceSubmittedAt||taskTime(c,'occurrence_report'); if(firstBase&&!occurrenceDoneAt){const due=addBusinessDays(firstBase,5);const h=(due-new Date())/36e5;if(h<0)a.push({level:'danger',title:'사안발생보고서 제출기한 확인 필요',detail:`5일(주말·등록 공휴일 제외) 계산상 ${formatDate(due)}이 경과했습니다.`});else if(h<=30)a.push({level:'warn',title:'사안발생보고서 제출기한 임박',detail:`계산상 ${formatDate(due)}까지입니다.`});}
+    }
+    if(route==='A'&&!supportCheckDone(c,'a_support_request'))a.push({level:'danger',title:'A형 현장지원 요청 미확인',detail:'A형은 24시간을 기다리지 않고 즉시 동부교육지원청에 연락하여 현장 출동 지원을 요청합니다.'});
+    if(route==='B'&&!supportCheckDone(c,'b_support_request'))a.push({level:'warn',title:'B형 지원 요청 미확인',detail:'인지 즉시 지원을 요청하고, 강화방안상 B형은 24시간 이내 현장지원 기준입니다.'});
+    if(route==='UNSURE'&&!supportCheckDone(c,'u_confirm'))a.push({level:'warn',title:'현장지원 유형 확인 필요',detail:'A/B/C 분류가 모호하면 동부교육지원청 장학사(062-605-5761)에게 즉시 확인하세요.'});
+    if(hasCaseType(c,'childAbuseReported')&&!supportCheckDone(c,'abuse_lawyer_connect'))a.push({level:route==='A'?'danger':'warn',title:'아동학대 피신고 교원 변호사 연결 미확인',detail:'동부교육지원청 변호사 062-605-5762 또는 장학사 062-605-5761을 통해 법률상담·조사 동행 지원을 연결하세요.'});
+    if(isEducationIntrusionCase(c) && isSerious(c)&&!taskDone(c,'serious_report'))a.push({level:'danger',title:'중대사안 가능성 — 즉시 보고 확인',detail:'동부교육지원청 유선 연락·팩스 보고와 현장 출동 지원 여부를 확인하세요.'});
+    if(isEducationIntrusionCase(c) && age>=24&&!taskDone(c,'followup_1d'))a.push({level:'info',title:'피해교원 다음 근무일 상태 확인',detail:'삼각초 내부 권장 모니터링 항목입니다.'});
+    if(isEducationIntrusionCase(c) && age>=72&&!taskDone(c,'followup_3d'))a.push({level:'info',title:'피해교원 3일 전후 지원 연결 확인',detail:'상담·치료·법률지원·업무조정의 실제 연결 여부를 확인하세요.'});
+    return a;
+  }
+
+  function showAlertModal(){ const all=state.cases.filter(c=>!c.closed).flatMap(c=>getAlerts(c).map(x=>({...x,caseId:c.id,caseAlias:c.alias}))); if(!all.length)return; document.getElementById('alertList').innerHTML=all.map(x=>`<div class="alert-item ${x.level}"><strong>${escapeHtml(x.caseAlias)} · ${x.title}</strong><small>${x.detail}</small></div>`).join(''); const first=all[0]; document.getElementById('goAlertCaseBtn').onclick=()=>{state.activeCaseId=first.caseId;saveState();closeModal('alertModal');go('case')}; openModal('alertModal'); }
+
+  document.getElementById('brandHomeBtn').addEventListener('click',()=>go('home'));
+  document.getElementById('continueBtn').addEventListener('click',()=>{if(activeCase())go('case')});
+
+  async function copyBlock(btn){const el=document.getElementById(btn.dataset.copy);if(!el)return;const clone=el.cloneNode(true);clone.querySelectorAll('button').forEach(x=>x.remove());const txt=clone.textContent.trim();try{await navigator.clipboard.writeText(txt);const old=btn.textContent;btn.textContent='복사됨';setTimeout(()=>btn.textContent=old,1200)}catch(e){alert('복사가 제한된 브라우저입니다. 문구를 직접 선택해 복사해 주세요.')}}
+  document.querySelectorAll('[data-copy]').forEach(b=>{b.dataset.copyBound='1';b.addEventListener('click',()=>copyBlock(b));});
+  document.addEventListener('click',e=>{const b=e.target.closest('[data-copy]');if(b && !b.dataset.copyBound){b.dataset.copyBound='1';copyBlock(b);}});
+
+  function renderSettings(){ const box=document.getElementById('holidayList'); if(!state.extraHolidays.length){box.innerHTML='<span class="muted tiny">등록된 추가 제외일 없음</span>';return;} box.innerHTML=state.extraHolidays.sort().map(d=>`<span class="pill brand" style="margin:3px">${d} <button data-del-holiday="${d}" style="border:0;background:transparent;color:inherit;font-weight:900">×</button></span>`).join(''); box.querySelectorAll('[data-del-holiday]').forEach(b=>b.addEventListener('click',()=>{state.extraHolidays=state.extraHolidays.filter(x=>x!==b.dataset.delHoliday);saveState();renderSettings()})); }
+  document.getElementById('addHolidayBtn').addEventListener('click',()=>{const v=document.getElementById('holidayInput').value;if(!v)return;if(!state.extraHolidays.includes(v))state.extraHolidays.push(v);document.getElementById('holidayInput').value='';saveState();renderSettings();});
+
+  document.getElementById('exportBtn').addEventListener('click',()=>{const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='삼각초_교육활동보호_백업_'+dateKey(new Date())+'.json';a.click();URL.revokeObjectURL(a.href);});
+  document.getElementById('importFile').addEventListener('change',e=>{const f=e.target.files?.[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const obj=JSON.parse(r.result);if(!Array.isArray(obj.cases))throw new Error();state={...structuredClone(defaultState),...obj};saveState();renderHome();renderSettings();alert('백업을 불러왔습니다.');}catch(err){alert('올바른 백업 파일이 아닙니다.')}};r.readAsText(f);e.target.value='';});
+  document.getElementById('clearBtn').addEventListener('click',()=>{if(!confirm('이 브라우저에 저장된 모든 사안과 체크 상태를 삭제할까요?'))return;state=structuredClone(defaultState);localStorage.removeItem(STORAGE_KEY);renderHome();renderSettings();go('home');});
+
+  function escapeHtml(s=''){return String(s).replace(/[&<>'"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#039;','"':'&quot;'}[m]));}
+
+  renderHome(); renderSettings();
+  setTimeout(()=>{ if(state.cases.some(c=>!c.closed&&getAlerts(c).length)) showAlertModal(); },450);
+})();
+</script>
+</body>
+</html>
