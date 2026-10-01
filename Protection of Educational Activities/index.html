@@ -51,6 +51,13 @@
     .pill.good{background:var(--soft-good);color:var(--good)}.pill.warn{background:var(--soft-warn);color:var(--warn)}.pill.danger{background:var(--soft-danger);color:var(--danger)}.pill.info{background:var(--soft-info);color:var(--info)}.pill.brand{background:var(--soft-brand);color:var(--brand);min-width:0}
     .notice{border-radius:14px;padding:13px 15px;margin:12px 0;border-left:4px solid var(--info);background:var(--soft-info);color:#24436c;font-size:14px}
     .notice.warn{border-color:var(--warn);background:var(--soft-warn);color:#6e5200}.notice.danger{border-color:var(--danger);background:var(--soft-danger);color:#7a271a}.notice.good{border-color:var(--good);background:var(--soft-good);color:#14532d}
+    .principle-list{display:flex;flex-direction:column;gap:12px;margin-top:14px}
+    .principle-item{margin:0;display:grid;grid-template-columns:24px minmax(0,1fr);column-gap:7px;align-items:start}
+    .principle-num{font-weight:800;line-height:1.65;text-align:center}
+    .principle-text{min-width:0;line-height:1.65}
+    .principle-text b{font-weight:800}
+    .principle-text .principle-desc{font-weight:400}
+
     .quick-card{min-height:145px;display:flex;flex-direction:column}.quick-card .icon{font-size:27px}.quick-card .btn{margin-top:auto;align-self:flex-start}
     .case-list{display:grid;gap:10px}.case-row{display:flex;gap:14px;align-items:center;padding:14px;border:1px solid var(--line);border-radius:14px;background:#fff}.case-row .case-main{flex:1}.case-row strong{display:block}.case-row small{color:var(--muted)}
     .progress{height:8px;background:#e9eff1;border-radius:99px;overflow:hidden;margin-top:8px}.progress>span{display:block;height:100%;background:linear-gradient(90deg,var(--brand),#34a3ad);border-radius:99px}
@@ -286,10 +293,12 @@
       <div class="section grid grid-2">
         <div class="card">
           <div class="kicker">절대 놓치지 않기</div><h3>초기 대응 4원칙</h3>
-          <div class="notice danger"><b>① 안전·보호가 먼저</b> — 피해교원의 신체·심리 상태를 확인하고 필요하면 응급조치·병원 후송을 지원합니다.</div>
-          <div class="notice"><b>② 즉시 분리 의사 확인</b> — 교원의 반대 의사 등 특별한 사유가 없으면 관련자와 피해교원을 즉시 분리합니다.</div>
-          <div class="notice warn"><b>③ 학교가 침해 여부를 미리 확정하지 않기</b> — 조치 결정 전에는 ‘침해학생’보다 ‘침해 관련 학생’ 등 중립적 표현을 사용합니다.</div>
-          <div class="notice good"><b>④ 보고와 기록을 동시에</b> — 24시간, 5일 등 기한을 기록하고 체크합니다.</div>
+          <div class="principle-list">
+            <div class="notice danger principle-item"><span class="principle-num">①</span><div class="principle-text"><b>안전·보호가 먼저</b><span class="principle-desc"> — 피해교원의 신체·심리 상태를 확인하고 필요하면 응급조치·병원 후송을 지원합니다.</span></div></div>
+            <div class="notice principle-item"><span class="principle-num">②</span><div class="principle-text"><b>즉시 분리 의사 확인</b><span class="principle-desc"> — 교원의 반대 의사 등 특별한 사유가 없으면 관련자와 피해교원을 즉시 분리합니다.</span></div></div>
+            <div class="notice warn principle-item"><span class="principle-num">③</span><div class="principle-text"><b>학교가 침해 여부를 미리 확정하지 않기</b><span class="principle-desc"> — 조치 결정 전에는 ‘침해학생’보다 ‘침해 관련 학생’ 등 중립적 표현을 사용합니다.</span></div></div>
+            <div class="notice good principle-item"><span class="principle-num">④</span><div class="principle-text"><b>보고와 기록을 동시에</b><span class="principle-desc"> — 24시간, 5일 등 기한을 기록하고 체크합니다.</span></div></div>
+          </div>
         </div>
         <div class="card">
           <div class="kicker">2026.10.1. 강화 · 두 축으로 판단</div><h3>① 사안 성격과 ② A/B/C 현장지원 유형을 구분합니다</h3>
@@ -348,6 +357,29 @@
           </div>
           <div id="supportRouteSteps"></div>
           <div id="supportRouteChecks"></div>
+        </div>
+
+        <div class="section card hidden" id="childAbuseLegalPanel">
+          <div class="section-head"><div><h2>아동학대 피신고 교원 — 변호사 바로 연결</h2><p>교원이 아동학대로 신고된 경우, 조사·수사 대응을 혼자 맡기지 않고 교육지원청의 원스톱 법률지원에 즉시 연결합니다.</p></div><span class="pill danger" id="childAbuseLegalBadge">피신고 교원 지원</span></div>
+          <div class="notice danger"><b>핵심:</b> 조사·수사기관의 연락이나 출석 요구를 받은 사실을 알게 되면 서부교육지원청에 즉시 알리고, <b>변호사 상담·조사 동행·교육감 의견 제출 지원</b>을 함께 요청합니다. A형이면 즉시 출동, B형이면 24시간 이내 현장지원 기준이 적용됩니다.</div>
+          <div class="grid grid-3 mt16">
+            <div class="card contact"><div class="contact-icon">🧭</div><div><strong>1. 사안 지원 요청</strong><a href="tel:0626009861">062-600-9861</a><small>서부교육지원청 장학사 · A/B 분류, 현장지원, 교육감 의견 제출 절차</small></div></div>
+            <div class="card contact"><div class="contact-icon">⚖️</div><div><strong>2. 변호사 바로 연결</strong><a href="tel:0626009862">062-600-9862</a><small>서부교육지원청 변호사 · 법률상담, 1:1 전담변호사, 조사 동행·소송지원 연계</small></div></div>
+            <div class="card contact"><div class="contact-icon">💬</div><div><strong>3. 심리 지원</strong><a href="tel:0626009863">062-600-9863</a><small>전문상담사 · 피신고 교원의 심리상담·회복 지원</small></div></div>
+          </div>
+          <div class="grid grid-2 mt16">
+            <div>
+              <h3 style="margin-top:0">학교에서 바로 이렇게 연결</h3>
+              <ol><li>교원에게 신고·조사 연락 여부와 현재 가장 필요한 지원을 확인합니다.</li><li>장학사 600-9861에 <b>“교원 아동학대 피신고 사안”</b>임을 알리고 원스톱 안심 서비스와 교육감 의견 제출 절차를 요청합니다.</li><li>변호사 600-9862에 바로 연결하여 <b>법률상담·조사 동행·1:1 전담변호사 지원</b>을 요청합니다.</li><li>조사·수사 일정이나 기관의 연락 내용을 지원청과 공유하고, 학교는 교육활동 확인서 작성 등 필요한 사실확인에 협조합니다.</li></ol>
+              <div class="notice"><b>교육감 의견 제출 일정:</b> 조사·수사기관이 신고사항을 교육지원청에 공유하면 지원청은 <b>3일 이내 사안 확인</b>, <b>5일 이내 교육청으로 교육활동 확인서 상신</b>, 교육감은 <b>7일 이내(공휴일 제외) 의견 제출</b> 절차를 진행합니다.</div>
+            </div>
+            <div>
+              <h3 style="margin-top:0">연결 요청 문구 예시</h3>
+              <div class="script-box" id="abuseLawyerScript">마재초 교원 아동학대 피신고 사안입니다. 피신고 교원이 조사·수사 대응을 준비할 수 있도록 원스톱 밀착 법률지원과 변호사 상담·조사 동행 연계를 요청드립니다. 교육감 의견 제출을 위해 학교에서 협조해야 할 자료와 절차도 함께 안내 부탁드립니다.<button class="btn btn-secondary btn-sm copy" data-copy="abuseLawyerScript">복사</button></div>
+              <div class="notice warn"><b>실무 예시 문구입니다.</b> 공식 서식 문구가 아니며, 통화에서는 실명·구체적 진술을 이 사이트에 입력하지 말고 공식 연락·문서 절차로 전달합니다.</div>
+            </div>
+          </div>
+          <div id="childAbuseLegalChecks" class="mt16"></div>
         </div>
 
         <div class="section grid grid-2">
@@ -444,6 +476,15 @@
         <div class="card"><div class="kicker">복무</div><h3>특별휴가·조퇴·병가</h3><ul><li><b>특별휴가:</b> 5일 범위</li><li>상해·폭행 및 성폭력범죄에 해당 시 <b>추가 5일 범위</b> 가능</li><li>원칙적으로 사안 인지 직후, 연속 사용</li><li>위원회 개최 전에도 학교장 판단으로 허가 가능</li></ul></div>
         <div class="card"><div class="kicker">치료</div><h3>공무상 병가·요양</h3><ul><li>6일 이내 단순안정이 필요한 경미한 공무상 질병·부상은 학교장이 공무상 여부 판단 후 승인 가능</li><li>공무상 요양 승인 시 연 180일 범위 공무상 병가 가능</li><li>치료비·심리상담 비용 지원 제도 안내</li></ul></div>
       </div>
+      <div class="section card">
+        <div class="section-head"><div><h2>교원이 아동학대로 신고된 경우 — 즉시 법률지원 연결</h2><p>2026.10.1. 강화방안은 아동학대 피신고 교원에게 원스톱 안심 서비스와 밀착 법률지원을 제공하도록 하고 있습니다.</p></div><span class="pill danger">변호사 연결</span></div>
+        <div class="grid grid-3">
+          <div class="card contact"><div class="contact-icon">🧭</div><div><strong>서부 장학사</strong><a href="tel:0626009861">062-600-9861</a><small>사안 접수·현장지원·교육감 의견 제출 절차</small></div></div>
+          <div class="card contact"><div class="contact-icon">⚖️</div><div><strong>서부 변호사</strong><a href="tel:0626009862">062-600-9862</a><small>법률상담·1:1 전담변호사·조사 동행·소송지원 연계</small></div></div>
+          <div class="card contact"><div class="contact-icon">📞</div><div><strong>교육활동보호 대표</strong><a href="tel:0621395">062-1395</a><small>또는 1644-9575 · 담당자 연계</small></div></div>
+        </div>
+        <div class="notice mt16"><b>권장 연결 순서:</b> 아동학대 신고·조사 사실 확인 → 서부 장학사에 원스톱 안심서비스 요청 → 변호사 연결 및 조사 동행 여부 확인 → 교육감 의견 제출을 위한 학교 사실확인 협조 → 심리·복귀 지원까지 계속 확인.</div>
+      </div>
       <div class="section grid grid-2">
         <div class="card"><h2>서부교육지원청 연결</h2><div class="contact"><div class="contact-icon">💬</div><div><strong>전문상담사</strong><a href="tel:0626009863">062-600-9863</a><small>심리상담·회복 지원, 외부 상담기관 연계</small></div></div><div class="contact mt16"><div class="contact-icon">⚖️</div><div><strong>변호사</strong><a href="tel:0626009862">062-600-9862</a><small>법률상담·절차·수사 및 소송 지원 연계</small></div></div><div class="contact mt16"><div class="contact-icon">🧭</div><div><strong>담당 장학사</strong><a href="tel:0626009861">062-600-9861</a><small>사안처리·현장지원·지역교권보호위원회 절차</small></div></div></div>
         <div class="card"><h2>마재초 실무 모니터링 권장</h2><p class="muted">아래는 법정 기한이 아니라 ‘행정처리가 끝나도 선생님을 계속 보호한다’는 학교 내부 관리용 권장 항목입니다.</p><ul><li>사안 발생 당일: 상태·희망 보호조치 다시 확인</li><li>다음 근무일: 수업·업무 부담 조정이 실제 작동하는지 확인</li><li>3일 전후: 상담·치료·법률지원 연결 여부 확인</li><li>특별휴가·병가 후 복귀 전: 복귀 의사·우려·접촉 가능성 확인</li><li>복귀 후: 관련자 동선·민원창구·업무부담 재점검</li></ul></div>
@@ -515,7 +556,7 @@
         <div class="field"><label>사안 코드·가명</label><input type="text" id="newAlias" maxlength="40" placeholder="예: 2026-01 / 사안 A"></div>
         <div class="field"><label>사안 인지·접수 일시</label><input type="datetime-local" id="newReceivedAt"></div>
         <div class="field"><label>관련자 유형</label><select id="newSubjectType" class="select"><option value="학생">학생</option><option value="보호자">보호자 등</option><option value="기타">기타</option></select></div>
-        <div class="field"><label>2026.10.1. 현장지원 유형</label><select id="newSupportRoute" class="select"><option value="STANDARD">일반·기존 지원</option><option value="A">A형 — 즉시 출동 지원</option><option value="B">B형 — 24시간 이내 현장 지원</option><option value="C">C형 — 서면·상담 지원</option><option value="UNSURE">판단 어려움</option></select><small>A/B/C는 사안 성격이 아니라 교육청 현장지원의 속도·방식입니다.</small></div>
+        <div class="field"><label>2026.10.1. 현장지원 유형·대상</label><select id="newSupportRoute" class="select"><option value="STANDARD">일반·기존 지원 — 교육활동 침해 기본절차 등</option><option value="A_EDU">A형 — 중대 교육활동 침해</option><option value="A_ABUSE">A형 — 중대한 아동학대 피신고</option><option value="B_ABUSE">B형 — 일반 아동학대 피신고</option><option value="B_COMPLAINT">B형 — 악성(특이)민원</option><option value="C_INQUIRY">C형 — 단순 교권 문의·상담</option><option value="UNSURE">판단 어려움 — 지원청 확인</option></select><small><b>선택하면 아래 관련 사안 성격을 자동 체크합니다.</b> 복합사안이면 아래에서 다른 성격을 추가로 체크할 수 있습니다.</small></div>
         <div class="field"><label>간단 키워드(선택)</label><input type="text" id="newNote" maxlength="100" placeholder="예: 수업방해 / 반복민원"></div>
       </div>
       <div class="mt16"><b>사안 성격(복수 선택 가능)</b></div>
@@ -685,6 +726,16 @@
     return tasks.filter(t=>!t.subject || t.subject===c.subjectType);
   }
   function supportCheckDone(c,id){ return !!c.supportChecks?.[id]; }
+  function childAbuseLegalChecks(c){
+    if(!hasCaseType(c,'childAbuseReported')) return [];
+    return [
+      ['abuse_support_request','서부교육지원청 장학사에 피신고 사안 지원 요청'],
+      ['abuse_lawyer_connect','서부교육지원청 변호사 연결·1:1 법률지원 요청'],
+      ['abuse_investigation_support','조사·수사 일정 확인 후 법률자문·조사 동행 지원 확인'],
+      ['abuse_opinion_support','교육활동 확인서·교육감 의견 제출 절차 협조사항 확인'],
+      ['abuse_psych_support','피신고 교원 심리상담·회복지원 필요 여부 확인']
+    ];
+  }
   function uniqueChecks(arr){ const seen=new Set(); return arr.filter(([id])=>!seen.has(id)&&seen.add(id)); }
   function supportProfile(c){
     const key=caseSupportRoute(c), base=supportRoutes[key]||supportRoutes.UNSURE, t=ensureCaseTypes(c);
@@ -719,9 +770,11 @@
     const list=visibleTasks(c);
     const route=supportProfile(c);
     const routeChecks=route.checks||[];
+    const abuseChecks=childAbuseLegalChecks(c);
     const taskDoneCount=list.filter(t=>taskDone(c,t.id)).length;
     const routeDoneCount=routeChecks.filter(([id])=>supportCheckDone(c,id)).length;
-    const total=list.length+routeChecks.length, done=taskDoneCount+routeDoneCount;
+    const abuseDoneCount=abuseChecks.filter(([id])=>supportCheckDone(c,id)).length;
+    const total=list.length+routeChecks.length+abuseChecks.length, done=taskDoneCount+routeDoneCount+abuseDoneCount;
     return {done,total,pct:total?Math.round(done/total*100):0};
   }
   function currentStage(c){ const list=visibleTasks(c); for(const s of stages){ if(list.some(t=>t.stage===s.n&&!taskDone(c,t.id))) return s.n; } return 5; }
@@ -746,6 +799,30 @@
       else checks.innerHTML=`<div class="support-checks">${r.checks.map(([id,label])=>`<label class="support-check"><input type="checkbox" data-support-check="${id}" ${supportCheckDone(c,id)?'checked':''}><span><b>${escapeHtml(label)}</b></span></label>`).join('')}</div>`;
       checks.querySelectorAll('[data-support-check]').forEach(ch=>ch.addEventListener('change',()=>{c.supportChecks=c.supportChecks||{};c.supportChecks[ch.dataset.supportCheck]=ch.checked;if(ch.checked){c.supportCheckTimes=c.supportCheckTimes||{};c.supportCheckTimes[ch.dataset.supportCheck]=new Date().toISOString();}else if(c.supportCheckTimes){delete c.supportCheckTimes[ch.dataset.supportCheck];}saveState();renderCase();}));
     }
+  }
+
+  function renderChildAbuseLegal(c){
+    const panel=document.getElementById('childAbuseLegalPanel');
+    if(!panel) return;
+    const show=hasCaseType(c,'childAbuseReported');
+    panel.classList.toggle('hidden',!show);
+    if(!show) return;
+    const route=caseSupportRoute(c);
+    const badge=document.getElementById('childAbuseLegalBadge');
+    if(badge){
+      badge.textContent=route==='A'?'A형 · 즉시 출동':route==='B'?'B형 · 24시간 이내 지원':'피신고 교원 지원';
+      badge.className='pill '+(route==='A'?'danger':route==='B'?'warn':'brand');
+    }
+    const checks=document.getElementById('childAbuseLegalChecks');
+    const items=childAbuseLegalChecks(c);
+    checks.innerHTML=`<div class="support-checks">${items.map(([id,label])=>`<label class="support-check"><input type="checkbox" data-abuse-legal-check="${id}" ${supportCheckDone(c,id)?'checked':''}><span><b>${escapeHtml(label)}</b></span></label>`).join('')}</div>`;
+    checks.querySelectorAll('[data-abuse-legal-check]').forEach(ch=>ch.addEventListener('change',()=>{
+      c.supportChecks=c.supportChecks||{}; c.supportCheckTimes=c.supportCheckTimes||{};
+      c.supportChecks[ch.dataset.abuseLegalCheck]=ch.checked;
+      if(ch.checked)c.supportCheckTimes[ch.dataset.abuseLegalCheck]=new Date().toISOString();
+      else delete c.supportCheckTimes[ch.dataset.abuseLegalCheck];
+      saveState(); renderCase();
+    }));
   }
 
   function applyRouteVisibility(c){
@@ -787,29 +864,39 @@
     openModal('newCaseModal');
   }
   document.getElementById('newCaseBtn').addEventListener('click',openNewCase); document.getElementById('newCaseBtn2').addEventListener('click',openNewCase);
-  function updateNewCaseRouteSuggestion(){
-    if(document.getElementById('newSerious').checked){ document.getElementById('newTypeEdu').checked=true; document.getElementById('newSupportRoute').value='A'; return; }
-    const edu=document.getElementById('newTypeEdu').checked, abuse=document.getElementById('newTypeAbuse').checked, complaint=document.getElementById('newTypeComplaint').checked, inquiry=document.getElementById('newTypeInquiry').checked;
-    if(abuse||complaint) document.getElementById('newSupportRoute').value='B';
-    else if(inquiry&&!edu) document.getElementById('newSupportRoute').value='C';
-    else document.getElementById('newSupportRoute').value='STANDARD';
+  const newSupportScenarioToRoute={STANDARD:'STANDARD',A_EDU:'A',A_ABUSE:'A',B_ABUSE:'B',B_COMPLAINT:'B',C_INQUIRY:'C',UNSURE:'UNSURE'};
+  function setNewCaseTypes({edu=false,abuse=false,complaint=false,inquiry=false}){
+    document.getElementById('newTypeEdu').checked=edu;
+    document.getElementById('newTypeAbuse').checked=abuse;
+    document.getElementById('newTypeComplaint').checked=complaint;
+    document.getElementById('newTypeInquiry').checked=inquiry;
   }
-  document.getElementById('newSerious').addEventListener('change',updateNewCaseRouteSuggestion);
-  ['newTypeEdu','newTypeAbuse','newTypeComplaint','newTypeInquiry'].forEach(id=>document.getElementById(id).addEventListener('change',updateNewCaseRouteSuggestion));
-  document.getElementById('newSupportRoute').addEventListener('change',e=>{
-    if(e.target.value!=='A' && document.getElementById('newSerious').checked){
-      document.getElementById('newSerious').checked=false;
-    }
+  function applyNewSupportScenario(){
+    const scenario=document.getElementById('newSupportRoute').value;
+    if(scenario==='A_EDU'){setNewCaseTypes({edu:true});document.getElementById('newSerious').checked=true;}
+    else if(scenario==='A_ABUSE'){setNewCaseTypes({abuse:true});document.getElementById('newSerious').checked=false;}
+    else if(scenario==='B_ABUSE'){setNewCaseTypes({abuse:true});document.getElementById('newSerious').checked=false;}
+    else if(scenario==='B_COMPLAINT'){setNewCaseTypes({complaint:true});document.getElementById('newSerious').checked=false;}
+    else if(scenario==='C_INQUIRY'){setNewCaseTypes({inquiry:true});document.getElementById('newSerious').checked=false;}
+    else if(scenario==='STANDARD'){setNewCaseTypes({edu:true});document.getElementById('newSerious').checked=false;}
+    // 판단 어려움은 사용자가 아래에서 현재 파악된 사안 성격을 직접 선택하도록 기존 체크를 유지한다.
+  }
+  document.getElementById('newSupportRoute').addEventListener('change',applyNewSupportScenario);
+  document.getElementById('newSerious').addEventListener('change',e=>{
+    if(e.target.checked){document.getElementById('newSupportRoute').value='A_EDU';document.getElementById('newTypeEdu').checked=true;}
   });
+  // 사안 성격을 수동으로 추가·해제해도 이미 선택한 A/B/C 현장지원 유형은 자동으로 바꾸지 않는다.
+  // 따라서 A형을 선택한 뒤 ‘교원 아동학대 피신고’를 추가해도 B형으로 되돌아가지 않는다.
   document.getElementById('createCaseBtn').addEventListener('click',()=>{
     const alias=document.getElementById('newAlias').value.trim() || `사안 ${state.cases.length+1}`;
     const received=document.getElementById('newReceivedAt').value || nowLocalValue();
-    const quickSerious=document.getElementById('newSerious').checked;
-    const selectedRoute=document.getElementById('newSupportRoute').value;
+    const scenario=document.getElementById('newSupportRoute').value;
+    const quickSerious=document.getElementById('newSerious').checked || scenario==='A_EDU';
+    const selectedRoute=newSupportScenarioToRoute[scenario]||'UNSURE';
     const caseTypes={educationIntrusion:document.getElementById('newTypeEdu').checked,childAbuseReported:document.getElementById('newTypeAbuse').checked,maliciousComplaint:document.getElementById('newTypeComplaint').checked,inquiry:document.getElementById('newTypeInquiry').checked};
     if(quickSerious) caseTypes.educationIntrusion=true;
     if(!Object.values(caseTypes).some(Boolean)){ alert('사안 성격을 하나 이상 선택해 주세요.'); return; }
-    const c={id:newId(),alias,receivedAt:fromInputValue(received),subjectType:document.getElementById('newSubjectType').value,caseTypes,supportRoute:quickSerious?'A':selectedRoute,note:document.getElementById('newNote').value.trim(),currentDanger:document.getElementById('newDanger').checked,quickSerious:quickSerious,flags:{},tasks:{},taskTimes:{},supportChecks:{},supportCheckTimes:{},firstReportAt:'',occurrenceSubmittedAt:'',occurrenceReceivedAt:'',committeeAt:'',resultAt:'',closed:false,createdAt:new Date().toISOString()};
+    const c={id:newId(),alias,receivedAt:fromInputValue(received),subjectType:document.getElementById('newSubjectType').value,caseTypes,supportRoute:selectedRoute,supportScenario:scenario,note:document.getElementById('newNote').value.trim(),currentDanger:document.getElementById('newDanger').checked,quickSerious:quickSerious,flags:{},tasks:{},taskTimes:{},supportChecks:{},supportCheckTimes:{},firstReportAt:'',occurrenceSubmittedAt:'',occurrenceReceivedAt:'',committeeAt:'',resultAt:'',closed:false,createdAt:new Date().toISOString()};
     state.cases.unshift(c); state.activeCaseId=c.id; saveState(); closeModal('newCaseModal'); go('case');
   });
 
@@ -830,7 +917,7 @@
     const sb=document.getElementById('seriousBanner'); sb.innerHTML=isSerious(c)?'<div class="notice danger"><b>중대사안 가능성 표시됨:</b> 서부교육지원청 담당 장학사(062-600-9861)에 즉시 연락하고, 필요한 경우 FAX 600-9860 보고 및 현장 출동 지원을 요청하세요.</div>':(c.currentDanger?'<div class="notice danger"><b>현재 위험 표시됨:</b> 안전 확보·침해행위 중단·피해교원 상태 확인을 다른 행정 절차보다 우선하세요.</div>':'');
     renderCaseTypes(c);
     if(isEducationIntrusionCase(c)){ renderDeadlines(c); renderMobileDeadlineSummary(c); renderStepper(c); renderTasks(c); } else { document.getElementById('deadlineGrid').innerHTML=''; document.getElementById('stepper').innerHTML=''; document.getElementById('taskArea').innerHTML=''; document.getElementById('mobileDeadlineSummary').innerHTML=''; }
-    renderSupportRoute(c); renderNextActions(c);
+    renderSupportRoute(c); renderChildAbuseLegal(c); renderNextActions(c);
     document.getElementById('closeCaseBtn').textContent=c.closed?'↩ 진행 중으로 되돌리기':'✓ 사안 종결 표시';
   }
 
@@ -922,11 +1009,12 @@
   function renderNextActions(c){
     const route=supportProfile(c);
     const routePending=(route.checks||[]).filter(([id])=>!supportCheckDone(c,id)).map(([id,label],idx)=>({kind:'route',id,title:label,desc:route.steps[Math.min(idx,route.steps.length-1)]||route.summary,urgency:route.level==='a'?'즉시':route.level==='b'?'신속':'확인'}));
+    const abusePending=childAbuseLegalChecks(c).filter(([id])=>!supportCheckDone(c,id)).map(([id,label],idx)=>({kind:'abuse',id,title:label,desc:['피신고 교원 지원 요청','변호사와 직접 연결','조사·수사 대응 지원','교육감 의견 제출 절차','심리·회복 지원'][idx]||'피신고 교원 지원',urgency:idx<2?'즉시':'확인'}));
     let taskPending=visibleTasks(c).filter(t=>!taskDone(c,t.id)); taskPending.sort((a,b)=>a.stage-b.stage || Number(b.critical)-Number(a.critical));
-    const list=[...routePending,...taskPending].slice(0,4);
+    const list=[...routePending,...abusePending,...taskPending].slice(0,4);
     const box=document.getElementById('nextActions');
     if(!list.length){box.innerHTML='<div class="notice good">현재 표시된 체크 항목이 완료되었습니다. 선택된 다른 사안 성격의 후속지원이 필요한지 다시 확인하세요.</div>';return;}
-    box.innerHTML=list.map((t,i)=>`<div class="next-item"><div class="next-number">${i+1}</div><div><b>${escapeHtml(t.title)}</b> <span class="pill ${t.kind==='route'&&route.level==='a'?'danger':t.critical?'danger':'brand'}">${escapeHtml(t.urgency)}</span><p>${escapeHtml(t.desc||'')}</p></div></div>`).join('');
+    box.innerHTML=list.map((t,i)=>`<div class="next-item"><div class="next-number">${i+1}</div><div><b>${escapeHtml(t.title)}</b> <span class="pill ${(t.kind==='route'&&route.level==='a')||(t.kind==='abuse'&&t.urgency==='즉시')?'danger':t.critical?'danger':'brand'}">${escapeHtml(t.urgency)}</span><p>${escapeHtml(t.desc||'')}</p></div></div>`).join('');
   }
 
   function renderStepper(c){ const cs=currentStage(c); document.getElementById('stepper').innerHTML=stages.map(s=>{const stageTasks=visibleTasks(c).filter(t=>t.stage===s.n);const allDone=stageTasks.length&&stageTasks.every(t=>taskDone(c,t.id));return `<div class="step ${allDone?'done':''} ${cs===s.n?'current':''}"><strong>${s.n+1}. ${s.short}</strong>${allDone?'완료':cs===s.n?'현재 단계':'대기'}</div>`}).join(''); }
@@ -983,6 +1071,7 @@
     if(route==='A'&&!supportCheckDone(c,'a_support_request'))a.push({level:'danger',title:'A형 현장지원 요청 미확인',detail:'A형은 24시간을 기다리지 않고 즉시 서부교육지원청에 연락하여 현장 출동 지원을 요청합니다.'});
     if(route==='B'&&!supportCheckDone(c,'b_support_request'))a.push({level:'warn',title:'B형 지원 요청 미확인',detail:'인지 즉시 지원을 요청하고, 강화방안상 B형은 24시간 이내 현장지원 기준입니다.'});
     if(route==='UNSURE'&&!supportCheckDone(c,'u_confirm'))a.push({level:'warn',title:'현장지원 유형 확인 필요',detail:'A/B/C 분류가 모호하면 서부교육지원청 장학사(062-600-9861)에게 즉시 확인하세요.'});
+    if(hasCaseType(c,'childAbuseReported')&&!supportCheckDone(c,'abuse_lawyer_connect'))a.push({level:route==='A'?'danger':'warn',title:'아동학대 피신고 교원 변호사 연결 미확인',detail:'서부교육지원청 변호사 062-600-9862 또는 장학사 062-600-9861을 통해 법률상담·조사 동행 지원을 연결하세요.'});
     if(isEducationIntrusionCase(c) && isSerious(c)&&!taskDone(c,'serious_report'))a.push({level:'danger',title:'중대사안 가능성 — 즉시 보고 확인',detail:'서부교육지원청 유선 연락·팩스 보고와 현장 출동 지원 여부를 확인하세요.'});
     if(isEducationIntrusionCase(c) && age>=24&&!taskDone(c,'followup_1d'))a.push({level:'info',title:'피해교원 다음 근무일 상태 확인',detail:'마재초 내부 권장 모니터링 항목입니다.'});
     if(isEducationIntrusionCase(c) && age>=72&&!taskDone(c,'followup_3d'))a.push({level:'info',title:'피해교원 3일 전후 지원 연결 확인',detail:'상담·치료·법률지원·업무조정의 실제 연결 여부를 확인하세요.'});
@@ -994,7 +1083,9 @@
   document.getElementById('brandHomeBtn').addEventListener('click',()=>go('home'));
   document.getElementById('continueBtn').addEventListener('click',()=>{if(activeCase())go('case')});
 
-  document.querySelectorAll('[data-copy]').forEach(b=>b.addEventListener('click',async()=>{const el=document.getElementById(b.dataset.copy);const clone=el.cloneNode(true);clone.querySelectorAll('button').forEach(x=>x.remove());const txt=clone.textContent.trim();try{await navigator.clipboard.writeText(txt);const old=b.textContent;b.textContent='복사됨';setTimeout(()=>b.textContent=old,1200)}catch(e){alert('복사가 제한된 브라우저입니다. 문구를 직접 선택해 복사해 주세요.')}}));
+  async function copyBlock(btn){const el=document.getElementById(btn.dataset.copy);if(!el)return;const clone=el.cloneNode(true);clone.querySelectorAll('button').forEach(x=>x.remove());const txt=clone.textContent.trim();try{await navigator.clipboard.writeText(txt);const old=btn.textContent;btn.textContent='복사됨';setTimeout(()=>btn.textContent=old,1200)}catch(e){alert('복사가 제한된 브라우저입니다. 문구를 직접 선택해 복사해 주세요.')}}
+  document.querySelectorAll('[data-copy]').forEach(b=>{b.dataset.copyBound='1';b.addEventListener('click',()=>copyBlock(b));});
+  document.addEventListener('click',e=>{const b=e.target.closest('[data-copy]');if(b && !b.dataset.copyBound){b.dataset.copyBound='1';copyBlock(b);}});
 
   function renderSettings(){ const box=document.getElementById('holidayList'); if(!state.extraHolidays.length){box.innerHTML='<span class="muted tiny">등록된 추가 제외일 없음</span>';return;} box.innerHTML=state.extraHolidays.sort().map(d=>`<span class="pill brand" style="margin:3px">${d} <button data-del-holiday="${d}" style="border:0;background:transparent;color:inherit;font-weight:900">×</button></span>`).join(''); box.querySelectorAll('[data-del-holiday]').forEach(b=>b.addEventListener('click',()=>{state.extraHolidays=state.extraHolidays.filter(x=>x!==b.dataset.delHoliday);saveState();renderSettings()})); }
   document.getElementById('addHolidayBtn').addEventListener('click',()=>{const v=document.getElementById('holidayInput').value;if(!v)return;if(!state.extraHolidays.includes(v))state.extraHolidays.push(v);document.getElementById('holidayInput').value='';saveState();renderSettings();});
